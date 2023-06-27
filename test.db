@@ -1,0 +1,19 @@
+record(ai, "temperature:water")
+{
+    field(DESC, "Water temperature in the fish tank")
+}
+
+record(ai, "temperature:oil")
+{
+    field(DESC, "Oil temperature in the engine")
+}
+
+record(ai, "timer_1")
+{
+        field(DESC, "Offset of the first docker")
+}
+
+record(ai, "timer_2")
+{
+	field(DESC, "Offset of the second docker")
+}
