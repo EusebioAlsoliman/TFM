@@ -1,4 +1,6 @@
 from opcua import Client
+import pvaccess
+dir (pvaccess)
 
 def read_opcua_value(node):
     
@@ -13,6 +15,9 @@ def read_opcua_value(node):
 if __name__ == "__main__":
 
     client = Client("opc.tcp://169.254.145.192:4897")
+
+    t1 = pvaccess.Channel('timer_1')
+    t2 = pvaccess.Channel('timer_2')
 
     try:
         client.connect()
@@ -30,8 +35,11 @@ if __name__ == "__main__":
 
         while True:
             
-            print("Timer_1:" + str(read_opcua_value(timer_1))) # get value of node as a DataValue object
-            print("Timer_2:" + str(read_opcua_value(timer_2)))
+            offset_1 = read_opcua_value(timer_1)
+            offset_2 = read_opcua_value(timer_2)
+
+            t1.put(offset_1)
+            t2.put(offset_2)
 
     except KeyboardInterrupt:
         client.disconnect()

@@ -12,5 +12,15 @@
       <monitor/>
       <period>1.0</period>
     </channel>
+    <channel>
+      <name>pva://timer_1</name>
+      <monitor/>
+      <period>0.1</period>
+    </channel>
+    <channel>
+      <name>pva://timer_2</name>
+      <monitor/>
+      <period>0.1</period>
+    </channel>
   </group>
 </engineconfig>

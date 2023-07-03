@@ -4,9 +4,9 @@
   <show_toolbar>true</show_toolbar>
   <update_period>3.0</update_period>
   <scroll_step>5</scroll_step>
-  <scroll>false</scroll>
-  <start>2023-07-01 12:26:04.875</start>
-  <end>2023-07-01 13:26:19.875</end>
+  <scroll>true</scroll>
+  <start>-1 hours -15 seconds</start>
+  <end>now</end>
   <archive_rescale>STAGGER</archive_rescale>
   <foreground>
     <red>0</red>
@@ -34,8 +34,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-6.2</min>
-      <max>68.2</max>
+      <min>9.3</min>
+      <max>27.700000000000003</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>

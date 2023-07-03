@@ -6,8 +6,8 @@
   <update_period>3.0</update_period>
   <scroll_step>5</scroll_step>
   <scroll>false</scroll>
-  <start>2023-07-01 14:03:37.844</start>
-  <end>2023-07-01 14:50:35.699</end>
+  <start>2023-07-03 16:07:16.416</start>
+  <end>2023-07-03 16:08:34.010</end>
   <archive_rescale>STAGGER</archive_rescale>
   <foreground>
     <red>0</red>
@@ -35,10 +35,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-1.1</min>
-      <max>1.1</max>
+      <min>-104000.0</min>
+      <max>17000.0</max>
       <grid>false</grid>
-      <autoscale>true</autoscale>
+      <autoscale>false</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -52,10 +52,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-1.1</min>
-      <max>1.1</max>
+      <min>-71152.54237288136</min>
+      <max>56847.45762711864</max>
       <grid>false</grid>
-      <autoscale>true</autoscale>
+      <autoscale>false</autoscale>
       <log_scale>false</log_scale>
     </axis>
   </axes>
@@ -81,6 +81,11 @@
       <period>0.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
+      <archive>
+        <name>RDB</name>
+        <url>jdbc:mysql://localhost/archive</url>
+        <key>1</key>
+      </archive>
     </pv>
     <pv>
       <display_name>Timer_2</display_name>
@@ -101,6 +106,11 @@
       <period>1.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
+      <archive>
+        <name>RDB</name>
+        <url>jdbc:mysql://localhost/archive</url>
+        <key>1</key>
+      </archive>
     </pv>
   </pvlist>
 </databrowser>
