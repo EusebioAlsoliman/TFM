@@ -1,19 +1,43 @@
 record(ai, "temperature:water")
 {
-    field(DESC, "Water temperature in the fish tank")
+	field(DESC, "Water temperature in the fish tank")
+	field(LOLO, "10")
+	field(LOW, "20")
+	field(HIGH, "80")
+	field(HIHI, "100")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ao, "alarm_lim_dynamic:Low")
+{
+    field(DESC, "Test")
+    field(PINI, "YES")
+    field(OUT, "temperature:oil.LOW")
+}
+
+record(ao, "alarm_lim_dynamic:High")
+{
+    field(DESC, "Test")
+    field(PINI, "YES")
+    field(OUT, "temperature:oil.HIGH")
 }
 
 record(ai, "temperature:oil")
 {
     field(DESC, "Oil temperature in the engine")
+    field(HSV, "MINOR")
+    field(LSV, "MINOR")
 }
 
-record(ai, "timer_1")
+record(int64in, "timer_1")
 {
-        field(DESC, "Offset of the first docker")
+    field(DESC, "Offset of the first PTP slave")
 }
 
-record(ai, "timer_2")
+record(int64in, "timer_2")
 {
-	field(DESC, "Offset of the second docker")
+	field(DESC, "Offset of the second PTP slave")
 }

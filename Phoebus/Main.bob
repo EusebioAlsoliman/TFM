@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-07-05 12:57:54 by root-->
+<!--Saved on 2023-07-05 20:28:37 by root-->
 <display version="2.0.0">
   <name>Display</name>
   <background_color>
@@ -146,5 +146,45 @@
     <show_high>false</show_high>
     <show_low>false</show_low>
     <show_lolo>false</show_lolo>
+  </widget>
+  <widget type="scaledslider" version="2.0.0">
+    <name>Scaled Slider_2</name>
+    <pv_name>pva://alarm_lim_dynamic:Low</pv_name>
+    <x>960</x>
+    <y>140</y>
+    <width>200</width>
+    <height>40</height>
+    <show_hihi>false</show_hihi>
+    <show_high>false</show_high>
+    <show_low>false</show_low>
+    <show_lolo>false</show_lolo>
+  </widget>
+  <widget type="scaledslider" version="2.0.0">
+    <name>Scaled Slider_3</name>
+    <pv_name>pva://alarm_lim_dynamic:High</pv_name>
+    <x>960</x>
+    <y>60</y>
+    <width>200</width>
+    <height>40</height>
+    <show_hihi>false</show_hihi>
+    <show_high>false</show_high>
+    <show_low>false</show_low>
+    <show_lolo>false</show_lolo>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_4</name>
+    <pv_name>pva://alarm_lim_dynamic:Low</pv_name>
+    <x>1190</x>
+    <y>140</y>
+    <width>210</width>
+    <interactive>true</interactive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_5</name>
+    <pv_name>pva://alarm_lim_dynamic:High</pv_name>
+    <x>1180</x>
+    <y>60</y>
+    <width>220</width>
+    <interactive>true</interactive>
   </widget>
 </display>

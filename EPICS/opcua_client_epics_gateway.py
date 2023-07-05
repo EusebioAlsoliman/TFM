@@ -2,16 +2,6 @@ from opcua import Client
 import pvaccess
 dir (pvaccess)
 
-def read_opcua_value(node):
-    
-    previous_value = node.get_value()
-    actual_value = node.get_value()
-
-    while previous_value == actual_value:
-        actual_value = node.get_value()
-
-    return actual_value
-
 if __name__ == "__main__":
 
     client = Client("opc.tcp://169.254.145.192:4897")
@@ -33,13 +23,27 @@ if __name__ == "__main__":
         timer_1 = client.get_node("ns=2;i=3")
         timer_2 = client.get_node("ns=2;i=4")
 
+        offset_1_before = timer_1.get_value()
+        offset_2_before = timer_2.get_value()
+
+        offset_1_after = offset_1_before
+        offset_2_after = offset_2_before
+
         while True:
             
-            offset_1 = read_opcua_value(timer_1)
-            offset_2 = read_opcua_value(timer_2)
+            offset_1_before = timer_1.get_value()
+            offset_2_before = timer_2.get_value()
 
-            t1.put(offset_1)
-            t2.put(offset_2)
+            if offset_1_before != offset_1_after:
+                # print(offset_1_before)
+                t1.put(offset_1_before)
+
+            if offset_2_before != offset_2_after:
+                # print(offset_2_before)
+                t2.put(offset_2_before)
+
+            offset_1_after = offset_1_before
+            offset_2_after = offset_2_before
 
     except KeyboardInterrupt:
         client.disconnect()
