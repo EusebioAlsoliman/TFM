@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-06-27 12:14:18 by root-->
+<!--Saved on 2023-07-05 12:57:54 by root-->
 <display version="2.0.0">
   <name>Display</name>
   <background_color>
@@ -55,8 +55,8 @@
   </widget>
   <widget type="databrowser" version="2.0.0">
     <name>Data Browser</name>
-    <file>prueba_phoebus.plt</file>
-    <x>20</x>
+    <file>plot_Temperature.plt</file>
+    <x>30</x>
     <y>260</y>
     <width>740</width>
     <height>330</height>
@@ -85,12 +85,66 @@
     <y>150</y>
     <width>200</width>
     <height>40</height>
+    <show_hihi>false</show_hihi>
+    <show_high>false</show_high>
+    <show_low>false</show_low>
+    <show_lolo>false</show_lolo>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_3</name>
-    <text>Controlar temperatura</text>
-    <x>440</x>
-    <y>80</y>
+    <text>Controlar temperatura Agua</text>
+    <x>390</x>
+    <y>90</y>
+    <width>180</width>
     <height>50</height>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="databrowser" version="2.0.0">
+    <name>Data Browser_1</name>
+    <file>plot_Timers.plt</file>
+    <x>830</x>
+    <y>260</y>
+    <width>740</width>
+    <height>330</height>
+    <show_toolbar>true</show_toolbar>
+  </widget>
+  <widget type="thermometer" version="2.0.0">
+    <name>Thermometer_1</name>
+    <pv_name>pva://temperature:oil</pv_name>
+    <x>620</x>
+    <y>31</y>
+    <width>100</width>
+    <height>199</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_3</name>
+    <pv_name>pva://temperature:oil</pv_name>
+    <x>710</x>
+    <y>50</y>
+    <width>160</width>
+    <interactive>true</interactive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_4</name>
+    <text>Controlar temperatura Aceite</text>
+    <x>700</x>
+    <y>90</y>
+    <width>180</width>
+    <height>50</height>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="scaledslider" version="2.0.0">
+    <name>Scaled Slider_1</name>
+    <pv_name>pva://temperature:oil</pv_name>
+    <x>690</x>
+    <y>150</y>
+    <width>200</width>
+    <height>40</height>
+    <show_hihi>false</show_hihi>
+    <show_high>false</show_high>
+    <show_low>false</show_low>
+    <show_lolo>false</show_lolo>
   </widget>
 </display>

@@ -2,12 +2,11 @@
 <databrowser>
   <title></title>
   <show_toolbar>true</show_toolbar>
-  <grid>true</grid>
   <update_period>3.0</update_period>
   <scroll_step>5</scroll_step>
-  <scroll>false</scroll>
-  <start>2023-07-03 16:07:16.416</start>
-  <end>2023-07-03 16:08:34.010</end>
+  <scroll>true</scroll>
+  <start>-5 hours -13 minutes -23.399 seconds</start>
+  <end>now</end>
   <archive_rescale>STAGGER</archive_rescale>
   <foreground>
     <red>0</red>
@@ -35,8 +34,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-104000.0</min>
-      <max>17000.0</max>
+      <min>-3.6</min>
+      <max>51.2</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>
@@ -52,8 +51,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-71152.54237288136</min>
-      <max>56847.45762711864</max>
+      <min>-5.0</min>
+      <max>112.0</max>
       <grid>false</grid>
       <autoscale>false</autoscale>
       <log_scale>false</log_scale>
@@ -63,9 +62,9 @@
   </annotations>
   <pvlist>
     <pv>
-      <display_name>Timer_1</display_name>
+      <display_name>pva://temperature:water</display_name>
       <visible>true</visible>
-      <name>pva://timer_1</name>
+      <name>pva://temperature:water</name>
       <axis>0</axis>
       <color>
         <red>255</red>
@@ -88,14 +87,14 @@
       </archive>
     </pv>
     <pv>
-      <display_name>Timer_2</display_name>
+      <display_name>pva://temperature:oil</display_name>
       <visible>true</visible>
-      <name>pva://timer_2</name>
+      <name>pva://temperature:oil</name>
       <axis>1</axis>
       <color>
         <red>0</red>
-        <green>0</green>
-        <blue>255</blue>
+        <green>255</green>
+        <blue>0</blue>
       </color>
       <trace_type>AREA</trace_type>
       <linewidth>2</linewidth>
@@ -103,7 +102,7 @@
       <point_type>NONE</point_type>
       <point_size>2</point_size>
       <waveform_index>0</waveform_index>
-      <period>1.0</period>
+      <period>0.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
       <archive>
