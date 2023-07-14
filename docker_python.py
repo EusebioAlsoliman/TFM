@@ -1,7 +1,7 @@
 import subprocess
-import os
 import shlex
 from opcua import ua, uamethod, Server
+import docker
 
 def obtain_offset_slave(ptp_instance):
     orden = "docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
@@ -21,10 +21,13 @@ def obtain_offset_slave(ptp_instance):
 
 if __name__ == "__main__":
 
+    list_containers_up = [False, False, False, False, False, False, False, False, False, False]
+
     i = 0
 
-    # Cambiamos directorio y establecemos la orden por la bash
-    os.chdir("/home/eusebio/linuxptp")
+    n = 5
+
+    client = docker.from_env()
   
     # OPC-UA-Server Setup
 
@@ -47,34 +50,35 @@ if __name__ == "__main__":
     print("Object Node ID                      :", object_node)
     print("Name Space and ID of Variable Object:", myobj)
 
-    # OPC-UA-Server Add Variable
+    # OPC-UA-Server Add Variable and start dockers
 
-    Temp = myobj.add_variable(idx, "Temperature", 0, ua.VariantType.Float)
-    Temp.set_writable()
+    for i in range(n):
+        str_i = str(i)
+        exec("Timer_" + str_i + " = myobj.add_variable(idx, 'Timer_" + str_i + "', 0, ua.VariantType.Float)")
+        exec("Timer_" + str_i + ".set_writable()")
 
-    print("Name Space and ID of Temperature : ", Temp)
+        exec("print('Name Space and ID of Timer " + str_i + " : ', Timer_" + str_i + ")")
 
-    Timer_1 = myobj.add_variable(idx, "First timer", 0, ua.VariantType.Float)
-    Timer_1.set_writable()
+        client.containers.run("ptp4l:latest", command="ptp4l -S -s -i eth0", auto_remove=True, network="multicast", name="ptp" + str(i), detach=True)
 
-    print("Name Space and ID of First Timer : ", Timer_1)
-
-    Timer_2 = myobj.add_variable(idx, "Second timer", 0, ua.VariantType.Float)
-    Timer_2.set_writable()
-
-    print("Name Space and ID of Second Timer : ", Timer_2)
+        exec("container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 
     # OPC-UA-Server Start
     server.start()
 
     try: 
         while True:
+            for i in range(n):
+                str_i = str(i)
+                exec("offsetFromMaster_" + str_i + " = obtain_offset_slave(" + str_i + ")")
+                exec("Timer_" + str_i + ".set_value(offsetFromMaster_" + str_i + ", ua.VariantType.Float)")
 
-            offsetFromMaster_1 = obtain_offset_slave(1)
-            offsetFromMaster_2 = obtain_offset_slave(2)
-
-            Timer_1.set_value(offsetFromMaster_1, ua.VariantType.Float)
-            Timer_2.set_value(offsetFromMaster_2, ua.VariantType.Float)
 
     except KeyboardInterrupt:
         server.stop()
+
+        for i in range(n):
+            str_i = str(i)
+            exec("container_" + str_i + ".kill()")
+
+        print("Script CANCELLED AND STOPPED!")
