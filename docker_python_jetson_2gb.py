@@ -3,13 +3,15 @@ import shlex
 from opcua import ua, uamethod, Server
 import docker
 import threading
+from time import sleep
 
 def obtain_offset_slave(ptp_instance):
-    orden = "docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
+    orden = "sudo docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
     # Lanzar pmc por la bash y obtener resultado en 'offsetFromMaster'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
     salida, error = process.communicate()
 
+    # try:
     pos_ini = salida.find("offset")
     pos_fin = salida.find("mean")
 
@@ -28,8 +30,9 @@ class run_timer(threading.Thread):
         self.str_i = str(self.i)
     
     def run(self):
+        # sleep(10)
         while self.running:
-            exec("offsetFromMaster_" + str_i + " = obtain_offset_slave(" + str_i + ")")
+            exec("offsetFromMaster_" + self.str_i + " = obtain_offset_slave(" + self.str_i + ")")
             self.offset = obtain_offset_slave(self.i)
             exec("Timer_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
 
@@ -42,7 +45,7 @@ if __name__ == "__main__":
 
     i = 0
 
-    n = 4
+    n = 8
 
     threads = []
 
@@ -52,10 +55,10 @@ if __name__ == "__main__":
 
     server = Server()
 
-    endpoint = "opc.tcp://169.254.145.192:4897"
+    endpoint = "opc.tcp://169.254.145.193:4897"
     server.set_endpoint(endpoint)
 
-    servername = "Raspberry-OPC-UA-Server"
+    servername = "Jetson-2GB-OPC-UA-Server"
     server.set_server_name(servername)
 
     # OPC-UA-Modelling
@@ -89,7 +92,7 @@ if __name__ == "__main__":
 
         exec("print('Name Space and ID of Conf " + str_i + " : ', list_containers_up[" + str_i + "])")
 
-        client.containers.run("ptp4l:latest", command="ptp4l -S -s -i eth0", auto_remove=True, network="multicast", name="ptp" + str(i), detach=True)
+        client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -m", auto_remove=True, network="host", name="ptp" + str(i), detach=True)
 
         exec("container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 
@@ -140,7 +143,7 @@ if __name__ == "__main__":
         for thread in threads:
             thread.join()
 
-        # Detiene los procesos en ejecución
+        # Detiene los procesos en ejecucion
         for thread in threads:
             thread.terminate()
 

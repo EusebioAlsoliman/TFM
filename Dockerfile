@@ -1,15 +1,15 @@
-FROM ubuntu
+FROM alpine:3.18.2
 MAINTAINER Eusebio Naif Al-Soliman Fuentes eunaif@correo.ugr.es
 
-ENV DEBIAN_FRONTEND=noninteractive
+RUN apk update \
+    && apk --no-cache --update add build-base && apk add git linux-headers bsd-compat-headers \
+    && apk --no-cache add tzdata
+
+ENV TZ=Europe/Madrid
 
 WORKDIR /linuxptp
-
-RUN apt update && \
-    apt install -y build-essential git sudo net-tools nano iputils-ping && \
-    rm -rf /var/lib/apt/lists/*
 
 RUN git clone git://git.code.sf.net/p/linuxptp/code .
 RUN make
 
-ENTRYPOINT ["sudo", "./ptp4l" ]
+ENTRYPOINT [ "./ptp4l" ]
