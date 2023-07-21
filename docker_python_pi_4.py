@@ -5,6 +5,7 @@ import docker
 import threading
 from time import sleep
 import sys
+import os
 
 def obtain_offset_slave(ptp_instance):
     orden = "docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
@@ -40,7 +41,7 @@ class run_timer(threading.Thread):
                     exec("Timer_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
 
                 else:
-                    client.containers.run("ptp4l", command="ptp4l -S -s -i eth0", auto_remove=True, network="host", name="ptp" + self.str_i, detach=True)
+                    client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + self.str_i, detach=True)
                     exec("container_" + self.str_i + " = client.containers.get('ptp" + self.str_i + "')")
                     self.is_killed = False
                     sleep(7)
@@ -106,7 +107,7 @@ if __name__ == "__main__":
 
         exec("print('Name Space and ID of Conf " + str_i + " : ', list_containers_up[" + str_i + "])")
 
-        client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -m", auto_remove=True, network="host", name="ptp" + str(i), detach=True)
+        client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + str_i, detach=True)
 
         exec("container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 

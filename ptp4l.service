@@ -8,7 +8,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/opt/linuxptp/ptp4l -S -i mynet-shim
+ExecStart=/opt/linuxptp/ptp4l -S -i eth0 -f /opt/UNICAST-MASTER.cfg
 
 [Install]
 WantedBy=multi-user.target
