@@ -4,6 +4,7 @@ from opcua import ua, uamethod, Server
 import docker
 import threading
 from time import sleep
+import sys
 
 def obtain_offset_slave(ptp_instance):
     orden = "sudo docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
@@ -28,24 +29,37 @@ class run_timer(threading.Thread):
         self.running = True
         self.i = i
         self.str_i = str(self.i)
-    
+        self.is_killed = False
+
     def run(self):
-        # sleep(10)
         while self.running:
-            exec("offsetFromMaster_" + self.str_i + " = obtain_offset_slave(" + self.str_i + ")")
-            self.offset = obtain_offset_slave(self.i)
-            exec("Timer_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
+            if list_containers_up[self.i].get_value() == True:
+
+                if self.is_killed == False:
+                    self.offset = obtain_offset_slave(self.i)
+                    exec("Timer_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
+
+                else:
+                    client.containers.run("ptp4l", command="ptp4l -S -s -i eth0", auto_remove=True, network="host", name="ptp" + self.str_i, detach=True)
+                    exec("container_" + self.str_i + " = client.containers.get('ptp" + self.str_i + "')")
+                    self.is_killed = False
+                    sleep(7)
+
+            elif list_containers_up[self.i].get_value() == False:
+                if self.is_killed == False:
+                    exec("container_" + self.str_i + ".kill()")
+                    self.is_killed = True
 
     def stop(self):
         self.running = False
 
 if __name__ == "__main__":
 
-    list_containers_up = [True, True, True, False, False, False, False, False, False, False]
+    list_containers_up = [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
     i = 0
 
-    n = 8
+    n = int(sys.argv[1])
 
     threads = []
 
@@ -74,7 +88,7 @@ if __name__ == "__main__":
 
     # OPC-UA-Server Add Variable and start dockers
 
-    Finished_all = myobj.add_variable(idx, "Finish all", False, ua.VariantType.Boolean)
+    Finished_all = myobj.add_variable(idx, "Finish_all", False, ua.VariantType.Boolean)
     Finished_all.set_writable()
 
     print("Name Space and ID of Finish all : ", Finished_all)
@@ -97,7 +111,7 @@ if __name__ == "__main__":
         exec("container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 
         # Initialize containers_up
-        exec("list_containers_up[" + str_i + "].set_value(list_containers_up[" + str_i + "], ua.VariantType.Boolean)")
+        exec("list_containers_up[" + str_i + "].set_value(True, ua.VariantType.Boolean)")
 
         threads.append(run_timer(i))
 
@@ -106,48 +120,26 @@ if __name__ == "__main__":
 
     # ------------------------------------------------- LOOOOOP ---------------------------------------
 
-    try:
+    for i in range(n):
+        threads[i].start()
+
+    while True:
+        count = 0
         for i in range(n):
-            threads[i].start()
+            if list_containers_up[i].get_value() == False:
+                count += 1
 
-        while True:
-            count = 0
-            for i in range(n):
-                if list_containers_up[i].get_value() == False:
-                    count += 1
+        if count == n or Finished_all.get_value() == True:
+            break
 
-            if count == n or Finished_all.get_value() == True:
-                break
+    # Espera a que todos los procesos terminen
+    for thread in threads:
+        thread.stop()
 
-        # Espera a que todos los procesos terminen
-        for thread in threads:
-            thread.stop()
+    server.stop()
 
-        server.stop()
+    for i in range(n):
+        str_i = str(i)
+        exec("client.containers.get('ptp" + str_i + "').kill()")
 
-        for i in range(n):
-            str_i = str(i)
-            exec("container_" + str_i + ".kill()")
-
-        print("Script FINISHED! \n")
-
-
-    except KeyboardInterrupt:
-        server.stop()
-
-        for i in range(n):
-            str_i = str(i)
-            exec("container_" + str_i + ".kill()")
-
-        # Espera a que todos los procesos terminen
-        for thread in threads:
-            thread.join()
-
-        # Detiene los procesos en ejecucion
-        for thread in threads:
-            thread.terminate()
-
-        # Elimina los procesos terminados
-        threads = []
-
-        print("Script CANCELLED AND STOPPED! \n")
+    print("Script FINISHED! \n")

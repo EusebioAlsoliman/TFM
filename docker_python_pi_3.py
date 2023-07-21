@@ -7,10 +7,10 @@ from time import sleep
 import sys
 
 def obtain_offset_slave(ptp_instance):
-    orden = "sudo docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
+    orden = "docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
 
     # Lanzar pmc por la bash y obtener resultado en 'offsetFromMaster'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
     salida, error = process.communicate()
 
     pos_ini = salida.find("offset")
@@ -69,10 +69,10 @@ if __name__ == "__main__":
 
     server = Server()
 
-    endpoint = "opc.tcp://169.254.145.193:4897"
+    endpoint = "opc.tcp://169.254.145.192:4897"
     server.set_endpoint(endpoint)
 
-    servername = "Jetson-2GB-OPC-UA-Server"
+    servername = "Pi-3-OPC-UA-Server"
     server.set_server_name(servername)
 
     # OPC-UA-Modelling
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     # OPC-UA-Server Add Variable and start dockers
 
-    Finished_all = myobj.add_variable(idx, "Finish_all", False, ua.VariantType.Boolean)
+    Finished_all = myobj.add_variable(idx, "Finish all", False, ua.VariantType.Boolean)
     Finished_all.set_writable()
 
     print("Name Space and ID of Finish all : ", Finished_all)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
         exec("print('Name Space and ID of Conf " + str_i + " : ', list_containers_up[" + str_i + "])")
 
-        client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -m", auto_remove=True, network="host", name="ptp" + str(i), detach=True)
+        client.containers.run("ptp4l", command="ptp4l -S -s -i eth0", auto_remove=True, network="multicast", name="ptp" + str(i), detach=True)
 
         exec("container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 
