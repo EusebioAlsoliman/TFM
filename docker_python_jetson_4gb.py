@@ -7,10 +7,10 @@ from time import sleep
 import sys
 import os
 
-def obtain_offset_slave(ptp_instance):
+def obtain_offset_PTP(ptp_instance): #linuxptp
     orden = "sudo docker exec -it ptp" + str(ptp_instance) + " ./pmc -u -b 0 'GET CURRENT_DATA_SET'"
-    
-    # Lanzar pmc por la bash y obtener resultado en 'offsetFromMaster'
+
+    # pmc command in bash and obtain result in 'offsetFromMaster'
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
     salida, error = process.communicate()
 
@@ -24,7 +24,25 @@ def obtain_offset_slave(ptp_instance):
 
     return offsetFromMaster
 
-class run_timer(threading.Thread):
+def obtain_offset_NTP(ptp_instance): # chrony 
+    orden = "sudo docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
+
+    # chronyc command in bash and obtain 'Last offset'
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    salida, error = process.communicate()
+
+    pos_ini = salida.find("Last offset     :")
+    
+    salida = salida[pos_ini+17:]
+
+    pos_fin = salida.find("seconds")
+
+    offsetFromMaster = salida[:pos_fin]
+    offsetFromMaster = float(offsetFromMaster) * 1e9
+
+    return offsetFromMaster
+
+class run_PTP(threading.Thread):
     def __init__(self, i):
         threading.Thread.__init__(self)
         self.running = True
@@ -34,21 +52,51 @@ class run_timer(threading.Thread):
 
     def run(self):
         while self.running:
-            if list_containers_up[self.i].get_value() == True:
+            if list_PTP_up[self.i].get_value() == True:
 
                 if self.is_killed == False:
-                    self.offset = obtain_offset_slave(self.i)
-                    exec("Timer_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
+                    self.offset = obtain_offset_PTP(self.i)
+                    exec("PTP_slave_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
 
                 else:
                     client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + self.str_i, detach=True)
-                    exec("container_" + self.str_i + " = client.containers.get('ptp" + self.str_i + "')")
+                    exec("PTP_container_" + self.str_i + " = client.containers.get('ptp" + self.str_i + "')")
                     self.is_killed = False
                     sleep(7)
 
-            elif list_containers_up[self.i].get_value() == False:
+            elif list_PTP_up[self.i].get_value() == False:
                 if self.is_killed == False:
-                    exec("container_" + self.str_i + ".kill()")
+                    exec("PTP_container_" + self.str_i + ".kill()")
+                    self.is_killed = True
+
+    def stop(self):
+        self.running = False
+
+class run_NTP(threading.Thread):
+    def __init__(self, i):
+        threading.Thread.__init__(self)
+        self.running = True
+        self.i = i
+        self.str_i = str(self.i)
+        self.is_killed = False
+
+    def run(self):
+        while self.running:
+            if list_NTP_up[self.i].get_value() == True:
+
+                if self.is_killed == False:
+                    self.offset = obtain_offset_NTP(self.i)
+                    exec("NTP_client_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
+
+                else:
+                    client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + self.str_i, detach=True)
+                    exec("NTP_container_" + self.str_i + " = client.containers.get('ntp" + self.str_i + "')")
+                    self.is_killed = False
+                    sleep(2)
+
+            elif list_NTP_up[self.i].get_value() == False:
+                if self.is_killed == False:
+                    exec("NTP_container_" + self.str_i + ".kill()")
                     self.is_killed = True
 
     def stop(self):
@@ -56,13 +104,15 @@ class run_timer(threading.Thread):
 
 if __name__ == "__main__":
 
-    list_containers_up = [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+    list_PTP_up = [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-    i = 0
+    list_NTP_up = [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 
-    n = int(sys.argv[1])
+    n_ptp = int(sys.argv[1])
+    n_ntp = int(sys.argv[2])
 
-    threads = []
+    threads_PTP = []
+    threads_NTP = []
 
     client = docker.from_env()
 
@@ -94,53 +144,98 @@ if __name__ == "__main__":
 
     print("Name Space and ID of Finish all : ", Finished_all)
 
-    for i in range(n):
+    if n_ptp != 0:
+        for i in range(n_ptp):
 
-        str_i = str(i)
-        exec("Timer_" + str_i + " = myobj.add_variable(idx, 'Timer_" + str_i + "', 0, ua.VariantType.Float)")
-        exec("Timer_" + str_i + ".set_writable()")
+            str_i = str(i)
+            exec("PTP_slave_" + str_i + " = myobj.add_variable(idx, 'PTP_slave_" + str_i + "', 0, ua.VariantType.Float)")
+            exec("PTP_slave_" + str_i + ".set_writable()")
 
-        exec("print('Name Space and ID of Timer " + str_i + " : ', Timer_" + str_i + ")")
+            exec("print('Name Space and ID of PTP Slave " + str_i + " : ', PTP_slave_" + str_i + ")")
 
-        exec("list_containers_up[" + str_i + "] = myobj.add_variable(idx, 'list_containers_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
-        exec("list_containers_up[" + str_i + "].set_writable()")
+            exec("list_PTP_up[" + str_i + "] = myobj.add_variable(idx, 'list_PTP_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
+            exec("list_PTP_up[" + str_i + "].set_writable()")
 
-        exec("print('Name Space and ID of Conf " + str_i + " : ', list_containers_up[" + str_i + "])")
+            exec("print('Name Space and ID of PTP Conf " + str_i + " : ', list_PTP_up[" + str_i + "])")
 
-        client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + str_i, detach=True)
+            client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + str_i, detach=True)
 
-        exec("container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
+            exec("PTP_container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 
-        # Initialize containers_up
-        exec("list_containers_up[" + str_i + "].set_value(True, ua.VariantType.Boolean)")
+            # Initialize containers
+            exec("list_PTP_up[" + str_i + "].set_value(True, ua.VariantType.Boolean)")
 
-        threads.append(run_timer(i))
+            threads_PTP.append(run_PTP(i))
+
+    if n_ntp != 0:
+        for i in range(n_ntp):
+            str_i = str(i)
+            exec("NTP_client_" + str_i + " = myobj.add_variable(idx, 'NTP_client_" + str_i + "', 0, ua.VariantType.Float)")
+            exec("NTP_client_" + str_i + ".set_writable()")
+
+            exec("print('Name Space and ID of NTP Client " + str_i + " : ', NTP_client_" + str_i + ")")
+
+            exec("list_NTP_up[" + str_i + "] = myobj.add_variable(idx, 'list_NTP_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
+            exec("list_NTP_up[" + str_i + "].set_writable()")
+
+            exec("print('Name Space and ID of NTP Conf " + str_i + " : ', list_NTP_up[" + str_i + "])")
+
+            client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + str_i, detach=True)
+
+            exec("NTP_container_"+ str_i + " = client.containers.get('ntp" + str_i + "')")
+
+            # Initialize containers
+            exec("list_NTP_up[" + str_i + "].set_value(True, ua.VariantType.Boolean)")
+
+            threads_NTP.append(run_NTP(i))
 
     # OPC-UA-Server Start
     server.start()
 
     # ------------------------------------------------- LOOOOOP ---------------------------------------
+    if n_ptp != 0:
+        for i in range(n_ptp):
+            threads_PTP[i].start()
 
-    for i in range(n):
-        threads[i].start()
+    if n_ntp != 0:
+        for i in range(n_ntp):
+            threads_NTP[i].start()
 
     while True:
         count = 0
-        for i in range(n):
-            if list_containers_up[i].get_value() == False:
-                count += 1
 
-        if count == n or Finished_all.get_value() == True:
+        if n_ptp != 0:
+            for i in range(n_ptp):
+                if list_PTP_up[i].get_value() == False:
+                    count += 1
+
+        if n_ntp != 0:
+            for i in range(n_ntp):
+                if list_NTP_up[i].get_value() == False:
+                    count += 1
+
+        if count == (n_ptp+n_ntp) or Finished_all.get_value() == True:
             break
 
     # Espera a que todos los procesos terminen
-    for thread in threads:
+    for thread in threads_PTP:
         thread.stop()
+
+    for thread in threads_NTP:
+        thread.stop()
+
+    if n_ptp != 0:
+        for i in range(n_ptp):
+            str_i = str(i)
+            if list_PTP_up[i].get_value() == True:
+                client.containers.get("ptp" + str_i).kill()
+
+    if n_ntp != 0:
+        for i in range(n_ntp):
+            str_i = str(i)
+            if list_NTP_up[i].get_value() == True:
+                client.containers.get("ntp" + str_i).kill()
 
     server.stop()
 
-    for i in range(n):
-        str_i = str(i)
-        exec("client.containers.get('ptp" + str_i + "').kill()")
-
-    print("Script FINISHED! \n \n \n \n \n")
+    print("Script FINISHED! \n")
