@@ -32,14 +32,14 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://timer_1</name>
+            <name>pva://rpi4:NTP_clients.VAL</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://timer_2</name>
+            <name>pva://rpi4:NTP_clients.VAL</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>

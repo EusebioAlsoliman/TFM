@@ -35,10 +35,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-3170.0</min>
-      <max>6340.0</max>
+      <min>-743000.0</min>
+      <max>423000.0</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
     <axis>
@@ -52,10 +52,10 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>420.0</min>
-      <max>2990.0</max>
+      <min>-743000.0</min>
+      <max>423000.0</max>
       <grid>false</grid>
-      <autoscale>false</autoscale>
+      <autoscale>true</autoscale>
       <log_scale>false</log_scale>
     </axis>
   </axes>
@@ -65,7 +65,7 @@
     <pv>
       <display_name>Timer_1</display_name>
       <visible>true</visible>
-      <name>pva://timer_1</name>
+      <name>pva://rpi4:NTP_clients.VAL[0]</name>
       <axis>0</axis>
       <color>
         <red>255</red>
@@ -81,21 +81,16 @@
       <period>0.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
-      <archive>
-        <name>RDB</name>
-        <url>jdbc:mysql://localhost/archive</url>
-        <key>1</key>
-      </archive>
     </pv>
     <pv>
-      <display_name>Timer_2</display_name>
+      <display_name>pva://rpi4:NTP_clients.VAL[1]</display_name>
       <visible>true</visible>
-      <name>pva://timer_2</name>
+      <name>pva://rpi4:NTP_clients.VAL[1]</name>
       <axis>1</axis>
       <color>
         <red>0</red>
-        <green>0</green>
-        <blue>255</blue>
+        <green>255</green>
+        <blue>0</blue>
       </color>
       <trace_type>AREA</trace_type>
       <linewidth>2</linewidth>
@@ -103,14 +98,9 @@
       <point_type>NONE</point_type>
       <point_size>2</point_size>
       <waveform_index>0</waveform_index>
-      <period>1.0</period>
+      <period>0.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
-      <archive>
-        <name>RDB</name>
-        <url>jdbc:mysql://localhost/archive</url>
-        <key>1</key>
-      </archive>
     </pv>
   </pvlist>
 </databrowser>

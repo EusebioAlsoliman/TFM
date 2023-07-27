@@ -1,14 +1,14 @@
-import sys
-sys.path.insert(0, "..")
-
-
 from opcua import Client
-
+import pvaccess
+dir (pvaccess)
 
 if __name__ == "__main__":
 
-    client = Client("opc.tcp://169.254.145.192:4897")
-    # client = Client("opc.tcp://admin@localhost:4840/freeopcua/server/") #connect using a user
+    client = Client("opc.tcp://169.254.145.195:4897")
+
+    channel_NTP = pvaccess.Channel("rpi4:NTP_clients")
+    channel_PTP = pvaccess.Channel("rpi4:PTP_slaves")
+
     try:
         client.connect()
 
@@ -19,24 +19,48 @@ if __name__ == "__main__":
         # Node objects have methods to read and write node attributes as well as browse or populate address space
         print("Children of root are: ", root.get_children())
 
-        # get a specific node knowing its node id
-        #var = client.get_node(ua.NodeId(1002, 2))
-        var = client.get_node("ns=2;i=3") #Temperature, Timer_1 = i=3, Timer_2 = i=4
-        print(var)
-        value = var.get_value() # get value of node as a DataValue object
-        print(value)
-        #var.get_value() # get value of node as a python builtin
-        #var.set_value(ua.Variant([23], ua.VariantType.Int64)) #set node value using explicit data type
-        #var.set_value(3.9) # set node value using implicit data type
+        objects = root.get_child("0:Objects")
 
-        # Now getting a variable node using its browse path
-        # myvar = root.get_child(["0:Objects", "2:MyObject", "2:MyVariable"])
-        # obj = root.get_child(["0:Objects", "2:MyObject"])
-        # print("myvar is: ", myvar)
-        # print("myobj is: ", obj)
+        variables = objects.get_child("2:Variables")
 
-        # Stacked myvar access
-        # print("myvar is: ", root.get_children()[0].get_children()[1].get_variables()[0].get_value())
+        PTP_slaves = []
+        NTP_clients = []
+
+        # ---------------------------------- PTP -------------------------------------
+        for i in range(20):
+            try:
+                PTP_slaves.append(variables.get_child("2:PTP_slave_" + str(i)))
+            except:
+                break
+
+        print(PTP_slaves)
+        
+        for slave in PTP_slaves:
+            print(slave.get_value())
+
+
+        # --------------------------------- NTP --------------------------------------
+        for i in range(20):
+            try:
+                NTP_clients.append(variables.get_child("2:NTP_client_" + str(i)))
+            except:
+                break
+        
+        print(NTP_clients)
+
+        for clients in NTP_clients:
+            print(clients.get_value())
+
+        array_data_NTP = [0] * 20
+
+
+        # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
+        while True:
+            for i in range(len(NTP_clients)):
+                array_data_NTP[i] = int(NTP_clients[i].get_value())
+            
+            channel_NTP.put(array_data_NTP)
 
     finally:
         client.disconnect()
+        print("Client disconnected succesfully!!!!")

@@ -32,12 +32,16 @@ record(ai, "temperature:oil")
     field(LSV, "MINOR")
 }
 
-record(int64in, "timer_1")
+record(aai, "rpi4:PTP_slaves")
 {
-    field(DESC, "Offset of the first PTP slave")
+    field(DESC, "PTP slaves offset in Raspberry Pi 4")
+    field(FTVL, "INT64")
+    field(NELM, "20")
 }
 
-record(int64in, "timer_2")
+record(aai, "rpi4:NTP_clients")
 {
-	field(DESC, "Offset of the second PTP slave")
+    field(DESC, "NTP clients offset in Raspberry Pi 4")
+    field(FTVL, "INT64")
+    field(NELM, "20")
 }
