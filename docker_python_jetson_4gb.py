@@ -144,21 +144,22 @@ if __name__ == "__main__":
 
     print("Name Space and ID of Finish all : ", Finished_all)
 
-    if n_ptp != 0:
-        for i in range(n_ptp):
 
-            str_i = str(i)
-            exec("PTP_slave_" + str_i + " = myobj.add_variable(idx, 'PTP_slave_" + str_i + "', 0, ua.VariantType.Float)")
-            exec("PTP_slave_" + str_i + ".set_writable()")
+    for i in range(20):
 
-            exec("print('Name Space and ID of PTP Slave " + str_i + " : ', PTP_slave_" + str_i + ")")
+        str_i = str(i)
+        exec("PTP_slave_" + str_i + " = myobj.add_variable(idx, 'PTP_slave_" + str_i + "', 0, ua.VariantType.Float)")
+        exec("PTP_slave_" + str_i + ".set_writable()")
 
-            exec("list_PTP_up[" + str_i + "] = myobj.add_variable(idx, 'list_PTP_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
-            exec("list_PTP_up[" + str_i + "].set_writable()")
+        exec("print('Name Space and ID of PTP Slave " + str_i + " : ', PTP_slave_" + str_i + ")")
 
-            exec("print('Name Space and ID of PTP Conf " + str_i + " : ', list_PTP_up[" + str_i + "])")
+        exec("list_PTP_up[" + str_i + "] = myobj.add_variable(idx, 'list_PTP_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
+        exec("list_PTP_up[" + str_i + "].set_writable()")
 
-            client.containers.run("ptp4l", command="ptp4l -S -s -i eth0 -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + str_i, detach=True)
+        exec("print('Name Space and ID of PTP Conf " + str_i + " : ', list_PTP_up[" + str_i + "])")
+
+        if i < n_ptp:
+            client.containers.run("ptp4l", command="ptp4l -S -s -f /home/UNICAST-SLAVE.cfg", volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ptp" + str_i, detach=True)
 
             exec("PTP_container_"+ str_i + " = client.containers.get('ptp" + str_i + "')")
 
@@ -167,19 +168,22 @@ if __name__ == "__main__":
 
             threads_PTP.append(run_PTP(i))
 
-    if n_ntp != 0:
-        for i in range(n_ntp):
-            str_i = str(i)
-            exec("NTP_client_" + str_i + " = myobj.add_variable(idx, 'NTP_client_" + str_i + "', 0, ua.VariantType.Float)")
-            exec("NTP_client_" + str_i + ".set_writable()")
+        else:
+            exec("list_PTP_up[" + str_i + "].set_value(False, ua.VariantType.Boolean)")
 
-            exec("print('Name Space and ID of NTP Client " + str_i + " : ', NTP_client_" + str_i + ")")
+    for i in range(20):
+        str_i = str(i)
+        exec("NTP_client_" + str_i + " = myobj.add_variable(idx, 'NTP_client_" + str_i + "', 0, ua.VariantType.Float)")
+        exec("NTP_client_" + str_i + ".set_writable()")
 
-            exec("list_NTP_up[" + str_i + "] = myobj.add_variable(idx, 'list_NTP_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
-            exec("list_NTP_up[" + str_i + "].set_writable()")
+        exec("print('Name Space and ID of NTP Client " + str_i + " : ', NTP_client_" + str_i + ")")
 
-            exec("print('Name Space and ID of NTP Conf " + str_i + " : ', list_NTP_up[" + str_i + "])")
+        exec("list_NTP_up[" + str_i + "] = myobj.add_variable(idx, 'list_NTP_up[" + str_i + "]', 0, ua.VariantType.Boolean)")
+        exec("list_NTP_up[" + str_i + "].set_writable()")
 
+        exec("print('Name Space and ID of NTP Conf " + str_i + " : ', list_NTP_up[" + str_i + "])")
+
+        if i < n_ntp:
             client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + str_i, detach=True)
 
             exec("NTP_container_"+ str_i + " = client.containers.get('ntp" + str_i + "')")
@@ -189,30 +193,31 @@ if __name__ == "__main__":
 
             threads_NTP.append(run_NTP(i))
 
+        else:
+            exec("list_NTP_up[" + str_i + "].set_value(False, ua.VariantType.Boolean)")
+
     # OPC-UA-Server Start
     server.start()
 
     # ------------------------------------------------- LOOOOOP ---------------------------------------
-    if n_ptp != 0:
-        for i in range(n_ptp):
-            threads_PTP[i].start()
 
-    if n_ntp != 0:
-        for i in range(n_ntp):
-            threads_NTP[i].start()
+    for i in range(n_ptp):
+        threads_PTP[i].start()
+
+
+    for i in range(n_ntp):
+        threads_NTP[i].start()
 
     while True:
         count = 0
 
-        if n_ptp != 0:
-            for i in range(n_ptp):
-                if list_PTP_up[i].get_value() == False:
-                    count += 1
+        for i in range(n_ptp):
+            if list_PTP_up[i].get_value() == False:
+                count += 1
 
-        if n_ntp != 0:
-            for i in range(n_ntp):
-                if list_NTP_up[i].get_value() == False:
-                    count += 1
+        for i in range(n_ntp):
+            if list_NTP_up[i].get_value() == False:
+                count += 1
 
         if count == (n_ptp+n_ntp) or Finished_all.get_value() == True:
             break
@@ -224,17 +229,15 @@ if __name__ == "__main__":
     for thread in threads_NTP:
         thread.stop()
 
-    if n_ptp != 0:
-        for i in range(n_ptp):
-            str_i = str(i)
-            if list_PTP_up[i].get_value() == True:
-                client.containers.get("ptp" + str_i).kill()
+    for i in range(n_ptp):
+        str_i = str(i)
+        if list_PTP_up[i].get_value() == True:
+            client.containers.get("ptp" + str_i).kill()
 
-    if n_ntp != 0:
-        for i in range(n_ntp):
-            str_i = str(i)
-            if list_NTP_up[i].get_value() == True:
-                client.containers.get("ntp" + str_i).kill()
+    for i in range(n_ntp):
+        str_i = str(i)
+        if list_NTP_up[i].get_value() == True:
+            client.containers.get("ntp" + str_i).kill()
 
     server.stop()
 
