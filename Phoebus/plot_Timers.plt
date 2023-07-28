@@ -35,8 +35,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-743000.0</min>
-      <max>423000.0</max>
+      <min>-31005.0</min>
+      <max>-8895.0</max>
       <grid>false</grid>
       <autoscale>true</autoscale>
       <log_scale>false</log_scale>
@@ -52,8 +52,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-743000.0</min>
-      <max>423000.0</max>
+      <min>-31005.0</min>
+      <max>-8895.0</max>
       <grid>false</grid>
       <autoscale>true</autoscale>
       <log_scale>false</log_scale>

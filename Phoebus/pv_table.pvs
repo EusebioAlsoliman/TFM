@@ -32,14 +32,21 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://rpi4:NTP_clients.VAL</name>
+            <name>pva://rpi4:NTP_clients</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://rpi4:NTP_clients.VAL</name>
+            <name>= `pva://rpi4:NTP_clients.VAL[3]` * 1</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://rpi4:NTP_clients.VAL[3]</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
