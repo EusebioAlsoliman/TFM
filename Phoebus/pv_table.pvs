@@ -39,14 +39,14 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>= `pva://rpi4:NTP_clients.VAL[3]` * 1</name>
+            <name>= `pva://rpi4:NTP_clients.VAL` * 1</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://rpi4:NTP_clients.VAL[3]</name>
+            <name>= elementAt(`pva://rpi4:NTP_clients`, 3)</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>

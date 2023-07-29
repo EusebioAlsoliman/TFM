@@ -13,12 +13,12 @@
       <period>1.0</period>
     </channel>
     <channel>
-      <name>pva://timer_1</name>
+      <name>= elementAt(`pva://rpi4:NTP_clients`, 0)</name>
       <monitor/>
       <period>0.1</period>
     </channel>
     <channel>
-      <name>pva://timer_2</name>
+      <name>= elementAt(`pva://rpi4:NTP_clients`, 1)</name>
       <monitor/>
       <period>0.1</period>
     </channel>

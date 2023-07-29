@@ -5,9 +5,9 @@
   <grid>true</grid>
   <update_period>3.0</update_period>
   <scroll_step>5</scroll_step>
-  <scroll>true</scroll>
-  <start>-1 minutes -17.594 seconds</start>
-  <end>now</end>
+  <scroll>false</scroll>
+  <start>2023-07-29 09:47:46.219</start>
+  <end>2023-07-29 09:51:17.133</end>
   <archive_rescale>STAGGER</archive_rescale>
   <foreground>
     <red>0</red>
@@ -35,8 +35,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-31005.0</min>
-      <max>-8895.0</max>
+      <min>-143500.0</min>
+      <max>175500.0</max>
       <grid>false</grid>
       <autoscale>true</autoscale>
       <log_scale>false</log_scale>
@@ -52,8 +52,8 @@
         <green>0</green>
         <blue>0</blue>
       </color>
-      <min>-31005.0</min>
-      <max>-8895.0</max>
+      <min>-133500.0</min>
+      <max>119500.0</max>
       <grid>false</grid>
       <autoscale>true</autoscale>
       <log_scale>false</log_scale>
@@ -65,7 +65,7 @@
     <pv>
       <display_name>Timer_1</display_name>
       <visible>true</visible>
-      <name>pva://rpi4:NTP_clients.VAL[0]</name>
+      <name>= elementAt(`pva://rpi4:NTP_clients`, 0)</name>
       <axis>0</axis>
       <color>
         <red>255</red>
@@ -81,11 +81,16 @@
       <period>0.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
+      <archive>
+        <name>RDB</name>
+        <url>jdbc:mysql://localhost/archive</url>
+        <key>1</key>
+      </archive>
     </pv>
     <pv>
       <display_name>pva://rpi4:NTP_clients.VAL[1]</display_name>
       <visible>true</visible>
-      <name>pva://rpi4:NTP_clients.VAL[1]</name>
+      <name>= elementAt(`pva://rpi4:NTP_clients`, 1)</name>
       <axis>1</axis>
       <color>
         <red>0</red>
@@ -101,6 +106,11 @@
       <period>0.0</period>
       <ring_size>5000</ring_size>
       <request>OPTIMIZED</request>
+      <archive>
+        <name>RDB</name>
+        <url>jdbc:mysql://localhost/archive</url>
+        <key>1</key>
+      </archive>
     </pv>
   </pvlist>
 </databrowser>
