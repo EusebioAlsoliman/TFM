@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-07-29 09:44:30 by root-->
+<!--Saved on 2023-07-29 20:32:00 by root-->
 <display version="2.0.0">
   <name>Old Main Panel</name>
   <background_color>
@@ -189,7 +189,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_6</name>
-    <pv_name>pva://rpi4:NTP_clients</pv_name>
+    <pv_name>pva://rpi4:NTP_client:0</pv_name>
     <x>20</x>
     <y>620</y>
     <width>470</width>

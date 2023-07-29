@@ -6,8 +6,16 @@ if __name__ == "__main__":
 
     client = Client("opc.tcp://169.254.145.195:4897")
 
-    channel_NTP = pvaccess.Channel("rpi4:NTP_clients")
-    channel_PTP = pvaccess.Channel("rpi4:PTP_slaves")
+    # channel_NTP = pvaccess.Channel("rpi4:NTP_clients")
+    # channel_PTP = pvaccess.Channel("rpi4:PTP_slaves")
+
+    channel_NTP = []
+    channel_PTP = []
+
+    for i in range(20):
+        channel_NTP.append(pvaccess.Channel("rpi4:NTP_client:" + str(i)))
+        channel_PTP.append(pvaccess.Channel("rpi4:PTP_slave:" + str(i)))
+
 
     try:
         client.connect()
@@ -57,9 +65,10 @@ if __name__ == "__main__":
         # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
         while True:
             for i in range(len(NTP_clients)):
-                array_data_NTP[i] = int(NTP_clients[i].get_value())
+                # array_data_NTP[i] = int(NTP_clients[i].get_value())
+                channel_NTP[i].put(int(NTP_clients[i].get_value()))
             
-            channel_NTP.put(array_data_NTP)
+            # channel_NTP.put(array_data_NTP)
 
     finally:
         client.disconnect()

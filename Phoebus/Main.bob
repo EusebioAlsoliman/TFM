@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-07-29 15:28:59 by root-->
+<!--Saved on 2023-07-29 21:53:29 by root-->
 <display version="2.0.0">
   <name>Main Panel</name>
   <background_color>
@@ -9,7 +9,7 @@
   <widget type="label" version="2.0.0">
     <name>Label</name>
     <class>TITLE</class>
-    <text>Primera pantalla</text>
+    <text>Pantalla principal</text>
     <x use_class="true">0</x>
     <y use_class="true">0</y>
     <width>550</width>
@@ -24,41 +24,12 @@
     </foreground_color>
     <transparent use_class="true">true</transparent>
   </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_1</name>
-    <text>Ejemplo sine:</text>
-    <y>50</y>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update</name>
-    <pv_name>sim://sine</pv_name>
-    <x>100</x>
-    <y>50</y>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_2</name>
-    <class>COMMENT</class>
-    <text>Funcion seno</text>
-    <x>220</x>
-    <y>50</y>
-    <width>140</width>
-    <font use_class="true">
-      <font name="Comment" family="Liberation Sans" style="ITALIC" size="14.0">
-      </font>
-    </font>
-    <foreground_color use_class="true">
-      <color name="Text" red="0" green="0" blue="0">
-      </color>
-    </foreground_color>
-    <transparent use_class="true">true</transparent>
-    <wrap_words use_class="true">true</wrap_words>
-  </widget>
   <widget type="databrowser" version="2.0.0">
     <name>Data Browser</name>
     <file>plot_Temperature.plt</file>
     <x>30</x>
     <y>260</y>
-    <width>740</width>
+    <width>470</width>
     <height>330</height>
     <show_toolbar>true</show_toolbar>
   </widget>
@@ -99,15 +70,6 @@
     <height>50</height>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="databrowser" version="2.0.0">
-    <name>Data Browser_1</name>
-    <file>plot_Timers.plt</file>
-    <x>830</x>
-    <y>260</y>
-    <width>740</width>
-    <height>330</height>
-    <show_toolbar>true</show_toolbar>
   </widget>
   <widget type="thermometer" version="2.0.0">
     <name>Thermometer_1</name>
@@ -189,7 +151,6 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_6</name>
-    <pv_name>pva://rpi4:NTP_clients</pv_name>
     <x>20</x>
     <y>620</y>
     <width>470</width>
@@ -214,8 +175,8 @@
         <description>Segundo panel</description>
       </action>
     </actions>
-    <x>40</x>
-    <y>100</y>
+    <x>30</x>
+    <y>50</y>
     <width>230</width>
     <height>60</height>
     <tooltip>$(actions)</tooltip>
@@ -229,9 +190,70 @@
         <description>WritePV</description>
       </action>
     </actions>
-    <x>70</x>
-    <y>190</y>
+    <x>30</x>
+    <y>140</y>
     <width>140</width>
     <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_5</name>
+    <text>Limites dinamicos para la temperatura del aceite</text>
+    <x>930</x>
+    <y>10</y>
+    <width>490</width>
+    <height>50</height>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="spinner" version="2.0.0">
+    <name>Spinner_1</name>
+    <pv_name>loc://rpi4:Node_ID</pv_name>
+    <x>40</x>
+    <y>190</y>
+    <width>210</width>
+    <height>50</height>
+  </widget>
+  <widget type="stripchart" version="2.1.0">
+    <name>Strip Chart</name>
+    <x>520</x>
+    <y>260</y>
+    <width>620</width>
+    <height>320</height>
+    <scripts>
+      <script file="update_trace.py">
+        <pv_name>loc://rpi4:Node_ID</pv_name>
+      </script>
+    </scripts>
+    <y_axes>
+      <y_axis>
+        <title>Y</title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+        <color>
+          <color name="Text" red="0" green="0" blue="0">
+          </color>
+        </color>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>$(traces[0].y_pv)</name>
+        <y_pv>pva://rpi4:NTP_client:0</y_pv>
+        <axis>0</axis>
+        <trace_type>2</trace_type>
+        <color>
+          <color red="0" green="0" blue="255">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
   </widget>
 </display>

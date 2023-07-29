@@ -1,3 +1,4 @@
+fixed_variables = """
 record(ai, "temperature:water")
 {
 	field(DESC, "Water temperature in the fish tank")
@@ -31,17 +32,30 @@ record(ai, "temperature:oil")
     field(HSV, "MINOR")
     field(LSV, "MINOR")
 }
+"""
 
-record(aai, "rpi4:PTP_slaves")
+template_dynamic = """
+record(int64in, "rpi4:PTP_slave:{index}")
 {
-    field(DESC, "PTP slaves offset in Raspberry Pi 4")
-    field(FTVL, "INT64")
-    field(NELM, "20")
+    field(DESC, "PTP slave {index} offset in Raspberry Pi 4")
 }
 
-record(aai, "rpi4:NTP_clients")
+record(int64in, "rpi4:NTP_client:{index}")
 {
-    field(DESC, "NTP clients offset in Raspberry Pi 4")
-    field(FTVL, "INT64")
-    field(NELM, "20")
+    field(DESC, "NTP client {index} offset in Raspberry Pi 4")
+	field(LOLO, "-50000")
+	field(LOW, "-20000")
+	field(HIGH, "20000")
+	field(HIHI, "50000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
 }
+"""
+
+with open("test.db", "w") as f:
+    f.write(fixed_variables)
+    for i in range(0, 20):
+        record_str = template_dynamic.replace("{index}", str(i))
+        f.write(record_str)

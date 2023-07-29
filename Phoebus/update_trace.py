@@ -7,7 +7,8 @@
 from connect2j import scriptContext
 
 with scriptContext('widget', 'pvs', 'PVUtil', dict=globals()):
-	value = PVUtil.getDouble(pvs[0]);
-	x0 = PVUtil.getDouble(pvs[1]);
-	scale = PVUtil.getDouble(pvs[2]);
-	widget.setPropertyValue("x", x0 + scale * value)
+	node = PVUtil.getDouble(pvs[0])
+	print("NODOO")
+	print('%g'%(node))
+	print("pva://rpi4_NTP_client:" + str('%g'%(node)))
+	widget.setPropertyValue("traces[0].y_pv", "pva://rpi4:NTP_client:" + str('%g'%(node)))
