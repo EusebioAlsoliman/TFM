@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-07-29 21:53:29 by root-->
+<!--Saved on 2023-07-30 11:50:59 by root-->
 <display version="2.0.0">
   <name>Main Panel</name>
   <background_color>
@@ -29,7 +29,7 @@
     <file>plot_Temperature.plt</file>
     <x>30</x>
     <y>260</y>
-    <width>470</width>
+    <width>550</width>
     <height>330</height>
     <show_toolbar>true</show_toolbar>
   </widget>
@@ -149,23 +149,6 @@
     <width>220</width>
     <interactive>true</interactive>
   </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_6</name>
-    <x>20</x>
-    <y>620</y>
-    <width>470</width>
-    <height>110</height>
-    <background_color>
-      <color name="Write_Background" red="128" green="255" blue="255">
-      </color>
-    </background_color>
-    <scripts>
-      <script file="update_color.py">
-        <pv_name>pva://temperature:water</pv_name>
-      </script>
-    </scripts>
-    <interactive>true</interactive>
-  </widget>
   <widget type="action_button" version="3.0.0">
     <name>Action Button</name>
     <actions>
@@ -176,9 +159,8 @@
       </action>
     </actions>
     <x>30</x>
-    <y>50</y>
-    <width>230</width>
-    <height>60</height>
+    <y>31</y>
+    <width>220</width>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="action_button" version="3.0.0">
@@ -191,7 +173,7 @@
       </action>
     </actions>
     <x>30</x>
-    <y>140</y>
+    <y>67</y>
     <width>140</width>
     <tooltip>$(actions)</tooltip>
   </widget>
@@ -207,7 +189,7 @@
   </widget>
   <widget type="spinner" version="2.0.0">
     <name>Spinner_1</name>
-    <pv_name>loc://rpi4:Node_ID</pv_name>
+    <pv_name>loc://node_ID</pv_name>
     <x>40</x>
     <y>190</y>
     <width>210</width>
@@ -215,18 +197,19 @@
   </widget>
   <widget type="stripchart" version="2.1.0">
     <name>Strip Chart</name>
-    <x>520</x>
+    <x>601</x>
     <y>260</y>
     <width>620</width>
     <height>320</height>
     <scripts>
       <script file="update_trace.py">
-        <pv_name>loc://rpi4:Node_ID</pv_name>
+        <pv_name>loc://node_ID</pv_name>
+        <pv_name>loc://device_name</pv_name>
       </script>
     </scripts>
     <y_axes>
       <y_axis>
-        <title>Y</title>
+        <title>offset</title>
         <autoscale>true</autoscale>
         <log_scale>false</log_scale>
         <minimum>0.0</minimum>
@@ -255,5 +238,13 @@
         <visible>true</visible>
       </trace>
     </traces>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Entry</name>
+    <pv_name>loc://device_name</pv_name>
+    <x>30</x>
+    <y>120</y>
+    <width>220</width>
+    <height>30</height>
   </widget>
 </display>

@@ -3,7 +3,7 @@ import threading
 import pvaccess
 dir (pvaccess)
 
-def main(url, device, running):
+def main(url, device):
     client = Client(url)
     
     channel_NTP = []
@@ -44,27 +44,25 @@ def main(url, device, running):
             channel_NTP[i].put(int(NTP_clients[i].get_value()))
     
     client.disconnect()
-    print("Client from device" + device + "disconnected succesfully!!!!")
+    print("Client from device " + device + " disconnected succesfully!!!!")
 
 class gateway(threading.Thread):
     def __init__(self, device, url):
         threading.Thread.__init__(self)
-        self.running = True
         self.device = device
         self.url = url
 
     def run(self):
-        main(device=self.device, url=self.url, running=self.running)
-
-    def stop(self):
-        self.running = False
+        main(device=self.device, url=self.url)
 
 if __name__ == "__main__":
 
     threads = []
 
-    list_devices = ["nano2gb", "rpi4"]
-    list_urls = ["opc.tcp://169.254.145.193:4897", "opc.tcp://169.254.145.195:4897"]
+    running = True
+
+    list_devices = ["nano2gb", "nano4gb", "rpi4"]
+    list_urls = ["opc.tcp://169.254.145.193:4897", "opc.tcp://169.254.145.194:4897","opc.tcp://169.254.145.195:4897"]
 
     for device_i, url_i in zip(list_devices, list_urls):
         threads.append(gateway(device=device_i, url=url_i))
@@ -74,15 +72,17 @@ if __name__ == "__main__":
 
     print("Threads running!")
 
-    while True:
-        try:
+    try:
+        while True:
             pass
-        except KeyboardInterrupt:
-            
-            for thread in threads:
-                thread.stop()
+    
+    except KeyboardInterrupt:
 
-            for thread in threads:
-                thread.join()
+        print("Trying to kill threads...")
 
-            print("Script FINISHED! \n")
+        running = False
+
+        for thread in threads:
+            thread.join()
+
+        print("Script FINISHED! \n")

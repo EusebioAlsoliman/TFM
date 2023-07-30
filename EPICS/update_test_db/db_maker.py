@@ -43,10 +43,10 @@ record(int64in, "rpi4:PTP_slave:{index}")
 record(int64in, "rpi4:NTP_client:{index}")
 {
     field(DESC, "NTP client {index} offset in Raspberry Pi 4")
-	field(LOLO, "-50000")
-	field(LOW, "-20000")
-	field(HIGH, "20000")
-	field(HIHI, "50000")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
 	field(LSV, "MINOR")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
@@ -55,16 +55,34 @@ record(int64in, "rpi4:NTP_client:{index}")
 
 record(int64in, "nano2gb:PTP_slave:{index}")
 {
-    field(DESC, "PTP slave {index} offset in Raspberry Pi 4")
+    field(DESC, "PTP slave {index} offset in Jetson Nano 2GB")
 }
 
 record(int64in, "nano2gb:NTP_client:{index}")
 {
-    field(DESC, "NTP client {index} offset in Raspberry Pi 4")
-	field(LOLO, "-50000")
-	field(LOW, "-20000")
-	field(HIGH, "20000")
-	field(HIHI, "50000")
+    field(DESC, "NTP client {index} offset in Jetson Nano 2GB")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(int64in, "nano4gb:PTP_slave:{index}")
+{
+    field(DESC, "PTP slave {index} offset in Jetson Nano 4GB")
+}
+
+record(int64in, "nano4gb:NTP_client:{index}")
+{
+    field(DESC, "NTP client {index} offset in Jetson Nano 4GB")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
 	field(LSV, "MINOR")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
