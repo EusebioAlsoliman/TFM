@@ -52,6 +52,24 @@ record(int64in, "rpi4:NTP_client:{index}")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
 }
+
+record(int64in, "nano2gb:PTP_slave:{index}")
+{
+    field(DESC, "PTP slave {index} offset in Raspberry Pi 4")
+}
+
+record(int64in, "nano2gb:NTP_client:{index}")
+{
+    field(DESC, "NTP client {index} offset in Raspberry Pi 4")
+	field(LOLO, "-50000")
+	field(LOW, "-20000")
+	field(HIGH, "20000")
+	field(HIHI, "50000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
 """
 
 with open("test.db", "w") as f:

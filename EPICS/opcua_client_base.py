@@ -1,75 +1,88 @@
 from opcua import Client
+import threading
 import pvaccess
 dir (pvaccess)
 
-if __name__ == "__main__":
-
-    client = Client("opc.tcp://169.254.145.195:4897")
-
-    # channel_NTP = pvaccess.Channel("rpi4:NTP_clients")
-    # channel_PTP = pvaccess.Channel("rpi4:PTP_slaves")
-
+def main(url, device, running):
+    client = Client(url)
+    
     channel_NTP = []
     channel_PTP = []
 
     for i in range(20):
-        channel_NTP.append(pvaccess.Channel("rpi4:NTP_client:" + str(i)))
-        channel_PTP.append(pvaccess.Channel("rpi4:PTP_slave:" + str(i)))
+        channel_NTP.append(pvaccess.Channel(device + ":NTP_client:" + str(i)))
+        channel_PTP.append(pvaccess.Channel(device + ":PTP_slave:" + str(i)))
 
+    client.connect()
 
-    try:
-        client.connect()
+    root = client.get_root_node()
 
-        # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects
-        root = client.get_root_node()
-        print("Objects node is: ", root)
+    objects = root.get_child("0:Objects")
 
-        # Node objects have methods to read and write node attributes as well as browse or populate address space
-        print("Children of root are: ", root.get_children())
+    variables = objects.get_child("2:Variables")
 
-        objects = root.get_child("0:Objects")
+    PTP_slaves = []
+    NTP_clients = []
 
-        variables = objects.get_child("2:Variables")
+    # ---------------------------------- PTP -------------------------------------
+    for i in range(20):
+        try:
+            PTP_slaves.append(variables.get_child("2:PTP_slave_" + str(i)))
+        except:
+            break
 
-        PTP_slaves = []
-        NTP_clients = []
+    # --------------------------------- NTP --------------------------------------
+    for i in range(20):
+        try:
+            NTP_clients.append(variables.get_child("2:NTP_client_" + str(i)))
+        except:
+            break
 
-        # ---------------------------------- PTP -------------------------------------
-        for i in range(20):
-            try:
-                PTP_slaves.append(variables.get_child("2:PTP_slave_" + str(i)))
-            except:
-                break
+    # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
+    while running:
+        for i in range(len(NTP_clients)):
+            channel_NTP[i].put(int(NTP_clients[i].get_value()))
+    
+    client.disconnect()
+    print("Client from device" + device + "disconnected succesfully!!!!")
 
-        print(PTP_slaves)
-        
-        for slave in PTP_slaves:
-            print(slave.get_value())
+class gateway(threading.Thread):
+    def __init__(self, device, url):
+        threading.Thread.__init__(self)
+        self.running = True
+        self.device = device
+        self.url = url
 
+    def run(self):
+        main(device=self.device, url=self.url, running=self.running)
 
-        # --------------------------------- NTP --------------------------------------
-        for i in range(20):
-            try:
-                NTP_clients.append(variables.get_child("2:NTP_client_" + str(i)))
-            except:
-                break
-        
-        print(NTP_clients)
+    def stop(self):
+        self.running = False
 
-        for clients in NTP_clients:
-            print(clients.get_value())
+if __name__ == "__main__":
 
-        array_data_NTP = [0] * 20
+    threads = []
 
+    list_devices = ["nano2gb", "rpi4"]
+    list_urls = ["opc.tcp://169.254.145.193:4897", "opc.tcp://169.254.145.195:4897"]
 
-        # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
-        while True:
-            for i in range(len(NTP_clients)):
-                # array_data_NTP[i] = int(NTP_clients[i].get_value())
-                channel_NTP[i].put(int(NTP_clients[i].get_value()))
+    for device_i, url_i in zip(list_devices, list_urls):
+        threads.append(gateway(device=device_i, url=url_i))
+    
+    for thread in threads:
+        thread.start()
+
+    print("Threads running!")
+
+    while True:
+        try:
+            pass
+        except KeyboardInterrupt:
             
-            # channel_NTP.put(array_data_NTP)
+            for thread in threads:
+                thread.stop()
 
-    finally:
-        client.disconnect()
-        print("Client disconnected succesfully!!!!")
+            for thread in threads:
+                thread.join()
+
+            print("Script FINISHED! \n")
