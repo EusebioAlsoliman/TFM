@@ -2,6 +2,7 @@
 record(ai, "temperature:water")
 {
 	field(DESC, "Water temperature in the fish tank")
+    field(VAL, "34")
 	field(LOLO, "10")
 	field(LOW, "20")
 	field(HIGH, "80")
@@ -17,6 +18,7 @@ record(ao, "alarm_lim_dynamic:Low")
     field(DESC, "Test")
     field(PINI, "YES")
     field(OUT, "temperature:oil.LOW")
+    field(VAL, "12")
 }
 
 record(ao, "alarm_lim_dynamic:High")
@@ -24,6 +26,7 @@ record(ao, "alarm_lim_dynamic:High")
     field(DESC, "Test")
     field(PINI, "YES")
     field(OUT, "temperature:oil.HIGH")
+    field(VAL, "72")
 }
 
 record(ai, "temperature:oil")
@@ -31,16 +34,41 @@ record(ai, "temperature:oil")
     field(DESC, "Oil temperature in the engine")
     field(HSV, "MINOR")
     field(LSV, "MINOR")
+    field(VAL, "33")
+}
+
+record(bi, "rpi4:finish_all")
+{
+	field(DESC, "Finish OPC UA Server in Raspberry Pi 4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
+    field(VAL, "0")
+}
+
+record(bi, "nano2gb:finish_all")
+{
+	field(DESC, "Finish OPC UA Server in Jetson Nano 2GB")
+    field(ZNAM, "False")
+    field(ONAM, "True")
+    field(VAL, "0")
+}
+
+record(bi, "nano4gb:finish_all")
+{
+	field(DESC, "Finish OPC UA Server in Jetson Nano 4GB")
+    field(ZNAM, "False")
+    field(ONAM, "True")
+    field(VAL, "0")
 }
 
 record(int64in, "rpi4:PTP_slave:0")
 {
-    field(DESC, "PTP slave 0 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 0 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:0")
 {
-    field(DESC, "NTP client 0 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 0 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -49,16 +77,23 @@ record(int64in, "rpi4:NTP_client:0")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:0")
+{
+	field(DESC, "Switch ON/OFF the Node 0 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:0")
 {
-    field(DESC, "PTP slave 0 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 0 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:0")
 {
-    field(DESC, "NTP client 0 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 0 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -67,16 +102,23 @@ record(int64in, "nano2gb:NTP_client:0")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:0")
+{
+	field(DESC, "Switch ON/OFF the Node 0 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:0")
 {
-    field(DESC, "PTP slave 0 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 0 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:0")
 {
-    field(DESC, "NTP client 0 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 0 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -85,16 +127,23 @@ record(int64in, "nano4gb:NTP_client:0")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:0")
+{
+	field(DESC, "Switch ON/OFF the Node 0 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:1")
 {
-    field(DESC, "PTP slave 1 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 1 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:1")
 {
-    field(DESC, "NTP client 1 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 1 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -103,16 +152,23 @@ record(int64in, "rpi4:NTP_client:1")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:1")
+{
+	field(DESC, "Switch ON/OFF the Node 1 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:1")
 {
-    field(DESC, "PTP slave 1 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 1 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:1")
 {
-    field(DESC, "NTP client 1 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 1 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -121,16 +177,23 @@ record(int64in, "nano2gb:NTP_client:1")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:1")
+{
+	field(DESC, "Switch ON/OFF the Node 1 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:1")
 {
-    field(DESC, "PTP slave 1 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 1 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:1")
 {
-    field(DESC, "NTP client 1 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 1 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -139,16 +202,23 @@ record(int64in, "nano4gb:NTP_client:1")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:1")
+{
+	field(DESC, "Switch ON/OFF the Node 1 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:2")
 {
-    field(DESC, "PTP slave 2 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 2 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:2")
 {
-    field(DESC, "NTP client 2 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 2 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -157,16 +227,23 @@ record(int64in, "rpi4:NTP_client:2")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:2")
+{
+	field(DESC, "Switch ON/OFF the Node 2 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:2")
 {
-    field(DESC, "PTP slave 2 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 2 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:2")
 {
-    field(DESC, "NTP client 2 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 2 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -175,16 +252,23 @@ record(int64in, "nano2gb:NTP_client:2")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:2")
+{
+	field(DESC, "Switch ON/OFF the Node 2 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:2")
 {
-    field(DESC, "PTP slave 2 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 2 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:2")
 {
-    field(DESC, "NTP client 2 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 2 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -193,16 +277,23 @@ record(int64in, "nano4gb:NTP_client:2")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:2")
+{
+	field(DESC, "Switch ON/OFF the Node 2 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:3")
 {
-    field(DESC, "PTP slave 3 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 3 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:3")
 {
-    field(DESC, "NTP client 3 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 3 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -211,16 +302,23 @@ record(int64in, "rpi4:NTP_client:3")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:3")
+{
+	field(DESC, "Switch ON/OFF the Node 3 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:3")
 {
-    field(DESC, "PTP slave 3 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 3 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:3")
 {
-    field(DESC, "NTP client 3 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 3 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -229,16 +327,23 @@ record(int64in, "nano2gb:NTP_client:3")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:3")
+{
+	field(DESC, "Switch ON/OFF the Node 3 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:3")
 {
-    field(DESC, "PTP slave 3 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 3 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:3")
 {
-    field(DESC, "NTP client 3 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 3 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -247,16 +352,23 @@ record(int64in, "nano4gb:NTP_client:3")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:3")
+{
+	field(DESC, "Switch ON/OFF the Node 3 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:4")
 {
-    field(DESC, "PTP slave 4 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 4 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:4")
 {
-    field(DESC, "NTP client 4 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 4 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -265,16 +377,23 @@ record(int64in, "rpi4:NTP_client:4")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:4")
+{
+	field(DESC, "Switch ON/OFF the Node 4 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:4")
 {
-    field(DESC, "PTP slave 4 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 4 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:4")
 {
-    field(DESC, "NTP client 4 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 4 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -283,16 +402,23 @@ record(int64in, "nano2gb:NTP_client:4")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:4")
+{
+	field(DESC, "Switch ON/OFF the Node 4 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:4")
 {
-    field(DESC, "PTP slave 4 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 4 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:4")
 {
-    field(DESC, "NTP client 4 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 4 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -301,16 +427,23 @@ record(int64in, "nano4gb:NTP_client:4")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:4")
+{
+	field(DESC, "Switch ON/OFF the Node 4 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:5")
 {
-    field(DESC, "PTP slave 5 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 5 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:5")
 {
-    field(DESC, "NTP client 5 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 5 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -319,16 +452,23 @@ record(int64in, "rpi4:NTP_client:5")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:5")
+{
+	field(DESC, "Switch ON/OFF the Node 5 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:5")
 {
-    field(DESC, "PTP slave 5 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 5 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:5")
 {
-    field(DESC, "NTP client 5 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 5 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -337,16 +477,23 @@ record(int64in, "nano2gb:NTP_client:5")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:5")
+{
+	field(DESC, "Switch ON/OFF the Node 5 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:5")
 {
-    field(DESC, "PTP slave 5 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 5 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:5")
 {
-    field(DESC, "NTP client 5 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 5 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -355,16 +502,23 @@ record(int64in, "nano4gb:NTP_client:5")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:5")
+{
+	field(DESC, "Switch ON/OFF the Node 5 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:6")
 {
-    field(DESC, "PTP slave 6 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 6 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:6")
 {
-    field(DESC, "NTP client 6 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 6 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -373,16 +527,23 @@ record(int64in, "rpi4:NTP_client:6")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:6")
+{
+	field(DESC, "Switch ON/OFF the Node 6 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:6")
 {
-    field(DESC, "PTP slave 6 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 6 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:6")
 {
-    field(DESC, "NTP client 6 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 6 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -391,16 +552,23 @@ record(int64in, "nano2gb:NTP_client:6")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:6")
+{
+	field(DESC, "Switch ON/OFF the Node 6 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:6")
 {
-    field(DESC, "PTP slave 6 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 6 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:6")
 {
-    field(DESC, "NTP client 6 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 6 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -409,16 +577,23 @@ record(int64in, "nano4gb:NTP_client:6")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:6")
+{
+	field(DESC, "Switch ON/OFF the Node 6 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:7")
 {
-    field(DESC, "PTP slave 7 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 7 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:7")
 {
-    field(DESC, "NTP client 7 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 7 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -427,16 +602,23 @@ record(int64in, "rpi4:NTP_client:7")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:7")
+{
+	field(DESC, "Switch ON/OFF the Node 7 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:7")
 {
-    field(DESC, "PTP slave 7 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 7 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:7")
 {
-    field(DESC, "NTP client 7 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 7 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -445,16 +627,23 @@ record(int64in, "nano2gb:NTP_client:7")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:7")
+{
+	field(DESC, "Switch ON/OFF the Node 7 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:7")
 {
-    field(DESC, "PTP slave 7 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 7 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:7")
 {
-    field(DESC, "NTP client 7 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 7 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -463,16 +652,23 @@ record(int64in, "nano4gb:NTP_client:7")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:7")
+{
+	field(DESC, "Switch ON/OFF the Node 7 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:8")
 {
-    field(DESC, "PTP slave 8 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 8 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:8")
 {
-    field(DESC, "NTP client 8 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 8 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -481,16 +677,23 @@ record(int64in, "rpi4:NTP_client:8")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:8")
+{
+	field(DESC, "Switch ON/OFF the Node 8 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:8")
 {
-    field(DESC, "PTP slave 8 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 8 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:8")
 {
-    field(DESC, "NTP client 8 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 8 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -499,16 +702,23 @@ record(int64in, "nano2gb:NTP_client:8")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:8")
+{
+	field(DESC, "Switch ON/OFF the Node 8 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:8")
 {
-    field(DESC, "PTP slave 8 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 8 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:8")
 {
-    field(DESC, "NTP client 8 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 8 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -517,16 +727,23 @@ record(int64in, "nano4gb:NTP_client:8")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:8")
+{
+	field(DESC, "Switch ON/OFF the Node 8 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:9")
 {
-    field(DESC, "PTP slave 9 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 9 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:9")
 {
-    field(DESC, "NTP client 9 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 9 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -535,16 +752,23 @@ record(int64in, "rpi4:NTP_client:9")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:9")
+{
+	field(DESC, "Switch ON/OFF the Node 9 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:9")
 {
-    field(DESC, "PTP slave 9 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 9 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:9")
 {
-    field(DESC, "NTP client 9 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 9 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -553,16 +777,23 @@ record(int64in, "nano2gb:NTP_client:9")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:9")
+{
+	field(DESC, "Switch ON/OFF the Node 9 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:9")
 {
-    field(DESC, "PTP slave 9 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 9 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:9")
 {
-    field(DESC, "NTP client 9 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 9 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -571,16 +802,23 @@ record(int64in, "nano4gb:NTP_client:9")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:9")
+{
+	field(DESC, "Switch ON/OFF the Node 9 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:10")
 {
-    field(DESC, "PTP slave 10 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 10 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:10")
 {
-    field(DESC, "NTP client 10 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 10 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -589,16 +827,23 @@ record(int64in, "rpi4:NTP_client:10")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:10")
+{
+	field(DESC, "Switch ON/OFF the Node 10 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:10")
 {
-    field(DESC, "PTP slave 10 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 10 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:10")
 {
-    field(DESC, "NTP client 10 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 10 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -607,16 +852,23 @@ record(int64in, "nano2gb:NTP_client:10")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:10")
+{
+	field(DESC, "Switch ON/OFF the Node 10 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:10")
 {
-    field(DESC, "PTP slave 10 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 10 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:10")
 {
-    field(DESC, "NTP client 10 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 10 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -625,16 +877,23 @@ record(int64in, "nano4gb:NTP_client:10")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:10")
+{
+	field(DESC, "Switch ON/OFF the Node 10 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:11")
 {
-    field(DESC, "PTP slave 11 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 11 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:11")
 {
-    field(DESC, "NTP client 11 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 11 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -643,16 +902,23 @@ record(int64in, "rpi4:NTP_client:11")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:11")
+{
+	field(DESC, "Switch ON/OFF the Node 11 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:11")
 {
-    field(DESC, "PTP slave 11 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 11 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:11")
 {
-    field(DESC, "NTP client 11 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 11 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -661,16 +927,23 @@ record(int64in, "nano2gb:NTP_client:11")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:11")
+{
+	field(DESC, "Switch ON/OFF the Node 11 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:11")
 {
-    field(DESC, "PTP slave 11 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 11 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:11")
 {
-    field(DESC, "NTP client 11 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 11 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -679,16 +952,23 @@ record(int64in, "nano4gb:NTP_client:11")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:11")
+{
+	field(DESC, "Switch ON/OFF the Node 11 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:12")
 {
-    field(DESC, "PTP slave 12 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 12 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:12")
 {
-    field(DESC, "NTP client 12 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 12 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -697,16 +977,23 @@ record(int64in, "rpi4:NTP_client:12")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:12")
+{
+	field(DESC, "Switch ON/OFF the Node 12 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:12")
 {
-    field(DESC, "PTP slave 12 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 12 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:12")
 {
-    field(DESC, "NTP client 12 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 12 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -715,16 +1002,23 @@ record(int64in, "nano2gb:NTP_client:12")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:12")
+{
+	field(DESC, "Switch ON/OFF the Node 12 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:12")
 {
-    field(DESC, "PTP slave 12 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 12 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:12")
 {
-    field(DESC, "NTP client 12 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 12 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -733,16 +1027,23 @@ record(int64in, "nano4gb:NTP_client:12")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:12")
+{
+	field(DESC, "Switch ON/OFF the Node 12 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:13")
 {
-    field(DESC, "PTP slave 13 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 13 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:13")
 {
-    field(DESC, "NTP client 13 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 13 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -751,16 +1052,23 @@ record(int64in, "rpi4:NTP_client:13")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:13")
+{
+	field(DESC, "Switch ON/OFF the Node 13 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:13")
 {
-    field(DESC, "PTP slave 13 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 13 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:13")
 {
-    field(DESC, "NTP client 13 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 13 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -769,16 +1077,23 @@ record(int64in, "nano2gb:NTP_client:13")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:13")
+{
+	field(DESC, "Switch ON/OFF the Node 13 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:13")
 {
-    field(DESC, "PTP slave 13 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 13 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:13")
 {
-    field(DESC, "NTP client 13 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 13 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -787,16 +1102,23 @@ record(int64in, "nano4gb:NTP_client:13")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:13")
+{
+	field(DESC, "Switch ON/OFF the Node 13 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:14")
 {
-    field(DESC, "PTP slave 14 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 14 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:14")
 {
-    field(DESC, "NTP client 14 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 14 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -805,16 +1127,23 @@ record(int64in, "rpi4:NTP_client:14")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:14")
+{
+	field(DESC, "Switch ON/OFF the Node 14 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:14")
 {
-    field(DESC, "PTP slave 14 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 14 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:14")
 {
-    field(DESC, "NTP client 14 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 14 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -823,16 +1152,23 @@ record(int64in, "nano2gb:NTP_client:14")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:14")
+{
+	field(DESC, "Switch ON/OFF the Node 14 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:14")
 {
-    field(DESC, "PTP slave 14 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 14 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:14")
 {
-    field(DESC, "NTP client 14 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 14 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -841,16 +1177,23 @@ record(int64in, "nano4gb:NTP_client:14")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:14")
+{
+	field(DESC, "Switch ON/OFF the Node 14 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:15")
 {
-    field(DESC, "PTP slave 15 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 15 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:15")
 {
-    field(DESC, "NTP client 15 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 15 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -859,16 +1202,23 @@ record(int64in, "rpi4:NTP_client:15")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:15")
+{
+	field(DESC, "Switch ON/OFF the Node 15 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:15")
 {
-    field(DESC, "PTP slave 15 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 15 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:15")
 {
-    field(DESC, "NTP client 15 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 15 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -877,16 +1227,23 @@ record(int64in, "nano2gb:NTP_client:15")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:15")
+{
+	field(DESC, "Switch ON/OFF the Node 15 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:15")
 {
-    field(DESC, "PTP slave 15 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 15 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:15")
 {
-    field(DESC, "NTP client 15 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 15 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -895,16 +1252,23 @@ record(int64in, "nano4gb:NTP_client:15")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:15")
+{
+	field(DESC, "Switch ON/OFF the Node 15 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:16")
 {
-    field(DESC, "PTP slave 16 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 16 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:16")
 {
-    field(DESC, "NTP client 16 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 16 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -913,16 +1277,23 @@ record(int64in, "rpi4:NTP_client:16")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:16")
+{
+	field(DESC, "Switch ON/OFF the Node 16 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:16")
 {
-    field(DESC, "PTP slave 16 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 16 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:16")
 {
-    field(DESC, "NTP client 16 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 16 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -931,16 +1302,23 @@ record(int64in, "nano2gb:NTP_client:16")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:16")
+{
+	field(DESC, "Switch ON/OFF the Node 16 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:16")
 {
-    field(DESC, "PTP slave 16 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 16 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:16")
 {
-    field(DESC, "NTP client 16 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 16 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -949,16 +1327,23 @@ record(int64in, "nano4gb:NTP_client:16")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:16")
+{
+	field(DESC, "Switch ON/OFF the Node 16 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:17")
 {
-    field(DESC, "PTP slave 17 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 17 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:17")
 {
-    field(DESC, "NTP client 17 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 17 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -967,16 +1352,23 @@ record(int64in, "rpi4:NTP_client:17")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:17")
+{
+	field(DESC, "Switch ON/OFF the Node 17 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:17")
 {
-    field(DESC, "PTP slave 17 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 17 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:17")
 {
-    field(DESC, "NTP client 17 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 17 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -985,16 +1377,23 @@ record(int64in, "nano2gb:NTP_client:17")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:17")
+{
+	field(DESC, "Switch ON/OFF the Node 17 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:17")
 {
-    field(DESC, "PTP slave 17 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 17 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:17")
 {
-    field(DESC, "NTP client 17 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 17 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1003,16 +1402,23 @@ record(int64in, "nano4gb:NTP_client:17")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:17")
+{
+	field(DESC, "Switch ON/OFF the Node 17 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:18")
 {
-    field(DESC, "PTP slave 18 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 18 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:18")
 {
-    field(DESC, "NTP client 18 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 18 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1021,16 +1427,23 @@ record(int64in, "rpi4:NTP_client:18")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:18")
+{
+	field(DESC, "Switch ON/OFF the Node 18 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:18")
 {
-    field(DESC, "PTP slave 18 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 18 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:18")
 {
-    field(DESC, "NTP client 18 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 18 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1039,16 +1452,23 @@ record(int64in, "nano2gb:NTP_client:18")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:18")
+{
+	field(DESC, "Switch ON/OFF the Node 18 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:18")
 {
-    field(DESC, "PTP slave 18 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 18 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:18")
 {
-    field(DESC, "NTP client 18 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 18 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1057,16 +1477,23 @@ record(int64in, "nano4gb:NTP_client:18")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:18")
+{
+	field(DESC, "Switch ON/OFF the Node 18 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "rpi4:PTP_slave:19")
 {
-    field(DESC, "PTP slave 19 offset in Raspberry Pi 4")
+    field(DESC, "PTP slave 19 offset in rpi4")
 }
 
 record(int64in, "rpi4:NTP_client:19")
 {
-    field(DESC, "NTP client 19 offset in Raspberry Pi 4")
+    field(DESC, "NTP client 19 offset in rpi4")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1075,16 +1502,23 @@ record(int64in, "rpi4:NTP_client:19")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "rpi4:client_up:19")
+{
+	field(DESC, "Switch ON/OFF the Node 19 of rpi4")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano2gb:PTP_slave:19")
 {
-    field(DESC, "PTP slave 19 offset in Jetson Nano 2GB")
+    field(DESC, "PTP slave 19 offset in nano2gb")
 }
 
 record(int64in, "nano2gb:NTP_client:19")
 {
-    field(DESC, "NTP client 19 offset in Jetson Nano 2GB")
+    field(DESC, "NTP client 19 offset in nano2gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1093,16 +1527,23 @@ record(int64in, "nano2gb:NTP_client:19")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano2gb:client_up:19")
+{
+	field(DESC, "Switch ON/OFF the Node 19 of nano2gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }
 
 record(int64in, "nano4gb:PTP_slave:19")
 {
-    field(DESC, "PTP slave 19 offset in Jetson Nano 4GB")
+    field(DESC, "PTP slave 19 offset in nano4gb")
 }
 
 record(int64in, "nano4gb:NTP_client:19")
 {
-    field(DESC, "NTP client 19 offset in Jetson Nano 4GB")
+    field(DESC, "NTP client 19 offset in nano4gb")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1111,4 +1552,11 @@ record(int64in, "nano4gb:NTP_client:19")
 	field(HSV, "MINOR")
 	field(LLSV, "MAJOR")
 	field(HHSV, "MAJOR")
+}
+
+record(bi, "nano4gb:client_up:19")
+{
+	field(DESC, "Switch ON/OFF the Node 19 of nano4gb")
+    field(ZNAM, "False")
+    field(ONAM, "True")
 }

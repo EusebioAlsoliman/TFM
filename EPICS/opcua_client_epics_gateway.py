@@ -1,50 +1,115 @@
 from opcua import Client
+import threading
 import pvaccess
 dir (pvaccess)
 
+def get_bool_index(EPICS_var):
+    pv = str(EPICS_var.get())
+    pv_pos = pv.find("int index")
+    pv = pv[pv_pos+9:]
+    pv_pos = pv.find("\n")
+    pv = bool(int(pv[:pv_pos]))
+
+    return pv
+
+def main(url, device):
+    
+    # Initialize EPICS variables (channels)
+    EPICS_channel_NTP = []
+    EPICS_channel_PTP = []
+    EPICS_channel_NTP_up = []
+
+    for i in range(20):
+        EPICS_channel_NTP.append(pvaccess.Channel(device + ":NTP_client:" + str(i)))
+        EPICS_channel_PTP.append(pvaccess.Channel(device + ":PTP_slave:" + str(i)))
+        EPICS_channel_NTP_up.append(pvaccess.Channel(device + ":client_up:" + str(i)))
+
+    EPICS_channel_finish_all = pvaccess.Channel(device + ":finish_all")
+
+    # Initialize OPC UA client and variables
+    client = Client(url)
+
+    client.connect()
+
+    root = client.get_root_node()
+
+    objects = root.get_child("0:Objects")
+
+    variables = objects.get_child("2:Variables")
+
+    OPCUA_PTP_slaves = []
+    OPCUA_NTP_clients = []
+    OPCUA_NTP_up = []
+
+    OPCUA_finish_all_var = variables.get_child("2:Finish_all")
+
+    for i in range(20):
+        # ---------------------------------- PTP -------------------------------------
+        OPCUA_PTP_slaves.append(variables.get_child("2:PTP_slave_" + str(i)))
+
+        # --------------------------------- NTP --------------------------------------
+        OPCUA_NTP_clients.append(variables.get_child("2:NTP_client_" + str(i)))
+
+        # ---------------------------------- NTP_client_up -------------------------------------
+        OPCUA_NTP_up.append(variables.get_child("2:list_NTP_up[" + str(i) + "]"))
+
+        EPICS_channel_NTP_up[i].put(int(OPCUA_NTP_up[i].get_value()))
+
+    EPICS_channel_finish_all.put(0)
+
+    # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
+    try:
+        while running:
+            for i in range(20):
+                EPICS_channel_NTP[i].put(int(OPCUA_NTP_clients[i].get_value()))
+                OPCUA_NTP_up[i].set_value(get_bool_index(EPICS_channel_NTP_up[i]))
+            
+            OPCUA_finish_all_var.set_value(get_bool_index(EPICS_channel_finish_all))
+    
+    finally:
+        client.disconnect()
+        print("Client from device " + device + " disconnected succesfully!!!!")
+
+class gateway(threading.Thread):
+    def __init__(self, device, url):
+        threading.Thread.__init__(self)
+        self.device = device
+        self.url = url
+
+    def run(self):
+        main(device=self.device, url=self.url)
+
 if __name__ == "__main__":
 
-    client = Client("opc.tcp://169.254.145.192:4897")
+    threads = []
 
-    t1 = pvaccess.Channel('timer_1')
-    t2 = pvaccess.Channel('timer_2')
+    running = True
+
+    # list_devices = ["nano2gb", "nano4gb", "rpi4"]
+    # list_urls = ["opc.tcp://169.254.145.193:4897", "opc.tcp://169.254.145.194:4897", "opc.tcp://169.254.145.195:4897"]
+
+    list_devices = ["nano2gb"]
+    list_urls = ["opc.tcp://169.254.145.193:4897"]
+
+    for device_i, url_i in zip(list_devices, list_urls):
+        threads.append(gateway(device=device_i, url=url_i))
+    
+    for thread in threads:
+        thread.start()
+
+    print("Threads running!")
 
     try:
-        client.connect()
-
-        # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects
-        root = client.get_root_node()
-        print("Objects node is: ", root)
-
-        # Node objects have methods to read and write node attributes as well as browse or populate address space
-        print("Children of root are: ", root.get_children())
-
-        # get a specific node knowing its node id
-        timer_1 = client.get_node("ns=2;i=3")
-        timer_2 = client.get_node("ns=2;i=4")
-
-        offset_1_before = timer_1.get_value()
-        offset_2_before = timer_2.get_value()
-
-        offset_1_after = offset_1_before
-        offset_2_after = offset_2_before
-
         while True:
-            
-            offset_1_before = timer_1.get_value()
-            offset_2_before = timer_2.get_value()
-
-            if offset_1_before != offset_1_after:
-                # print(offset_1_before)
-                t1.put(offset_1_before)
-
-            if offset_2_before != offset_2_after:
-                # print(offset_2_before)
-                t2.put(offset_2_before)
-
-            offset_1_after = offset_1_before
-            offset_2_after = offset_2_before
-
+            pass
+    
     except KeyboardInterrupt:
-        client.disconnect()
-        print("Cliente desconectado")
+
+        print("Killing threads...")
+
+        running = False
+
+        for thread in threads:
+            thread.join()
+
+        print("Script FINISHED! \n")
