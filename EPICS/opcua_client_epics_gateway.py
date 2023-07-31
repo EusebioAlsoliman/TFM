@@ -1,16 +1,15 @@
 from opcua import Client
-import threading
-import pvaccess
-dir (pvaccess)
+from threading import Thread
+from pvaccess import Channel
+from time import sleep
 
-def get_bool_index(EPICS_var):
-    pv = str(EPICS_var.get())
-    pv_pos = pv.find("int index")
-    pv = pv[pv_pos+9:]
-    pv_pos = pv.find("\n")
-    pv = bool(int(pv[:pv_pos]))
+# def get_bool_index(EPICS_var):
+#     pv = str(EPICS_var.get())[55:57]
+#     pv = bool(int(pv))
 
-    return pv
+#     bool(int(str(EPICS_var.get())[55:57]))
+
+#     return pv
 
 def main(url, device):
     
@@ -20,11 +19,14 @@ def main(url, device):
     EPICS_channel_NTP_up = []
 
     for i in range(20):
-        EPICS_channel_NTP.append(pvaccess.Channel(device + ":NTP_client:" + str(i)))
-        EPICS_channel_PTP.append(pvaccess.Channel(device + ":PTP_slave:" + str(i)))
-        EPICS_channel_NTP_up.append(pvaccess.Channel(device + ":client_up:" + str(i)))
+        EPICS_channel_NTP.append(Channel(device + ":NTP_client:" + str(i)))
+        EPICS_channel_PTP.append(Channel(device + ":PTP_slave:" + str(i)))
+        EPICS_channel_NTP_up.append(Channel(device + ":client_up:" + str(i)))
 
-    EPICS_channel_finish_all = pvaccess.Channel(device + ":finish_all")
+    EPICS_channel_finish_all = Channel(device + ":finish_all")
+
+    EPICS_channel_NTP = tuple(EPICS_channel_NTP)
+    EPICS_channel_NTP_up = tuple(EPICS_channel_NTP_up)
 
     # Initialize OPC UA client and variables
     client = Client(url)
@@ -57,22 +59,65 @@ def main(url, device):
 
     EPICS_channel_finish_all.put(0)
 
+    OPCUA_NTP_clients = tuple(OPCUA_NTP_clients)
+    OPCUA_NTP_up = tuple(OPCUA_NTP_up)
+
+    i = 0
+
+    def thread1():
+        i = 0
+        while running:
+            if i == 20:
+                i = 0
+            EPICS_channel_NTP[i].put(int(OPCUA_NTP_clients[i].get_value()))
+            i+=1
+    
+    def thread2():
+        i = 0
+        while running:
+            if i == 20:
+                i = 0
+            OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
+            i+=1
+
     # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
     try:
-        while running:
-            for i in range(20):
-                EPICS_channel_NTP[i].put(int(OPCUA_NTP_clients[i].get_value()))
-                OPCUA_NTP_up[i].set_value(get_bool_index(EPICS_channel_NTP_up[i]))
+        # while running:
+        #     # for EPICS_channel_NTP_i, OPCUA_NTP_clients_i in enumerate(zip(EPICS_channel_NTP, OPCUA_NTP_clients)):
+        #     #     EPICS_channel_NTP_i.put(int(OPCUA_NTP_clients_i.get_value()))
             
-            OPCUA_finish_all_var.set_value(get_bool_index(EPICS_channel_finish_all))
+        #     # for OPCUA_NTP_up_i, EPICS_channel_NTP_up_i in enumerate(zip(OPCUA_NTP_up, EPICS_channel_NTP_up)):
+        #     #     OPCUA_NTP_up_i.set_value(get_bool_index(EPICS_channel_NTP_up_i))
+
+        #     if i == 20:
+        #         i = 0
+        #         OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
+
+        #     EPICS_channel_NTP[i].put(int(OPCUA_NTP_clients[i].get_value()))
+        #     # OPCUA_NTP_up[i].set_value(get_bool_index(EPICS_channel_NTP_up[i]))
+        #     OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
+            
+        #     # OPCUA_finish_all_var.set_value(get_bool_index(EPICS_channel_finish_all))
+        #     # OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
+
+        #     i+=1
+
+        t1 = Thread(target=thread1)
+        t2 = Thread(target=thread2)
+        t1.start()
+        t2.start()
+
+        while running:
+            OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
+            sleep(1)
     
     finally:
         client.disconnect()
         print("Client from device " + device + " disconnected succesfully!!!!")
 
-class gateway(threading.Thread):
+class gateway(Thread):
     def __init__(self, device, url):
-        threading.Thread.__init__(self)
+        Thread.__init__(self)
         self.device = device
         self.url = url
 
@@ -85,11 +130,11 @@ if __name__ == "__main__":
 
     running = True
 
-    # list_devices = ["nano2gb", "nano4gb", "rpi4"]
-    # list_urls = ["opc.tcp://169.254.145.193:4897", "opc.tcp://169.254.145.194:4897", "opc.tcp://169.254.145.195:4897"]
+    list_devices = ["nano2gb", "nano4gb", "rpi4"]
+    list_urls = ["opc.tcp://169.254.145.193:4897", "opc.tcp://169.254.145.194:4897", "opc.tcp://169.254.145.195:4897"]
 
-    list_devices = ["nano2gb"]
-    list_urls = ["opc.tcp://169.254.145.193:4897"]
+    # list_devices = ["nano2gb"]
+    # list_urls = ["opc.tcp://169.254.145.193:4897"]
 
     for device_i, url_i in zip(list_devices, list_urls):
         threads.append(gateway(device=device_i, url=url_i))
