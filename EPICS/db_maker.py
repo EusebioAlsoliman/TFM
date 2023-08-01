@@ -60,6 +60,69 @@ record(bi, "nano4gb:finish_all")
     field(ONAM, "True")
     field(VAL, "0")
 }
+
+record(aai, "rpi4:PTP_slaves")
+{
+    field(DESC, "PTP slaves offset in Raspberry Pi 4")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "rpi4:NTP_clients")
+{
+    field(DESC, "NTP clients offset in Raspberry Pi 4")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "nano2gb:PTP_slaves")
+{
+    field(DESC, "PTP slaves offset in Nano 2GB")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "nano2gb:NTP_clients")
+{
+    field(DESC, "NTP clients offset in Nano 2GB")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "nano4gb:PTP_slaves")
+{
+    field(DESC, "PTP slaves offset in Nano 4GB")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "nano4gb:NTP_clients")
+{
+    field(DESC, "NTP clients offset in Nano 4GB")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "rpi4:NTP_clients_up")
+{
+    field(DESC, "NTP clients ON/OFF")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "nano2gb:NTP_clients_up")
+{
+    field(DESC, "NTP clients ON/OFF")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
+
+record(aai, "nano4gb:NTP_clients_up")
+{
+    field(DESC, "NTP clients ON/OFF")
+    field(FTVL, "INT64")
+    field(NELM, "20")
+}
 """
 
 template_dynamic = """
@@ -68,9 +131,12 @@ record(int64in, "{device}:PTP_slave:{index}")
     field(DESC, "PTP slave {index} offset in {device}")
 }
 
-record(int64in, "{device}:NTP_client:{index}")
+record(calc, "{device}:NTP_client:{index}")
 {
     field(DESC, "NTP client {index} offset in {device}")
+	field(SCAN, ".1 second")
+	field(INPA, "{device}:NTP_clients.VAL[{index}]")
+	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")

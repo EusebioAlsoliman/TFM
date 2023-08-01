@@ -3,30 +3,17 @@ from threading import Thread
 from pvaccess import Channel
 from time import sleep
 
-# def get_bool_index(EPICS_var):
-#     pv = str(EPICS_var.get())[55:57]
-#     pv = bool(int(pv))
-
-#     bool(int(str(EPICS_var.get())[55:57]))
-
-#     return pv
-
 def main(url, device):
     
     # Initialize EPICS variables (channels)
-    EPICS_channel_NTP = []
-    EPICS_channel_PTP = []
+    EPICS_channel_NTP = Channel(device + ":NTP_clients")
+    EPICS_channel_PTP = Channel(device + ":PTP_slaves")
     EPICS_channel_NTP_up = []
 
     for i in range(20):
-        EPICS_channel_NTP.append(Channel(device + ":NTP_client:" + str(i)))
-        EPICS_channel_PTP.append(Channel(device + ":PTP_slave:" + str(i)))
         EPICS_channel_NTP_up.append(Channel(device + ":client_up:" + str(i)))
 
     EPICS_channel_finish_all = Channel(device + ":finish_all")
-
-    EPICS_channel_NTP = tuple(EPICS_channel_NTP)
-    EPICS_channel_NTP_up = tuple(EPICS_channel_NTP_up)
 
     # Initialize OPC UA client and variables
     client = Client(url)
@@ -59,57 +46,20 @@ def main(url, device):
 
     EPICS_channel_finish_all.put(0)
 
-    OPCUA_NTP_clients = tuple(OPCUA_NTP_clients)
-    OPCUA_NTP_up = tuple(OPCUA_NTP_up)
-
-    i = 0
-
-    def thread1():
-        i = 0
-        while running:
-            if i == 20:
-                i = 0
-            EPICS_channel_NTP[i].put(int(OPCUA_NTP_clients[i].get_value()))
-            i+=1
-    
-    def thread2():
-        i = 0
-        while running:
-            if i == 20:
-                i = 0
-            OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
-            i+=1
+    array_data_NTP = [0] * 20
 
     # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
     try:
-        # while running:
-        #     # for EPICS_channel_NTP_i, OPCUA_NTP_clients_i in enumerate(zip(EPICS_channel_NTP, OPCUA_NTP_clients)):
-        #     #     EPICS_channel_NTP_i.put(int(OPCUA_NTP_clients_i.get_value()))
-            
-        #     # for OPCUA_NTP_up_i, EPICS_channel_NTP_up_i in enumerate(zip(OPCUA_NTP_up, EPICS_channel_NTP_up)):
-        #     #     OPCUA_NTP_up_i.set_value(get_bool_index(EPICS_channel_NTP_up_i))
-
-        #     if i == 20:
-        #         i = 0
-        #         OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
-
-        #     EPICS_channel_NTP[i].put(int(OPCUA_NTP_clients[i].get_value()))
-        #     # OPCUA_NTP_up[i].set_value(get_bool_index(EPICS_channel_NTP_up[i]))
-        #     OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
-            
-        #     # OPCUA_finish_all_var.set_value(get_bool_index(EPICS_channel_finish_all))
-        #     # OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
-
-        #     i+=1
-
-        t1 = Thread(target=thread1)
-        t2 = Thread(target=thread2)
-        t1.start()
-        t2.start()
-
         while running:
-            OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
-            sleep(1)
+            if i == 20:
+                i = 0
+                EPICS_channel_NTP.put(array_data_NTP)
+                OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
+
+            array_data_NTP[i] = int(OPCUA_NTP_clients[i].get_value())
+            OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
+
+            i+=1
     
     finally:
         client.disconnect()
