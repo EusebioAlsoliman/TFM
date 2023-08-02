@@ -47,19 +47,45 @@ def main(url, device):
     EPICS_channel_finish_all.put(0)
 
     array_data_NTP = [0] * 20
+    array_data_PTP = [0] * 20
 
-    # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
-    try:
+    def thread1():
+        i = 0
         while running:
             if i == 20:
                 i = 0
                 EPICS_channel_NTP.put(array_data_NTP)
-                OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
-
             array_data_NTP[i] = int(OPCUA_NTP_clients[i].get_value())
-            OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
+            i += 1
 
+    def thread3():
+        i = 0
+        while running:
+            if i == 20:
+                i = 0
+                EPICS_channel_PTP.put(array_data_PTP)
+            array_data_PTP[i] = int(OPCUA_PTP_slaves[i].get_value())
+            i += 1
+
+    def thread2():
+        i = 0
+        while running:
+            if i == 20:
+                i = 0
+            OPCUA_NTP_up[i].set_value(bool(int(str(EPICS_channel_NTP_up[i].get())[55:57])))
             i+=1
+
+    # ----------------------------------------LOOOOOOOOOOOPPPP-----------------------------------
+    try:
+        t1 = Thread(target=thread1)
+        t2 = Thread(target=thread2)
+        t3 = Thread(target=thread3)
+        t1.start()
+        t2.start()
+        t3.start()
+        while running:
+            OPCUA_finish_all_var.set_value(bool(int(str(EPICS_channel_finish_all.get())[55:57])))
+            sleep(1)
     
     finally:
         client.disconnect()
