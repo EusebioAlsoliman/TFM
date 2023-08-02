@@ -2,13 +2,14 @@ FROM debian:11
 MAINTAINER Eusebio Naif Al-Soliman Fuentes eunaif@correo.ugr.es
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Madrid
 
 RUN apt update && \
     apt install -y systemd systemd-sysv && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt update && \
-    apt install -y chrony sudo net-tools nano iputils-ping && \
+    apt install -y chrony sudo net-tools nano iputils-ping tzdata && \
     rm -rf /var/lib/apt/lists/*
 
 CMD ["sudo", "/usr/sbin/chronyd", "-f", "/home/chrony-client.conf", "-d"]

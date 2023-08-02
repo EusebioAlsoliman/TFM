@@ -1,0 +1,14 @@
+# This inside /etc/systemd/system
+# linuxptp in /opt directory
+
+[Unit]
+Description=Precision Time Protocol (PTP) service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/linuxptp/ptp4l -S -s -f /opt/UNICAST-SLAVE.cfg
+
+[Install]
+WantedBy=multi-user.target

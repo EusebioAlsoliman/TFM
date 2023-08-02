@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  client:
+    image: ptp4l:v4.0
+    # privileged: true
+    networks:
+      - vlan
+    volumes:
+      - ${PWD}/ptp4l.conf:/etc/ptp4l.conf
+    command: -S -m -f /etc/ptp4l.conf
+    deploy:
+      mode: replicated
+      replicas: 4
+networks:
+  vlan:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 169.254.145.0/24
+          ip_range: 169.254.145.128/26
