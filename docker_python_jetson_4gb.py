@@ -1,6 +1,6 @@
 import subprocess
 import shlex
-from opcua import ua, uamethod, Server
+from opcua import ua, Server
 import docker
 import threading
 from time import sleep
@@ -11,7 +11,7 @@ def obtain_offset_PTP(): #linuxptp
     orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
 
     # pmc command in bash and obtain result in 'offsetFromMaster'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
     salida, error = process.communicate()
 
     pos_ini = salida.find("offset")
@@ -28,7 +28,7 @@ def obtain_offset_NTP(ptp_instance): # chrony
     orden = "sudo docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
     salida, error = process.communicate()
 
     pos_ini = salida.find("Last offset     :")
@@ -118,7 +118,7 @@ if __name__ == "__main__":
 
     # OPC-UA-Server Add Variable and start dockers
 
-    Finished_all = myobj.add_variable(idx, "Finish_all", False, ua.VariantType.Boolean)
+    Finished_all = myobj.add_variable(idx, "Finish_all", True, ua.VariantType.Boolean)
     Finished_all.set_writable()
 
     print("Name Space and ID of Finish all : ", Finished_all)
@@ -173,7 +173,7 @@ if __name__ == "__main__":
             if list_NTP_up[i].get_value() == False:
                 count += 1
 
-        if count == (n_ntp) or Finished_all.get_value() == True:
+        if count == (n_ntp) or Finished_all.get_value() == False:
             break
 
     # Espera a que todos los procesos terminen
