@@ -1,0 +1,1961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-08-03 22:05:46 by root-->
+<display version="2.0.0">
+  <name>Vista general</name>
+  <background_color>
+    <color name="Read_Background" red="240" green="240" blue="240">
+    </color>
+  </background_color>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <class>TITLE</class>
+    <text>Vista general</text>
+    <x use_class="true">0</x>
+    <y use_class="true">0</y>
+    <width>550</width>
+    <height>31</height>
+    <font use_class="true">
+      <font name="Header 1" family="Liberation Sans" style="BOLD" size="22.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="Text" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button</name>
+    <actions>
+      <action type="open_display">
+        <file>Main.bob</file>
+        <target>replace</target>
+        <description>Acceder a vista de Nodo y Dispositivo</description>
+      </action>
+    </actions>
+    <x>30</x>
+    <y>30</y>
+    <width>220</width>
+    <height>50</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update</name>
+    <x>1160</x>
+    <y>270</y>
+    <width>0</width>
+    <height>0</height>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Raspberry Pi 4</name>
+    <x>8</x>
+    <y>93</y>
+    <width>620</width>
+    <height>540</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="125" green="255" blue="128">
+      </color>
+    </background_color>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_1</name>
+      <pv_name>pva://rpi4:NTP_client:0</pv_name>
+      <x>2</x>
+      <y>2</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button</name>
+      <pv_name>pva://rpi4:client_up:0</pv_name>
+      <x>162</x>
+      <y>2</y>
+      <height>40</height>
+      <off_label>Nodo 0 OFF</off_label>
+      <on_label>Nodo 0 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_2</name>
+      <pv_name>pva://rpi4:NTP_client:1</pv_name>
+      <x>2</x>
+      <y>54</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_1</name>
+      <pv_name>pva://rpi4:client_up:1</pv_name>
+      <x>162</x>
+      <y>54</y>
+      <height>40</height>
+      <off_label>Nodo 1 OFF</off_label>
+      <on_label>Nodo 1 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_3</name>
+      <pv_name>pva://rpi4:NTP_client:2</pv_name>
+      <x>2</x>
+      <y>104</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_2</name>
+      <pv_name>pva://rpi4:client_up:2</pv_name>
+      <x>162</x>
+      <y>104</y>
+      <height>40</height>
+      <off_label>Nodo 2 OFF</off_label>
+      <on_label>Nodo 2 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_4</name>
+      <pv_name>pva://rpi4:NTP_client:3</pv_name>
+      <x>2</x>
+      <y>154</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_3</name>
+      <pv_name>pva://rpi4:client_up:3</pv_name>
+      <x>162</x>
+      <y>154</y>
+      <height>40</height>
+      <off_label>Nodo 3 OFF</off_label>
+      <on_label>Nodo 3 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_5</name>
+      <pv_name>pva://rpi4:NTP_client:4</pv_name>
+      <x>2</x>
+      <y>204</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_4</name>
+      <pv_name>pva://rpi4:client_up:4</pv_name>
+      <x>162</x>
+      <y>204</y>
+      <height>40</height>
+      <off_label>Nodo 4 OFF</off_label>
+      <on_label>Nodo 4 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_6</name>
+      <pv_name>pva://rpi4:NTP_client:5</pv_name>
+      <x>2</x>
+      <y>254</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_5</name>
+      <pv_name>pva://rpi4:client_up:5</pv_name>
+      <x>162</x>
+      <y>254</y>
+      <height>40</height>
+      <off_label>Nodo 5 OFF</off_label>
+      <on_label>Nodo 5 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_7</name>
+      <pv_name>pva://rpi4:NTP_client:6</pv_name>
+      <x>2</x>
+      <y>304</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_6</name>
+      <pv_name>pva://rpi4:client_up:6</pv_name>
+      <x>162</x>
+      <y>304</y>
+      <height>40</height>
+      <off_label>Nodo 6 OFF</off_label>
+      <on_label>Nodo 6 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_8</name>
+      <pv_name>pva://rpi4:NTP_client:7</pv_name>
+      <x>2</x>
+      <y>354</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_7</name>
+      <pv_name>pva://rpi4:client_up:7</pv_name>
+      <x>162</x>
+      <y>354</y>
+      <height>40</height>
+      <off_label>Nodo 7 OFF</off_label>
+      <on_label>Nodo 7 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_9</name>
+      <pv_name>pva://rpi4:NTP_client:8</pv_name>
+      <x>2</x>
+      <y>404</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_8</name>
+      <pv_name>pva://rpi4:client_up:8</pv_name>
+      <x>162</x>
+      <y>404</y>
+      <height>40</height>
+      <off_label>Nodo 8 OFF</off_label>
+      <on_label>Nodo 8 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_10</name>
+      <pv_name>pva://rpi4:NTP_client:9</pv_name>
+      <x>2</x>
+      <y>454</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_9</name>
+      <pv_name>pva://rpi4:client_up:9</pv_name>
+      <x>162</x>
+      <y>454</y>
+      <height>40</height>
+      <off_label>Nodo 9 OFF</off_label>
+      <on_label>Nodo 9 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_11</name>
+      <pv_name>pva://rpi4:NTP_client:10</pv_name>
+      <x>304</x>
+      <y>2</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_10</name>
+      <pv_name>pva://rpi4:client_up:10</pv_name>
+      <x>464</x>
+      <y>2</y>
+      <height>40</height>
+      <off_label>Nodo 10 OFF</off_label>
+      <on_label>Nodo 10 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_12</name>
+      <pv_name>pva://rpi4:NTP_client:11</pv_name>
+      <x>304</x>
+      <y>54</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_11</name>
+      <pv_name>pva://rpi4:client_up:11</pv_name>
+      <x>464</x>
+      <y>54</y>
+      <height>40</height>
+      <off_label>Nodo 11 OFF</off_label>
+      <on_label>Nodo 11 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_13</name>
+      <pv_name>pva://rpi4:NTP_client:12</pv_name>
+      <x>304</x>
+      <y>104</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_12</name>
+      <pv_name>pva://rpi4:client_up:12</pv_name>
+      <x>464</x>
+      <y>104</y>
+      <height>40</height>
+      <off_label>Nodo 12 OFF</off_label>
+      <on_label>Nodo 12 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_14</name>
+      <pv_name>pva://rpi4:NTP_client:13</pv_name>
+      <x>304</x>
+      <y>154</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_13</name>
+      <pv_name>pva://rpi4:client_up:13</pv_name>
+      <x>464</x>
+      <y>154</y>
+      <height>40</height>
+      <off_label>Nodo 13 OFF</off_label>
+      <on_label>Nodo 13 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_15</name>
+      <pv_name>pva://rpi4:NTP_client:14</pv_name>
+      <x>304</x>
+      <y>204</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_14</name>
+      <pv_name>pva://rpi4:client_up:14</pv_name>
+      <x>464</x>
+      <y>204</y>
+      <height>40</height>
+      <off_label>Nodo 14 OFF</off_label>
+      <on_label>Nodo 14 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_16</name>
+      <pv_name>pva://rpi4:NTP_client:15</pv_name>
+      <x>304</x>
+      <y>254</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_15</name>
+      <pv_name>pva://rpi4:client_up:15</pv_name>
+      <x>464</x>
+      <y>254</y>
+      <height>40</height>
+      <off_label>Nodo 15 OFF</off_label>
+      <on_label>Nodo 15 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_17</name>
+      <pv_name>pva://rpi4:NTP_client:16</pv_name>
+      <x>304</x>
+      <y>304</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_16</name>
+      <pv_name>pva://rpi4:client_up:16</pv_name>
+      <x>464</x>
+      <y>304</y>
+      <height>40</height>
+      <off_label>Nodo 16 OFF</off_label>
+      <on_label>Nodo 16 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_18</name>
+      <pv_name>pva://rpi4:NTP_client:17</pv_name>
+      <x>304</x>
+      <y>354</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_17</name>
+      <pv_name>pva://rpi4:client_up:17</pv_name>
+      <x>464</x>
+      <y>354</y>
+      <height>40</height>
+      <off_label>Nodo 17 OFF</off_label>
+      <on_label>Nodo 17 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_19</name>
+      <pv_name>pva://rpi4:NTP_client:18</pv_name>
+      <x>304</x>
+      <y>404</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_18</name>
+      <pv_name>pva://rpi4:client_up:18</pv_name>
+      <x>464</x>
+      <y>404</y>
+      <height>40</height>
+      <off_label>Nodo 18 OFF</off_label>
+      <on_label>Nodo 18 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_20</name>
+      <pv_name>pva://rpi4:NTP_client:19</pv_name>
+      <x>304</x>
+      <y>454</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="95" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_19</name>
+      <pv_name>pva://rpi4:client_up:19</pv_name>
+      <x>464</x>
+      <y>454</y>
+      <height>40</height>
+      <off_label>Nodo 19 OFF</off_label>
+      <on_label>Nodo 019ON</on_label>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Jetson Nano 2 GB</name>
+    <x>642</x>
+    <y>93</y>
+    <width>620</width>
+    <height>540</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="125" green="147" blue="255">
+      </color>
+    </background_color>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_21</name>
+      <pv_name>pva://nano2gb:NTP_client:0</pv_name>
+      <x>2</x>
+      <y>2</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_20</name>
+      <pv_name>pva://nano2gb:client_up:0</pv_name>
+      <x>162</x>
+      <y>2</y>
+      <height>40</height>
+      <off_label>Nodo 0 OFF</off_label>
+      <on_label>Nodo 0 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_22</name>
+      <pv_name>pva://nano2gb:NTP_client:1</pv_name>
+      <x>2</x>
+      <y>54</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_21</name>
+      <pv_name>pva://nano2gb:client_up:1</pv_name>
+      <x>162</x>
+      <y>54</y>
+      <height>40</height>
+      <off_label>Nodo 1 OFF</off_label>
+      <on_label>Nodo 1 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_23</name>
+      <pv_name>pva://nano2gb:NTP_client:2</pv_name>
+      <x>2</x>
+      <y>104</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_22</name>
+      <pv_name>pva://nano2gb:client_up:2</pv_name>
+      <x>162</x>
+      <y>104</y>
+      <height>40</height>
+      <off_label>Nodo 2 OFF</off_label>
+      <on_label>Nodo 2 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_24</name>
+      <pv_name>pva://nano2gb:NTP_client:3</pv_name>
+      <x>2</x>
+      <y>154</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_23</name>
+      <pv_name>pva://nano2gb:client_up:3</pv_name>
+      <x>162</x>
+      <y>154</y>
+      <height>40</height>
+      <off_label>Nodo 3 OFF</off_label>
+      <on_label>Nodo 3 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_25</name>
+      <pv_name>pva://nano2gb:NTP_client:4</pv_name>
+      <x>2</x>
+      <y>204</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_24</name>
+      <pv_name>pva://nano2gb:client_up:4</pv_name>
+      <x>162</x>
+      <y>204</y>
+      <height>40</height>
+      <off_label>Nodo 4 OFF</off_label>
+      <on_label>Nodo 4 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_26</name>
+      <pv_name>pva://nano2gb:NTP_client:5</pv_name>
+      <x>2</x>
+      <y>254</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_25</name>
+      <pv_name>pva://nano2gb:client_up:5</pv_name>
+      <x>162</x>
+      <y>254</y>
+      <height>40</height>
+      <off_label>Nodo 5 OFF</off_label>
+      <on_label>Nodo 5 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_27</name>
+      <pv_name>pva://nano2gb:NTP_client:6</pv_name>
+      <x>2</x>
+      <y>304</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_26</name>
+      <pv_name>pva://nano2gb:client_up:6</pv_name>
+      <x>162</x>
+      <y>304</y>
+      <height>40</height>
+      <off_label>Nodo 6 OFF</off_label>
+      <on_label>Nodo 6 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_28</name>
+      <pv_name>pva://nano2gb:NTP_client:7</pv_name>
+      <x>2</x>
+      <y>354</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_27</name>
+      <pv_name>pva://nano2gb:client_up:7</pv_name>
+      <x>162</x>
+      <y>354</y>
+      <height>40</height>
+      <off_label>Nodo 7 OFF</off_label>
+      <on_label>Nodo 7 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_29</name>
+      <pv_name>pva://nano2gb:NTP_client:8</pv_name>
+      <x>2</x>
+      <y>404</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_28</name>
+      <pv_name>pva://nano2gb:client_up:8</pv_name>
+      <x>162</x>
+      <y>404</y>
+      <height>40</height>
+      <off_label>Nodo 8 OFF</off_label>
+      <on_label>Nodo 8 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_30</name>
+      <pv_name>pva://nano2gb:NTP_client:9</pv_name>
+      <x>2</x>
+      <y>454</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_29</name>
+      <pv_name>pva://nano2gb:client_up:9</pv_name>
+      <x>162</x>
+      <y>454</y>
+      <height>40</height>
+      <off_label>Nodo 9 OFF</off_label>
+      <on_label>Nodo 9 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_31</name>
+      <pv_name>pva://nano2gb:NTP_client:10</pv_name>
+      <x>304</x>
+      <y>2</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_30</name>
+      <pv_name>pva://nano2gb:client_up:10</pv_name>
+      <x>464</x>
+      <y>2</y>
+      <height>40</height>
+      <off_label>Nodo 10 OFF</off_label>
+      <on_label>Nodo 10 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_32</name>
+      <pv_name>pva://nano2gb:NTP_client:11</pv_name>
+      <x>304</x>
+      <y>54</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_31</name>
+      <pv_name>pva://nano2gb:client_up:11</pv_name>
+      <x>464</x>
+      <y>54</y>
+      <height>40</height>
+      <off_label>Nodo 11 OFF</off_label>
+      <on_label>Nodo 11 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_33</name>
+      <pv_name>pva://nano2gb:NTP_client:12</pv_name>
+      <x>304</x>
+      <y>104</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_32</name>
+      <pv_name>pva://nano2gb:client_up:12</pv_name>
+      <x>464</x>
+      <y>104</y>
+      <height>40</height>
+      <off_label>Nodo 12 OFF</off_label>
+      <on_label>Nodo 12 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_34</name>
+      <pv_name>pva://nano2gb:NTP_client:13</pv_name>
+      <x>304</x>
+      <y>154</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_33</name>
+      <pv_name>pva://nano2gb:client_up:13</pv_name>
+      <x>464</x>
+      <y>154</y>
+      <height>40</height>
+      <off_label>Nodo 13 OFF</off_label>
+      <on_label>Nodo 13 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_35</name>
+      <pv_name>pva://nano2gb:NTP_client:14</pv_name>
+      <x>304</x>
+      <y>204</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_34</name>
+      <pv_name>pva://nano2gb:client_up:14</pv_name>
+      <x>464</x>
+      <y>204</y>
+      <height>40</height>
+      <off_label>Nodo 14 OFF</off_label>
+      <on_label>Nodo 14 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_36</name>
+      <pv_name>pva://nano2gb:NTP_client:15</pv_name>
+      <x>304</x>
+      <y>254</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_35</name>
+      <pv_name>pva://nano2gb:client_up:15</pv_name>
+      <x>464</x>
+      <y>254</y>
+      <height>40</height>
+      <off_label>Nodo 15 OFF</off_label>
+      <on_label>Nodo 15 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_37</name>
+      <pv_name>pva://nano2gb:NTP_client:16</pv_name>
+      <x>304</x>
+      <y>304</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_36</name>
+      <pv_name>pva://nano2gb:client_up:16</pv_name>
+      <x>464</x>
+      <y>304</y>
+      <height>40</height>
+      <off_label>Nodo 16 OFF</off_label>
+      <on_label>Nodo 16 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_38</name>
+      <pv_name>pva://nano2gb:NTP_client:17</pv_name>
+      <x>304</x>
+      <y>354</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_37</name>
+      <pv_name>pva://nano2gb:client_up:17</pv_name>
+      <x>464</x>
+      <y>354</y>
+      <height>40</height>
+      <off_label>Nodo 17 OFF</off_label>
+      <on_label>Nodo 17 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_39</name>
+      <pv_name>pva://nano2gb:NTP_client:18</pv_name>
+      <x>304</x>
+      <y>404</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_38</name>
+      <pv_name>pva://nano2gb:client_up:18</pv_name>
+      <x>464</x>
+      <y>404</y>
+      <height>40</height>
+      <off_label>Nodo 18 OFF</off_label>
+      <on_label>Nodo 18 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_40</name>
+      <pv_name>pva://nano2gb:NTP_client:19</pv_name>
+      <x>304</x>
+      <y>454</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="0" green="0" blue="63">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_39</name>
+      <pv_name>pva://nano2gb:client_up:19</pv_name>
+      <x>464</x>
+      <y>454</y>
+      <height>40</height>
+      <off_label>Nodo 19 OFF</off_label>
+      <on_label>Nodo 019ON</on_label>
+    </widget>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_41</name>
+    <x>1800</x>
+    <y>270</y>
+    <width>1</width>
+    <height>1</height>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Jetson Nano 4 GB</name>
+    <x>1280</x>
+    <y>93</y>
+    <width>620</width>
+    <height>540</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="255" green="147" blue="125">
+      </color>
+    </background_color>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_42</name>
+      <pv_name>pva://nano4gb:NTP_client:0</pv_name>
+      <x>2</x>
+      <y>2</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_40</name>
+      <pv_name>pva://nano4gb:client_up:0</pv_name>
+      <x>162</x>
+      <y>2</y>
+      <height>40</height>
+      <off_label>Nodo 0 OFF</off_label>
+      <on_label>Nodo 0 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_43</name>
+      <pv_name>pva://nano4gb:NTP_client:1</pv_name>
+      <x>2</x>
+      <y>54</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_41</name>
+      <pv_name>pva://nano4gb:client_up:1</pv_name>
+      <x>162</x>
+      <y>54</y>
+      <height>40</height>
+      <off_label>Nodo 1 OFF</off_label>
+      <on_label>Nodo 1 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_44</name>
+      <pv_name>pva://nano4gb:NTP_client:2</pv_name>
+      <x>2</x>
+      <y>104</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_42</name>
+      <pv_name>pva://nano4gb:client_up:2</pv_name>
+      <x>162</x>
+      <y>104</y>
+      <height>40</height>
+      <off_label>Nodo 2 OFF</off_label>
+      <on_label>Nodo 2 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_45</name>
+      <pv_name>pva://nano4gb:NTP_client:3</pv_name>
+      <x>2</x>
+      <y>154</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_43</name>
+      <pv_name>pva://nano4gb:client_up:3</pv_name>
+      <x>162</x>
+      <y>154</y>
+      <height>40</height>
+      <off_label>Nodo 3 OFF</off_label>
+      <on_label>Nodo 3 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_46</name>
+      <pv_name>pva://nano4gb:NTP_client:4</pv_name>
+      <x>2</x>
+      <y>204</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_44</name>
+      <pv_name>pva://nano4gb:client_up:4</pv_name>
+      <x>162</x>
+      <y>204</y>
+      <height>40</height>
+      <off_label>Nodo 4 OFF</off_label>
+      <on_label>Nodo 4 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_47</name>
+      <pv_name>pva://nano4gb:NTP_client:5</pv_name>
+      <x>2</x>
+      <y>254</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_45</name>
+      <pv_name>pva://nano4gb:client_up:5</pv_name>
+      <x>162</x>
+      <y>254</y>
+      <height>40</height>
+      <off_label>Nodo 5 OFF</off_label>
+      <on_label>Nodo 5 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_48</name>
+      <pv_name>pva://nano4gb:NTP_client:6</pv_name>
+      <x>2</x>
+      <y>304</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_46</name>
+      <pv_name>pva://nano4gb:client_up:6</pv_name>
+      <x>162</x>
+      <y>304</y>
+      <height>40</height>
+      <off_label>Nodo 6 OFF</off_label>
+      <on_label>Nodo 6 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_49</name>
+      <pv_name>pva://nano4gb:NTP_client:7</pv_name>
+      <x>2</x>
+      <y>354</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_47</name>
+      <pv_name>pva://nano4gb:client_up:7</pv_name>
+      <x>162</x>
+      <y>354</y>
+      <height>40</height>
+      <off_label>Nodo 7 OFF</off_label>
+      <on_label>Nodo 7 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_50</name>
+      <pv_name>pva://nano4gb:NTP_client:8</pv_name>
+      <x>2</x>
+      <y>404</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_48</name>
+      <pv_name>pva://nano4gb:client_up:8</pv_name>
+      <x>162</x>
+      <y>404</y>
+      <height>40</height>
+      <off_label>Nodo 8 OFF</off_label>
+      <on_label>Nodo 8 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_51</name>
+      <pv_name>pva://nano4gb:NTP_client:9</pv_name>
+      <x>2</x>
+      <y>454</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_49</name>
+      <pv_name>pva://nano4gb:client_up:9</pv_name>
+      <x>162</x>
+      <y>454</y>
+      <height>40</height>
+      <off_label>Nodo 9 OFF</off_label>
+      <on_label>Nodo 9 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_52</name>
+      <pv_name>pva://nano4gb:NTP_client:10</pv_name>
+      <x>304</x>
+      <y>2</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_50</name>
+      <pv_name>pva://nano4gb:client_up:10</pv_name>
+      <x>464</x>
+      <y>2</y>
+      <height>40</height>
+      <off_label>Nodo 10 OFF</off_label>
+      <on_label>Nodo 10 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_53</name>
+      <pv_name>pva://nano4gb:NTP_client:11</pv_name>
+      <x>304</x>
+      <y>54</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_51</name>
+      <pv_name>pva://nano4gb:client_up:11</pv_name>
+      <x>464</x>
+      <y>54</y>
+      <height>40</height>
+      <off_label>Nodo 11 OFF</off_label>
+      <on_label>Nodo 11 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_54</name>
+      <pv_name>pva://nano4gb:NTP_client:12</pv_name>
+      <x>304</x>
+      <y>104</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_52</name>
+      <pv_name>pva://nano4gb:client_up:12</pv_name>
+      <x>464</x>
+      <y>104</y>
+      <height>40</height>
+      <off_label>Nodo 12 OFF</off_label>
+      <on_label>Nodo 12 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_55</name>
+      <pv_name>pva://nano4gb:NTP_client:13</pv_name>
+      <x>304</x>
+      <y>154</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_53</name>
+      <pv_name>pva://nano4gb:client_up:13</pv_name>
+      <x>464</x>
+      <y>154</y>
+      <height>40</height>
+      <off_label>Nodo 13 OFF</off_label>
+      <on_label>Nodo 13 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_56</name>
+      <pv_name>pva://nano4gb:NTP_client:14</pv_name>
+      <x>304</x>
+      <y>204</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_54</name>
+      <pv_name>pva://nano4gb:client_up:14</pv_name>
+      <x>464</x>
+      <y>204</y>
+      <height>40</height>
+      <off_label>Nodo 14 OFF</off_label>
+      <on_label>Nodo 14 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_57</name>
+      <pv_name>pva://nano4gb:NTP_client:15</pv_name>
+      <x>304</x>
+      <y>254</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_55</name>
+      <pv_name>pva://nano4gb:client_up:15</pv_name>
+      <x>464</x>
+      <y>254</y>
+      <height>40</height>
+      <off_label>Nodo 15 OFF</off_label>
+      <on_label>Nodo 15 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_58</name>
+      <pv_name>pva://nano4gb:NTP_client:16</pv_name>
+      <x>304</x>
+      <y>304</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_56</name>
+      <pv_name>pva://nano4gb:client_up:16</pv_name>
+      <x>464</x>
+      <y>304</y>
+      <height>40</height>
+      <off_label>Nodo 16 OFF</off_label>
+      <on_label>Nodo 16 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_59</name>
+      <pv_name>pva://nano4gb:NTP_client:17</pv_name>
+      <x>304</x>
+      <y>354</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_57</name>
+      <pv_name>pva://nano4gb:client_up:17</pv_name>
+      <x>464</x>
+      <y>354</y>
+      <height>40</height>
+      <off_label>Nodo 17 OFF</off_label>
+      <on_label>Nodo 17 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_60</name>
+      <pv_name>pva://nano4gb:NTP_client:18</pv_name>
+      <x>304</x>
+      <y>404</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_58</name>
+      <pv_name>pva://nano4gb:client_up:18</pv_name>
+      <x>464</x>
+      <y>404</y>
+      <height>40</height>
+      <off_label>Nodo 18 OFF</off_label>
+      <on_label>Nodo 18 ON</on_label>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_61</name>
+      <pv_name>pva://nano4gb:NTP_client:19</pv_name>
+      <x>304</x>
+      <y>454</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="100" green="0" blue="0">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_59</name>
+      <pv_name>pva://nano4gb:client_up:19</pv_name>
+      <x>464</x>
+      <y>454</y>
+      <height>40</height>
+      <off_label>Nodo 19 OFF</off_label>
+      <on_label>Nodo 019ON</on_label>
+    </widget>
+  </widget>
+</display>

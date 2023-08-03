@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-01 20:57:48 by root-->
+<!--Saved on 2023-08-03 21:31:25 by root-->
 <display version="2.0.0">
   <name>Main Panel</name>
   <background_color>
@@ -23,188 +23,42 @@
       </color>
     </foreground_color>
     <transparent use_class="true">true</transparent>
-  </widget>
-  <widget type="databrowser" version="2.0.0">
-    <name>Data Browser</name>
-    <file>plot_Temperature.plt</file>
-    <x>30</x>
-    <y>260</y>
-    <width>550</width>
-    <height>330</height>
-    <show_toolbar>true</show_toolbar>
-  </widget>
-  <widget type="thermometer" version="2.0.0">
-    <name>Thermometer</name>
-    <pv_name>pva://temperature:water</pv_name>
-    <x>310</x>
-    <y>31</y>
-    <width>100</width>
-    <height>199</height>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_2</name>
-    <pv_name>pva://temperature:water</pv_name>
-    <x>400</x>
-    <y>50</y>
-    <width>160</width>
-    <interactive>true</interactive>
-  </widget>
-  <widget type="scaledslider" version="2.0.0">
-    <name>Scaled Slider</name>
-    <pv_name>pva://temperature:water</pv_name>
-    <x>380</x>
-    <y>150</y>
-    <width>200</width>
-    <height>40</height>
-    <show_hihi>false</show_hihi>
-    <show_high>false</show_high>
-    <show_low>false</show_low>
-    <show_lolo>false</show_lolo>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_3</name>
-    <text>Controlar temperatura Agua</text>
-    <x>390</x>
-    <y>90</y>
-    <width>180</width>
-    <height>50</height>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="thermometer" version="2.0.0">
-    <name>Thermometer_1</name>
-    <pv_name>pva://temperature:oil</pv_name>
-    <x>620</x>
-    <y>31</y>
-    <width>100</width>
-    <height>199</height>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_3</name>
-    <pv_name>pva://temperature:oil</pv_name>
-    <x>710</x>
-    <y>50</y>
-    <width>160</width>
-    <interactive>true</interactive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_4</name>
-    <text>Controlar temperatura Aceite</text>
-    <x>700</x>
-    <y>90</y>
-    <width>180</width>
-    <height>50</height>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="scaledslider" version="2.0.0">
-    <name>Scaled Slider_1</name>
-    <pv_name>pva://temperature:oil</pv_name>
-    <x>690</x>
-    <y>150</y>
-    <width>200</width>
-    <height>40</height>
-    <show_hihi>false</show_hihi>
-    <show_high>false</show_high>
-    <show_low>false</show_low>
-    <show_lolo>false</show_lolo>
-  </widget>
-  <widget type="scaledslider" version="2.0.0">
-    <name>Scaled Slider_2</name>
-    <pv_name>pva://alarm_lim_dynamic:Low</pv_name>
-    <x>960</x>
-    <y>140</y>
-    <width>200</width>
-    <height>40</height>
-    <show_hihi>false</show_hihi>
-    <show_high>false</show_high>
-    <show_low>false</show_low>
-    <show_lolo>false</show_lolo>
-  </widget>
-  <widget type="scaledslider" version="2.0.0">
-    <name>Scaled Slider_3</name>
-    <pv_name>pva://alarm_lim_dynamic:High</pv_name>
-    <x>960</x>
-    <y>60</y>
-    <width>200</width>
-    <height>40</height>
-    <show_hihi>false</show_hihi>
-    <show_high>false</show_high>
-    <show_low>false</show_low>
-    <show_lolo>false</show_lolo>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_4</name>
-    <pv_name>pva://alarm_lim_dynamic:Low</pv_name>
-    <x>1190</x>
-    <y>140</y>
-    <width>210</width>
-    <interactive>true</interactive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_5</name>
-    <pv_name>pva://alarm_lim_dynamic:High</pv_name>
-    <x>1180</x>
-    <y>60</y>
-    <width>220</width>
-    <interactive>true</interactive>
+    <scripts>
+      <script file="update_name_NTP.py">
+        <pv_name>pva://node_ID</pv_name>
+        <pv_name>pva://device_name</pv_name>
+      </script>
+    </scripts>
   </widget>
   <widget type="action_button" version="3.0.0">
     <name>Action Button</name>
     <actions>
       <action type="open_display">
-        <file>Panel2.bob</file>
+        <file>General.bob</file>
         <target>replace</target>
-        <description>Segundo panel</description>
+        <description>Vista general</description>
       </action>
     </actions>
     <x>30</x>
-    <y>31</y>
+    <y>30</y>
     <width>220</width>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_1</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>pva://temperature:oil</pv_name>
-        <value>69</value>
-        <description>WritePV</description>
-      </action>
-    </actions>
-    <x>30</x>
-    <y>67</y>
-    <width>140</width>
-    <tooltip>$(actions)</tooltip>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_5</name>
-    <text>Limites dinamicos para la temperatura del aceite</text>
-    <x>930</x>
-    <y>10</y>
-    <width>490</width>
     <height>50</height>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="spinner" version="2.0.0">
-    <name>Spinner_1</name>
-    <pv_name>loc://node_ID</pv_name>
-    <x>40</x>
-    <y>190</y>
-    <width>210</width>
-    <height>50</height>
+    <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="stripchart" version="2.1.0">
     <name>Strip Chart</name>
-    <x>601</x>
-    <y>260</y>
-    <width>620</width>
-    <height>320</height>
+    <x>15</x>
+    <y>286</y>
+    <width>1190</width>
+    <height>530</height>
+    <background_color>
+      <color name="Header_ForeGround" red="255" green="255" blue="255">
+      </color>
+    </background_color>
     <scripts>
-      <script file="update_trace.py">
-        <pv_name>loc://node_ID</pv_name>
-        <pv_name>loc://device_name</pv_name>
+      <script file="update_trace_NTP.py">
+        <pv_name>pva://node_ID</pv_name>
+        <pv_name>pva://device_name</pv_name>
       </script>
     </scripts>
     <y_axes>
@@ -239,12 +93,212 @@
       </trace>
     </traces>
   </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Entry</name>
-    <pv_name>loc://device_name</pv_name>
+  <widget type="group" version="2.0.0">
+    <name>Seleccionar dispositivo y numero de nodo</name>
     <x>30</x>
-    <y>120</y>
-    <width>220</width>
-    <height>30</height>
+    <y>130</y>
+    <width>510</width>
+    <height>140</height>
+    <widget type="combo" version="2.0.0">
+      <name>Combo Box</name>
+      <pv_name>pva://device_name</pv_name>
+      <x>17</x>
+      <y>42</y>
+      <width>185</width>
+      <height>49</height>
+      <actions>
+      </actions>
+      <items>
+        <item>nano2gb</item>
+        <item>nano4gb</item>
+        <item>rpi4</item>
+      </items>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_1</name>
+      <text>Dispositivo:</text>
+      <x>22</x>
+      <y>12</y>
+      <width>240</width>
+      <height>30</height>
+    </widget>
+    <widget type="spinner" version="2.0.0">
+      <name>Spinner_1</name>
+      <pv_name>pva://node_ID</pv_name>
+      <x>256</x>
+      <y>42</y>
+      <width>210</width>
+      <height>50</height>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_2</name>
+      <text>Nodo:</text>
+      <x>260</x>
+      <y>12</y>
+      <width>240</width>
+      <height>30</height>
+    </widget>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button</name>
+    <x>430</x>
+    <y>31</y>
+    <scripts>
+      <script file="update_pvname_button.py">
+        <pv_name>pva://node_ID</pv_name>
+        <pv_name>pva://device_name</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Nodos PTP</name>
+    <x>560</x>
+    <y>10</y>
+    <width>650</width>
+    <height>269</height>
+    <widget type="meter" version="3.0.0">
+      <name>Meter</name>
+      <pv_name>pva://rpi4:PTP_slave</pv_name>
+      <width>190</width>
+      <height>124</height>
+      <actions>
+      </actions>
+      <minimum>-700000.0</minimum>
+      <maximum>700000.0</maximum>
+    </widget>
+    <widget type="meter" version="3.0.0">
+      <name>Meter_1</name>
+      <pv_name>pva://nano2gb:PTP_slave</pv_name>
+      <x>208</x>
+      <width>190</width>
+      <height>124</height>
+      <minimum>-700000.0</minimum>
+      <maximum>700000.0</maximum>
+    </widget>
+    <widget type="meter" version="3.0.0">
+      <name>Meter_2</name>
+      <pv_name>pva://nano4gb:PTP_slave</pv_name>
+      <x>417</x>
+      <width>190</width>
+      <height>124</height>
+      <minimum>-700000.0</minimum>
+      <maximum>700000.0</maximum>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>Action Button_2</name>
+      <actions execute_as_one="true">
+        <action type="write_pv">
+          <pv_name>pva://device_name</pv_name>
+          <value>rpi4</value>
+          <description>Open Display</description>
+        </action>
+        <action type="open_display">
+          <file>PTP_Nodes.bob</file>
+          <target>replace</target>
+          <description>WritePV</description>
+        </action>
+      </actions>
+      <text>Raspberry Pi 4</text>
+      <y>193</y>
+      <width>190</width>
+      <height>36</height>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>Action Button_3</name>
+      <actions execute_as_one="true">
+        <action type="write_pv">
+          <pv_name>pva://device_name</pv_name>
+          <value>nano2gb</value>
+          <description>Open Display</description>
+        </action>
+        <action type="open_display">
+          <file>PTP_Nodes.bob</file>
+          <target>replace</target>
+          <description>WritePV</description>
+        </action>
+      </actions>
+      <text>Jetson Nano 2 GB</text>
+      <x>208</x>
+      <y>193</y>
+      <width>190</width>
+      <height>36</height>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>Action Button_4</name>
+      <actions execute_as_one="true">
+        <action type="write_pv">
+          <pv_name>pva://device_name</pv_name>
+          <value>nano4gb</value>
+          <description>Open Display</description>
+        </action>
+        <action type="open_display">
+          <file>PTP_Nodes.bob</file>
+          <target>replace</target>
+          <description>WritePV</description>
+        </action>
+      </actions>
+      <text>Jetson Nano 4 GB</text>
+      <x>417</x>
+      <y>193</y>
+      <width>190</width>
+      <height>36</height>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update</name>
+      <pv_name>pva://rpi4:PTP_slave</pv_name>
+      <x>15</x>
+      <y>139</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_1</name>
+      <pv_name>pva://nano2gb:PTP_slave</pv_name>
+      <x>223</x>
+      <y>139</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_2</name>
+      <pv_name>pva://nano4gb:PTP_slave</pv_name>
+      <x>432</x>
+      <y>139</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
   </widget>
 </display>

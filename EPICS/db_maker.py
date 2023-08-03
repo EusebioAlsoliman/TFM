@@ -37,12 +37,63 @@ record(ai, "temperature:oil")
     field(VAL, "33")
 }
 
+record(int64in, "node_ID")
+{
+    field(DESC, "Node ID selected in CSS Phoebus")
+    field(VAL, "0")
+}
+
+record(stringin, "device_name")
+{
+    field(DESC, "Device selected in CSS Phoebus")
+    field(VAL, "rpi4")
+}
+
+record(ai, "rpi4:PTP_slave")
+{
+    field(DESC, "PTP slave offset in Pi 4")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "nano2gb:PTP_slave")
+{
+    field(DESC, "PTP slave offset in Nano 2GB")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "nano4gb:PTP_slave")
+{
+    field(DESC, "PTP slave offset in Nano 4GB")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
 record(bi, "rpi4:finish_all")
 {
 	field(DESC, "Finish OPC UA Server in Raspberry Pi 4")
     field(ZNAM, "False")
     field(ONAM, "True")
-    field(VAL, "0")
+    field(VAL, "1")
 }
 
 record(bi, "nano2gb:finish_all")
@@ -50,7 +101,7 @@ record(bi, "nano2gb:finish_all")
 	field(DESC, "Finish OPC UA Server in Jetson Nano 2GB")
     field(ZNAM, "False")
     field(ONAM, "True")
-    field(VAL, "0")
+    field(VAL, "1")
 }
 
 record(bi, "nano4gb:finish_all")
@@ -58,85 +109,14 @@ record(bi, "nano4gb:finish_all")
 	field(DESC, "Finish OPC UA Server in Jetson Nano 4GB")
     field(ZNAM, "False")
     field(ONAM, "True")
-    field(VAL, "0")
-}
-
-record(aai, "rpi4:PTP_slaves")
-{
-    field(DESC, "PTP slaves offset in Raspberry Pi 4")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "rpi4:NTP_clients")
-{
-    field(DESC, "NTP clients offset in Raspberry Pi 4")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano2gb:PTP_slaves")
-{
-    field(DESC, "PTP slaves offset in Nano 2GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano2gb:NTP_clients")
-{
-    field(DESC, "NTP clients offset in Nano 2GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano4gb:PTP_slaves")
-{
-    field(DESC, "PTP slaves offset in Nano 4GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano4gb:NTP_clients")
-{
-    field(DESC, "NTP clients offset in Nano 4GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "rpi4:NTP_clients_up")
-{
-    field(DESC, "NTP clients ON/OFF")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano2gb:NTP_clients_up")
-{
-    field(DESC, "NTP clients ON/OFF")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano4gb:NTP_clients_up")
-{
-    field(DESC, "NTP clients ON/OFF")
-    field(FTVL, "INT64")
-    field(NELM, "20")
+    field(VAL, "1")
 }
 """
 
 template_dynamic = """
-record(int64in, "{device}:PTP_slave:{index}")
-{
-    field(DESC, "PTP slave {index} offset in {device}")
-}
-
-record(calc, "{device}:NTP_client:{index}")
+record(ai, "{device}:NTP_client:{index}")
 {
     field(DESC, "NTP client {index} offset in {device}")
-	field(SCAN, ".1 second")
-	field(INPA, "{device}:NTP_clients.VAL[{index}]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")

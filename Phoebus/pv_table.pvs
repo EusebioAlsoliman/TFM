@@ -39,13 +39,6 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://rpi4:NTP_clients</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
             <name>pva://rpi4:NTP_client:2</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
@@ -53,28 +46,7 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>loc://node_ID</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
-            <name>pva://nano2gb:NTP_clients</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
             <name>pva://nano4gb:NTP_client:0</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
-            <name>loc://device_name</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
@@ -102,7 +74,7 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://nano2gb:NTP_clients_up</name>
+            <name>pva://nano2gb:client_up:0</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
@@ -130,7 +102,35 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://nano2gb:client_up:4</name>
+            <name>pva://nano2gb:NTP_client:0</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:NTP_client:1</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:NTP_client:2</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:NTP_client:3</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:NTP_client:4</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>

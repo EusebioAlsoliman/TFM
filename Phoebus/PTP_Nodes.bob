@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-08-03 21:37:38 by root-->
+<display version="2.0.0">
+  <name>Nodo PTP</name>
+  <background_color>
+    <color name="Read_Background" red="240" green="240" blue="240">
+    </color>
+  </background_color>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <class>TITLE</class>
+    <text>Nodo PTP</text>
+    <x use_class="true">0</x>
+    <y use_class="true">0</y>
+    <width>550</width>
+    <height>31</height>
+    <font use_class="true">
+      <font name="Header 1" family="Liberation Sans" style="BOLD" size="22.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="Text" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button</name>
+    <actions>
+      <action type="open_display">
+        <file>Main.bob</file>
+        <target>replace</target>
+        <description>VOLVER</description>
+      </action>
+    </actions>
+    <x>30</x>
+    <y>30</y>
+    <width>220</width>
+    <height>50</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_1</name>
+    <pv_name>pva://device_name</pv_name>
+    <x>350</x>
+    <y>31</y>
+    <width>185</width>
+    <height>49</height>
+    <actions>
+    </actions>
+    <items>
+      <item>nano2gb</item>
+      <item>nano4gb</item>
+      <item>rpi4</item>
+    </items>
+  </widget>
+  <widget type="stripchart" version="2.1.0">
+    <name>Strip Chart</name>
+    <x>20</x>
+    <y>100</y>
+    <width>1350</width>
+    <height>690</height>
+    <background_color>
+      <color name="Header_ForeGround" red="255" green="255" blue="255">
+      </color>
+    </background_color>
+    <scripts>
+      <script file="update_trace_PTP.py">
+        <pv_name>pva://device_name</pv_name>
+      </script>
+    </scripts>
+    <y_axes>
+      <y_axis>
+        <title>offset</title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+        <color>
+          <color name="Text" red="0" green="0" blue="0">
+          </color>
+        </color>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>$(traces[0].y_pv)</name>
+        <y_pv>pva://rpi4:PTP_slave</y_pv>
+        <axis>0</axis>
+        <trace_type>2</trace_type>
+        <color>
+          <color red="0" green="0" blue="255">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+</display>

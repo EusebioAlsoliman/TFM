@@ -37,12 +37,63 @@ record(ai, "temperature:oil")
     field(VAL, "33")
 }
 
+record(int64in, "node_ID")
+{
+    field(DESC, "Node ID selected in CSS Phoebus")
+    field(VAL, "0")
+}
+
+record(stringin, "device_name")
+{
+    field(DESC, "Device selected in CSS Phoebus")
+    field(VAL, "rpi4")
+}
+
+record(ai, "rpi4:PTP_slave")
+{
+    field(DESC, "PTP slave offset in Pi 4")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "nano2gb:PTP_slave")
+{
+    field(DESC, "PTP slave offset in Nano 2GB")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "nano4gb:PTP_slave")
+{
+    field(DESC, "PTP slave offset in Nano 4GB")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
 record(bi, "rpi4:finish_all")
 {
 	field(DESC, "Finish OPC UA Server in Raspberry Pi 4")
     field(ZNAM, "False")
     field(ONAM, "True")
-    field(VAL, "0")
+    field(VAL, "1")
 }
 
 record(bi, "nano2gb:finish_all")
@@ -50,7 +101,7 @@ record(bi, "nano2gb:finish_all")
 	field(DESC, "Finish OPC UA Server in Jetson Nano 2GB")
     field(ZNAM, "False")
     field(ONAM, "True")
-    field(VAL, "0")
+    field(VAL, "1")
 }
 
 record(bi, "nano4gb:finish_all")
@@ -58,83 +109,12 @@ record(bi, "nano4gb:finish_all")
 	field(DESC, "Finish OPC UA Server in Jetson Nano 4GB")
     field(ZNAM, "False")
     field(ONAM, "True")
-    field(VAL, "0")
+    field(VAL, "1")
 }
 
-record(aai, "rpi4:PTP_slaves")
-{
-    field(DESC, "PTP slaves offset in Raspberry Pi 4")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "rpi4:NTP_clients")
-{
-    field(DESC, "NTP clients offset in Raspberry Pi 4")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano2gb:PTP_slaves")
-{
-    field(DESC, "PTP slaves offset in Nano 2GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano2gb:NTP_clients")
-{
-    field(DESC, "NTP clients offset in Nano 2GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano4gb:PTP_slaves")
-{
-    field(DESC, "PTP slaves offset in Nano 4GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano4gb:NTP_clients")
-{
-    field(DESC, "NTP clients offset in Nano 4GB")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "rpi4:NTP_clients_up")
-{
-    field(DESC, "NTP clients ON/OFF")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano2gb:NTP_clients_up")
-{
-    field(DESC, "NTP clients ON/OFF")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(aai, "nano4gb:NTP_clients_up")
-{
-    field(DESC, "NTP clients ON/OFF")
-    field(FTVL, "INT64")
-    field(NELM, "20")
-}
-
-record(int64in, "rpi4:PTP_slave:0")
-{
-    field(DESC, "PTP slave 0 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:0")
+record(ai, "rpi4:NTP_client:0")
 {
     field(DESC, "NTP client 0 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[0]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -152,17 +132,9 @@ record(bi, "rpi4:client_up:0")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:0")
-{
-    field(DESC, "PTP slave 0 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:0")
+record(ai, "nano2gb:NTP_client:0")
 {
     field(DESC, "NTP client 0 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[0]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -180,17 +152,9 @@ record(bi, "nano2gb:client_up:0")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:0")
-{
-    field(DESC, "PTP slave 0 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:0")
+record(ai, "nano4gb:NTP_client:0")
 {
     field(DESC, "NTP client 0 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[0]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -208,17 +172,9 @@ record(bi, "nano4gb:client_up:0")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:1")
-{
-    field(DESC, "PTP slave 1 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:1")
+record(ai, "rpi4:NTP_client:1")
 {
     field(DESC, "NTP client 1 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[1]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -236,17 +192,9 @@ record(bi, "rpi4:client_up:1")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:1")
-{
-    field(DESC, "PTP slave 1 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:1")
+record(ai, "nano2gb:NTP_client:1")
 {
     field(DESC, "NTP client 1 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[1]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -264,17 +212,9 @@ record(bi, "nano2gb:client_up:1")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:1")
-{
-    field(DESC, "PTP slave 1 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:1")
+record(ai, "nano4gb:NTP_client:1")
 {
     field(DESC, "NTP client 1 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[1]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -292,17 +232,9 @@ record(bi, "nano4gb:client_up:1")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:2")
-{
-    field(DESC, "PTP slave 2 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:2")
+record(ai, "rpi4:NTP_client:2")
 {
     field(DESC, "NTP client 2 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[2]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -320,17 +252,9 @@ record(bi, "rpi4:client_up:2")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:2")
-{
-    field(DESC, "PTP slave 2 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:2")
+record(ai, "nano2gb:NTP_client:2")
 {
     field(DESC, "NTP client 2 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[2]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -348,17 +272,9 @@ record(bi, "nano2gb:client_up:2")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:2")
-{
-    field(DESC, "PTP slave 2 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:2")
+record(ai, "nano4gb:NTP_client:2")
 {
     field(DESC, "NTP client 2 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[2]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -376,17 +292,9 @@ record(bi, "nano4gb:client_up:2")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:3")
-{
-    field(DESC, "PTP slave 3 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:3")
+record(ai, "rpi4:NTP_client:3")
 {
     field(DESC, "NTP client 3 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[3]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -404,17 +312,9 @@ record(bi, "rpi4:client_up:3")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:3")
-{
-    field(DESC, "PTP slave 3 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:3")
+record(ai, "nano2gb:NTP_client:3")
 {
     field(DESC, "NTP client 3 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[3]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -432,17 +332,9 @@ record(bi, "nano2gb:client_up:3")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:3")
-{
-    field(DESC, "PTP slave 3 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:3")
+record(ai, "nano4gb:NTP_client:3")
 {
     field(DESC, "NTP client 3 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[3]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -460,17 +352,9 @@ record(bi, "nano4gb:client_up:3")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:4")
-{
-    field(DESC, "PTP slave 4 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:4")
+record(ai, "rpi4:NTP_client:4")
 {
     field(DESC, "NTP client 4 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[4]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -488,17 +372,9 @@ record(bi, "rpi4:client_up:4")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:4")
-{
-    field(DESC, "PTP slave 4 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:4")
+record(ai, "nano2gb:NTP_client:4")
 {
     field(DESC, "NTP client 4 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[4]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -516,17 +392,9 @@ record(bi, "nano2gb:client_up:4")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:4")
-{
-    field(DESC, "PTP slave 4 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:4")
+record(ai, "nano4gb:NTP_client:4")
 {
     field(DESC, "NTP client 4 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[4]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -544,17 +412,9 @@ record(bi, "nano4gb:client_up:4")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:5")
-{
-    field(DESC, "PTP slave 5 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:5")
+record(ai, "rpi4:NTP_client:5")
 {
     field(DESC, "NTP client 5 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[5]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -572,17 +432,9 @@ record(bi, "rpi4:client_up:5")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:5")
-{
-    field(DESC, "PTP slave 5 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:5")
+record(ai, "nano2gb:NTP_client:5")
 {
     field(DESC, "NTP client 5 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[5]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -600,17 +452,9 @@ record(bi, "nano2gb:client_up:5")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:5")
-{
-    field(DESC, "PTP slave 5 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:5")
+record(ai, "nano4gb:NTP_client:5")
 {
     field(DESC, "NTP client 5 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[5]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -628,17 +472,9 @@ record(bi, "nano4gb:client_up:5")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:6")
-{
-    field(DESC, "PTP slave 6 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:6")
+record(ai, "rpi4:NTP_client:6")
 {
     field(DESC, "NTP client 6 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[6]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -656,17 +492,9 @@ record(bi, "rpi4:client_up:6")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:6")
-{
-    field(DESC, "PTP slave 6 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:6")
+record(ai, "nano2gb:NTP_client:6")
 {
     field(DESC, "NTP client 6 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[6]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -684,17 +512,9 @@ record(bi, "nano2gb:client_up:6")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:6")
-{
-    field(DESC, "PTP slave 6 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:6")
+record(ai, "nano4gb:NTP_client:6")
 {
     field(DESC, "NTP client 6 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[6]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -712,17 +532,9 @@ record(bi, "nano4gb:client_up:6")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:7")
-{
-    field(DESC, "PTP slave 7 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:7")
+record(ai, "rpi4:NTP_client:7")
 {
     field(DESC, "NTP client 7 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[7]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -740,17 +552,9 @@ record(bi, "rpi4:client_up:7")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:7")
-{
-    field(DESC, "PTP slave 7 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:7")
+record(ai, "nano2gb:NTP_client:7")
 {
     field(DESC, "NTP client 7 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[7]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -768,17 +572,9 @@ record(bi, "nano2gb:client_up:7")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:7")
-{
-    field(DESC, "PTP slave 7 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:7")
+record(ai, "nano4gb:NTP_client:7")
 {
     field(DESC, "NTP client 7 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[7]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -796,17 +592,9 @@ record(bi, "nano4gb:client_up:7")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:8")
-{
-    field(DESC, "PTP slave 8 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:8")
+record(ai, "rpi4:NTP_client:8")
 {
     field(DESC, "NTP client 8 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[8]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -824,17 +612,9 @@ record(bi, "rpi4:client_up:8")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:8")
-{
-    field(DESC, "PTP slave 8 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:8")
+record(ai, "nano2gb:NTP_client:8")
 {
     field(DESC, "NTP client 8 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[8]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -852,17 +632,9 @@ record(bi, "nano2gb:client_up:8")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:8")
-{
-    field(DESC, "PTP slave 8 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:8")
+record(ai, "nano4gb:NTP_client:8")
 {
     field(DESC, "NTP client 8 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[8]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -880,17 +652,9 @@ record(bi, "nano4gb:client_up:8")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:9")
-{
-    field(DESC, "PTP slave 9 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:9")
+record(ai, "rpi4:NTP_client:9")
 {
     field(DESC, "NTP client 9 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[9]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -908,17 +672,9 @@ record(bi, "rpi4:client_up:9")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:9")
-{
-    field(DESC, "PTP slave 9 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:9")
+record(ai, "nano2gb:NTP_client:9")
 {
     field(DESC, "NTP client 9 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[9]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -936,17 +692,9 @@ record(bi, "nano2gb:client_up:9")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:9")
-{
-    field(DESC, "PTP slave 9 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:9")
+record(ai, "nano4gb:NTP_client:9")
 {
     field(DESC, "NTP client 9 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[9]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -964,17 +712,9 @@ record(bi, "nano4gb:client_up:9")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:10")
-{
-    field(DESC, "PTP slave 10 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:10")
+record(ai, "rpi4:NTP_client:10")
 {
     field(DESC, "NTP client 10 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[10]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -992,17 +732,9 @@ record(bi, "rpi4:client_up:10")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:10")
-{
-    field(DESC, "PTP slave 10 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:10")
+record(ai, "nano2gb:NTP_client:10")
 {
     field(DESC, "NTP client 10 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[10]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1020,17 +752,9 @@ record(bi, "nano2gb:client_up:10")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:10")
-{
-    field(DESC, "PTP slave 10 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:10")
+record(ai, "nano4gb:NTP_client:10")
 {
     field(DESC, "NTP client 10 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[10]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1048,17 +772,9 @@ record(bi, "nano4gb:client_up:10")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:11")
-{
-    field(DESC, "PTP slave 11 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:11")
+record(ai, "rpi4:NTP_client:11")
 {
     field(DESC, "NTP client 11 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[11]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1076,17 +792,9 @@ record(bi, "rpi4:client_up:11")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:11")
-{
-    field(DESC, "PTP slave 11 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:11")
+record(ai, "nano2gb:NTP_client:11")
 {
     field(DESC, "NTP client 11 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[11]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1104,17 +812,9 @@ record(bi, "nano2gb:client_up:11")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:11")
-{
-    field(DESC, "PTP slave 11 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:11")
+record(ai, "nano4gb:NTP_client:11")
 {
     field(DESC, "NTP client 11 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[11]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1132,17 +832,9 @@ record(bi, "nano4gb:client_up:11")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:12")
-{
-    field(DESC, "PTP slave 12 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:12")
+record(ai, "rpi4:NTP_client:12")
 {
     field(DESC, "NTP client 12 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[12]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1160,17 +852,9 @@ record(bi, "rpi4:client_up:12")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:12")
-{
-    field(DESC, "PTP slave 12 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:12")
+record(ai, "nano2gb:NTP_client:12")
 {
     field(DESC, "NTP client 12 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[12]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1188,17 +872,9 @@ record(bi, "nano2gb:client_up:12")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:12")
-{
-    field(DESC, "PTP slave 12 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:12")
+record(ai, "nano4gb:NTP_client:12")
 {
     field(DESC, "NTP client 12 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[12]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1216,17 +892,9 @@ record(bi, "nano4gb:client_up:12")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:13")
-{
-    field(DESC, "PTP slave 13 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:13")
+record(ai, "rpi4:NTP_client:13")
 {
     field(DESC, "NTP client 13 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[13]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1244,17 +912,9 @@ record(bi, "rpi4:client_up:13")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:13")
-{
-    field(DESC, "PTP slave 13 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:13")
+record(ai, "nano2gb:NTP_client:13")
 {
     field(DESC, "NTP client 13 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[13]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1272,17 +932,9 @@ record(bi, "nano2gb:client_up:13")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:13")
-{
-    field(DESC, "PTP slave 13 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:13")
+record(ai, "nano4gb:NTP_client:13")
 {
     field(DESC, "NTP client 13 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[13]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1300,17 +952,9 @@ record(bi, "nano4gb:client_up:13")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:14")
-{
-    field(DESC, "PTP slave 14 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:14")
+record(ai, "rpi4:NTP_client:14")
 {
     field(DESC, "NTP client 14 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[14]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1328,17 +972,9 @@ record(bi, "rpi4:client_up:14")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:14")
-{
-    field(DESC, "PTP slave 14 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:14")
+record(ai, "nano2gb:NTP_client:14")
 {
     field(DESC, "NTP client 14 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[14]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1356,17 +992,9 @@ record(bi, "nano2gb:client_up:14")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:14")
-{
-    field(DESC, "PTP slave 14 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:14")
+record(ai, "nano4gb:NTP_client:14")
 {
     field(DESC, "NTP client 14 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[14]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1384,17 +1012,9 @@ record(bi, "nano4gb:client_up:14")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:15")
-{
-    field(DESC, "PTP slave 15 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:15")
+record(ai, "rpi4:NTP_client:15")
 {
     field(DESC, "NTP client 15 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[15]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1412,17 +1032,9 @@ record(bi, "rpi4:client_up:15")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:15")
-{
-    field(DESC, "PTP slave 15 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:15")
+record(ai, "nano2gb:NTP_client:15")
 {
     field(DESC, "NTP client 15 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[15]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1440,17 +1052,9 @@ record(bi, "nano2gb:client_up:15")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:15")
-{
-    field(DESC, "PTP slave 15 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:15")
+record(ai, "nano4gb:NTP_client:15")
 {
     field(DESC, "NTP client 15 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[15]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1468,17 +1072,9 @@ record(bi, "nano4gb:client_up:15")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:16")
-{
-    field(DESC, "PTP slave 16 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:16")
+record(ai, "rpi4:NTP_client:16")
 {
     field(DESC, "NTP client 16 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[16]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1496,17 +1092,9 @@ record(bi, "rpi4:client_up:16")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:16")
-{
-    field(DESC, "PTP slave 16 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:16")
+record(ai, "nano2gb:NTP_client:16")
 {
     field(DESC, "NTP client 16 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[16]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1524,17 +1112,9 @@ record(bi, "nano2gb:client_up:16")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:16")
-{
-    field(DESC, "PTP slave 16 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:16")
+record(ai, "nano4gb:NTP_client:16")
 {
     field(DESC, "NTP client 16 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[16]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1552,17 +1132,9 @@ record(bi, "nano4gb:client_up:16")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:17")
-{
-    field(DESC, "PTP slave 17 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:17")
+record(ai, "rpi4:NTP_client:17")
 {
     field(DESC, "NTP client 17 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[17]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1580,17 +1152,9 @@ record(bi, "rpi4:client_up:17")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:17")
-{
-    field(DESC, "PTP slave 17 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:17")
+record(ai, "nano2gb:NTP_client:17")
 {
     field(DESC, "NTP client 17 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[17]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1608,17 +1172,9 @@ record(bi, "nano2gb:client_up:17")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:17")
-{
-    field(DESC, "PTP slave 17 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:17")
+record(ai, "nano4gb:NTP_client:17")
 {
     field(DESC, "NTP client 17 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[17]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1636,17 +1192,9 @@ record(bi, "nano4gb:client_up:17")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:18")
-{
-    field(DESC, "PTP slave 18 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:18")
+record(ai, "rpi4:NTP_client:18")
 {
     field(DESC, "NTP client 18 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[18]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1664,17 +1212,9 @@ record(bi, "rpi4:client_up:18")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:18")
-{
-    field(DESC, "PTP slave 18 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:18")
+record(ai, "nano2gb:NTP_client:18")
 {
     field(DESC, "NTP client 18 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[18]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1692,17 +1232,9 @@ record(bi, "nano2gb:client_up:18")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:18")
-{
-    field(DESC, "PTP slave 18 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:18")
+record(ai, "nano4gb:NTP_client:18")
 {
     field(DESC, "NTP client 18 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[18]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1720,17 +1252,9 @@ record(bi, "nano4gb:client_up:18")
     field(ONAM, "True")
 }
 
-record(int64in, "rpi4:PTP_slave:19")
-{
-    field(DESC, "PTP slave 19 offset in rpi4")
-}
-
-record(calc, "rpi4:NTP_client:19")
+record(ai, "rpi4:NTP_client:19")
 {
     field(DESC, "NTP client 19 offset in rpi4")
-	field(SCAN, ".1 second")
-	field(INPA, "rpi4:NTP_clients.VAL[19]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1748,17 +1272,9 @@ record(bi, "rpi4:client_up:19")
     field(ONAM, "True")
 }
 
-record(int64in, "nano2gb:PTP_slave:19")
-{
-    field(DESC, "PTP slave 19 offset in nano2gb")
-}
-
-record(calc, "nano2gb:NTP_client:19")
+record(ai, "nano2gb:NTP_client:19")
 {
     field(DESC, "NTP client 19 offset in nano2gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano2gb:NTP_clients.VAL[19]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")
@@ -1776,17 +1292,9 @@ record(bi, "nano2gb:client_up:19")
     field(ONAM, "True")
 }
 
-record(int64in, "nano4gb:PTP_slave:19")
-{
-    field(DESC, "PTP slave 19 offset in nano4gb")
-}
-
-record(calc, "nano4gb:NTP_client:19")
+record(ai, "nano4gb:NTP_client:19")
 {
     field(DESC, "NTP client 19 offset in nano4gb")
-	field(SCAN, ".1 second")
-	field(INPA, "nano4gb:NTP_clients.VAL[19]")
-	field(CALC, "A")
 	field(LOLO, "-500000")
 	field(LOW, "-200000")
 	field(HIGH, "200000")

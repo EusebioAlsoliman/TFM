@@ -25,7 +25,7 @@ def obtain_offset_PTP(): #linuxptp
     return offsetFromMaster
 
 def obtain_offset_NTP(ptp_instance): # chrony 
-    orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
+    orden = "sudo docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
@@ -99,10 +99,10 @@ if __name__ == "__main__":
 
     server = Server()
 
-    endpoint = "opc.tcp://169.254.145.195:4897"
+    endpoint = "opc.tcp://169.254.145.193:4897"
     server.set_endpoint(endpoint)
 
-    servername = "Pi-4-OPC-UA-Server"
+    servername = "Jetson-2GB-OPC-UA-Server"
     server.set_server_name(servername)
 
     # OPC-UA-Modelling
@@ -118,10 +118,10 @@ if __name__ == "__main__":
 
     # OPC-UA-Server Add Variable and start dockers
 
-    Finished_all = myobj.add_variable(idx, "Finish_all", True, ua.VariantType.Boolean)
-    Finished_all.set_writable()
+    finish_all = myobj.add_variable(idx, "Finish_all", True, ua.VariantType.Boolean)
+    finish_all.set_writable()
 
-    print("Name Space and ID of Finish all : ", Finished_all)
+    print("Name Space and ID of Finish all : ", finish_all)
 
     PTP_slave = myobj.add_variable(idx, "PTP_slave", 0, ua.VariantType.Float)
     PTP_slave.set_writable()
@@ -173,7 +173,7 @@ if __name__ == "__main__":
             if list_NTP_up[i].get_value() == False:
                 count += 1
 
-        if count == (n_ntp) or Finished_all.get_value() == False:
+        if count == (n_ntp) or finish_all.get_value() == False:
             break
 
     # Espera a que todos los procesos terminen
