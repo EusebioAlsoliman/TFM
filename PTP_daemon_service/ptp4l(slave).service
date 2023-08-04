@@ -8,7 +8,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/opt/linuxptp/ptp4l -S -s -f /opt/UNICAST-SLAVE.cfg
+ExecStart=/opt/linuxptp/ptp4l -S -s -l1 -f /opt/UNICAST-SLAVE.cfg
 
 [Install]
 WantedBy=multi-user.target

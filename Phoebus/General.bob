@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-03 22:05:46 by root-->
+<!--Saved on 2023-08-04 09:43:58 by root-->
 <display version="2.0.0">
   <name>Vista general</name>
   <background_color>
@@ -43,8 +43,8 @@
     <name>Text Update</name>
     <x>1160</x>
     <y>270</y>
-    <width>0</width>
-    <height>0</height>
+    <width>1</width>
+    <height>1</height>
   </widget>
   <widget type="group" version="2.0.0">
     <name>Raspberry Pi 4</name>
@@ -1957,5 +1957,35 @@
       <off_label>Nodo 19 OFF</off_label>
       <on_label>Nodo 019ON</on_label>
     </widget>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button_60</name>
+    <pv_name>pva://rpi4:finish_all</pv_name>
+    <x>150</x>
+    <y>650</y>
+    <width>310</width>
+    <height>40</height>
+    <off_label>Apagar todos los nodos</off_label>
+    <on_label>Apagar todos los nodos</on_label>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button_61</name>
+    <pv_name>pva://nano2gb:finish_all</pv_name>
+    <x>795</x>
+    <y>650</y>
+    <width>310</width>
+    <height>40</height>
+    <off_label>Apagar todos los nodos</off_label>
+    <on_label>Apagar todos los nodos</on_label>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button_62</name>
+    <pv_name>pva://nano4gb:finish_all</pv_name>
+    <x>1435</x>
+    <y>650</y>
+    <width>310</width>
+    <height>40</height>
+    <off_label>Apagar todos los nodos</off_label>
+    <on_label>Apagar todos los nodos</on_label>
   </widget>
 </display>
