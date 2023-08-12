@@ -66,23 +66,27 @@ def obtain_slave_code_PTP():
 
     return slave_code
 
-def obtain_offset_NTP(ptp_instance): # chrony 
+def obtain_NTP_data(ptp_instance): # chrony 
     orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
     output, error = process.communicate()
 
-    pos_ini = output.find("Last offset     :")
+    pos_offset = output.find("Last offset     :")
     
-    output = output[pos_ini+17:]
+    output = output[pos_offset+17:]
 
     pos_fin = output.find("seconds")
 
     offsetFromMaster = output[:pos_fin]
     offsetFromMaster = float(offsetFromMaster) * 1e9
 
-    return offsetFromMaster
+    pos_leap_status = output.find("Leap status     :")
+    leap_status = output[pos_leap_status+17:]
+    leap_status = leap_status.replace(" ", "")
+
+    return offsetFromMaster, leap_status
 
 class run_PTP(threading.Thread):
     def __init__(self):
@@ -115,8 +119,9 @@ class run_NTP(threading.Thread):
             self.is_up = bool(int(str(channel_NTP_up[self.i].get())[55:57]))
             if self.is_up == True:
                 if self.is_killed == False:
-                    self.offset = obtain_offset_NTP(self.i)
+                    self.offset, self.leap_status = obtain_NTP_data(self.i)
                     channel_NTP[self.i].put(self.offset)
+                    channel_NTP_leap_status[self.i].put(self.leap_status)
 
                 else:
                     client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + self.str_i, detach=True)
@@ -136,6 +141,7 @@ if __name__ == "__main__":
 
     channel_NTP_up = []
     channel_NTP = []
+    channel_NTP_leap_status = []
 
     device = sys.argv[1]
 
@@ -166,6 +172,7 @@ if __name__ == "__main__":
 
         channel_NTP_up.append(Channel(device + ":client_up:" + str_i))
         channel_NTP.append(Channel(device + ":NTP_client:" + str_i))
+        channel_NTP_leap_status.append(Channel(device + ":leap_status:" + str_i))
 
         if i < n_ntp:
             client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + str_i, detach=True)

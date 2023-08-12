@@ -178,6 +178,11 @@ record(bi, "{device}:client_up:{index}")
     field(ZNAM, "False")
     field(ONAM, "True")
 }
+
+record(stringin, "{device}:leap_status:{index}")
+{
+	field(DESC, "Leap Status of Node {index} of {device}")
+}
 """
 
 devices = ["rpi4", "nano2gb", "nano4gb"]

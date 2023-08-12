@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-12 20:23:54 by root-->
+<!--Saved on 2023-08-12 20:47:16 by root-->
 <display version="2.0.0">
   <name>Main Panel</name>
   <background_color>
@@ -156,6 +156,37 @@
       <y>111</y>
       <width>185</width>
       <height>30</height>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_9</name>
+      <text>Leap status:</text>
+      <x>256</x>
+      <y>111</y>
+      <width>185</width>
+      <height>30</height>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_12</name>
+      <x>256</x>
+      <y>141</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <scripts>
+        <script file="update_pvname_leap_status.py">
+          <pv_name>pva://node_ID</pv_name>
+          <pv_name>pva://device_name</pv_name>
+        </script>
+      </scripts>
     </widget>
   </widget>
   <widget type="group" version="2.0.0">
