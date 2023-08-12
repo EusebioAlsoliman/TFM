@@ -8,20 +8,31 @@ import sys
 import os
 
 def obtain_offset_PTP(): #linuxptp
-    orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
+    orden = "journalctl --unit=ptp4l.service"
 
-    # pmc command in bash and obtain result in 'offsetFromMaster'
+    # from journalctl obtain the offset and freq values
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
     output, error = process.communicate()
 
-    pos_ini = output.find("offset")
+    output = output[-113:]
 
-    offsetFromMaster = output[pos_ini+17:]
-    pos_chars = offsetFromMaster.find("\n")
-    offsetFromMaster = offsetFromMaster[:pos_chars]
-    offsetFromMaster = float(offsetFromMaster)
+    try: 
+        pos_offset = output.find("offset")
+        pos_freq = output.find("freq")
+        pos_path = output.find("path")
 
-    return offsetFromMaster
+        # Get offset
+        offsetFromMaster = output[pos_offset+6:pos_freq-3]
+        offsetFromMaster = float(offsetFromMaster)
+
+        # get freq
+        freq = output[pos_freq+4:pos_path]
+        freq = float(freq)
+
+        return offsetFromMaster, freq
+
+    except:
+        return -999999, -999999
 
 def obtain_slave_code_PTP():
     orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
@@ -65,8 +76,9 @@ class run_PTP(threading.Thread):
 
     def run(self):
         while self.running:
-            self.offset = obtain_offset_PTP()
+            self.offset, self.freq = obtain_offset_PTP()
             PTP_slave.put(self.offset)
+            PTP_freq.put(self.freq)
 
     def stop(self):
         self.running = False
@@ -125,6 +137,8 @@ if __name__ == "__main__":
     PTP_slave_code = Channel(device + ":PTP_slave_code")
     PTP_slave_code.put(obtain_slave_code_PTP())
 
+    PTP_freq = Channel(device + ":PTP_freq")
+
     thread_PTP = run_PTP()
 
     for i in range(20):
@@ -159,7 +173,7 @@ if __name__ == "__main__":
             if bool(int(str(channel_NTP_up[i].get())[55:57])) == False:
                 count += 1
 
-        if count == (n_ntp) or bool(int(str(finish_all.get())[55:57])) == False:
+        if (count == n_ntp) or bool(int(str(finish_all.get())[55:57])) == False:
             break
 
     # Wait for all processes to stop
@@ -170,8 +184,8 @@ if __name__ == "__main__":
 
     for i in range(20):
         str_i = str(i)
-        channel_NTP_up[i].put(0)
         if (i < n_ntp) and (bool(int(str(channel_NTP_up[i].get())[55:57])) == True):
             client.containers.get("ntp" + str_i).kill()
+        channel_NTP_up[i].put(0)
 
     print("Script FINISHED! \n")

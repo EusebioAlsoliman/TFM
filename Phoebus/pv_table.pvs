@@ -142,5 +142,19 @@
             <saved_value_timestamp/>
             <completion>true</completion>
         </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:PTP_freq</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:PTP_slave</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
     </pvlist>
 </pvtable>

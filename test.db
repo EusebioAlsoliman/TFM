@@ -127,6 +127,21 @@ record(stringin, "nano4gb:PTP_slave_code")
 	field(DESC, "ID of the PTP slave")
 }
 
+record(ai, "rpi4:PTP_freq")
+{
+	field(DESC, "Updated frequency of the clock")
+}
+
+record(ai, "nano2gb:PTP_freq")
+{
+	field(DESC, "Updated frequency of the clock")
+}
+
+record(ai, "nano4gb:PTP_freq")
+{
+	field(DESC, "Updated frequency of the clock")
+}
+
 record(ai, "rpi4:NTP_client:0")
 {
     field(DESC, "NTP client 0 offset in rpi4")

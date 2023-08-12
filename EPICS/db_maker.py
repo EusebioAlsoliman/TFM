@@ -126,6 +126,21 @@ record(stringin, "nano4gb:PTP_slave_code")
 {
 	field(DESC, "ID of the PTP slave")
 }
+
+record(ai, "rpi4:PTP_freq")
+{
+	field(DESC, "Updated frequency of the clock")
+}
+
+record(ai, "nano2gb:PTP_freq")
+{
+	field(DESC, "Updated frequency of the clock")
+}
+
+record(ai, "nano4gb:PTP_freq")
+{
+	field(DESC, "Updated frequency of the clock")
+}
 """
 
 template_dynamic = """
