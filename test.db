@@ -112,6 +112,21 @@ record(bi, "nano4gb:finish_all")
     field(VAL, "1")
 }
 
+record(stringin, "rpi4:PTP_slave_code")
+{
+	field(DESC, "ID of the PTP slave")
+}
+
+record(stringin, "nano2gb:PTP_slave_code")
+{
+	field(DESC, "ID of the PTP slave")
+}
+
+record(stringin, "nano4gb:PTP_slave_code")
+{
+	field(DESC, "ID of the PTP slave")
+}
+
 record(ai, "rpi4:NTP_client:0")
 {
     field(DESC, "NTP client 0 offset in rpi4")

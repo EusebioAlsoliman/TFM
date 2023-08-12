@@ -12,32 +12,48 @@ def obtain_offset_PTP(): #linuxptp
 
     # pmc command in bash and obtain result in 'offsetFromMaster'
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
-    salida, error = process.communicate()
+    output, error = process.communicate()
 
-    pos_ini = salida.find("offset")
-    pos_fin = salida.find("mean")
+    pos_ini = output.find("offset")
 
-    offsetFromMaster = salida[pos_ini+17:pos_fin]
+    offsetFromMaster = output[pos_ini+17:]
     pos_chars = offsetFromMaster.find("\n")
     offsetFromMaster = offsetFromMaster[:pos_chars]
     offsetFromMaster = float(offsetFromMaster)
 
     return offsetFromMaster
 
+def obtain_slave_code_PTP():
+    orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
+
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    output, error = process.communicate()
+
+    pos = output.find("CURRENT_DATA_SET")
+    slave_code = output[pos:]
+    
+    pos = slave_code.find("\n")
+    slave_code = slave_code[pos+2:]
+
+    pos = slave_code.find("seq")
+    slave_code = slave_code[:pos]
+
+    return slave_code
+
 def obtain_offset_NTP(ptp_instance): # chrony 
     orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
-    salida, error = process.communicate()
+    output, error = process.communicate()
 
-    pos_ini = salida.find("Last offset     :")
+    pos_ini = output.find("Last offset     :")
     
-    salida = salida[pos_ini+17:]
+    output = output[pos_ini+17:]
 
-    pos_fin = salida.find("seconds")
+    pos_fin = output.find("seconds")
 
-    offsetFromMaster = salida[:pos_fin]
+    offsetFromMaster = output[:pos_fin]
     offsetFromMaster = float(offsetFromMaster) * 1e9
 
     return offsetFromMaster
@@ -106,6 +122,9 @@ if __name__ == "__main__":
 
     PTP_slave = Channel(device + ":PTP_slave")
 
+    PTP_slave_code = Channel(device + ":PTP_slave_code")
+    PTP_slave_code.put(obtain_slave_code_PTP())
+
     thread_PTP = run_PTP()
 
     for i in range(20):
@@ -143,15 +162,16 @@ if __name__ == "__main__":
         if count == (n_ntp) or bool(int(str(finish_all.get())[55:57])) == False:
             break
 
-    # Espera a que todos los procesos terminen
+    # Wait for all processes to stop
     thread_PTP.stop()
 
     for thread in threads_NTP:
         thread.stop()
 
-    for i in range(n_ntp):
+    for i in range(20):
         str_i = str(i)
-        if bool(int(str(channel_NTP_up[i].get())[55:57])) == True:
+        channel_NTP_up[i].put(0)
+        if (i < n_ntp) and (bool(int(str(channel_NTP_up[i].get())[55:57])) == True):
             client.containers.get("ntp" + str_i).kill()
 
     print("Script FINISHED! \n")

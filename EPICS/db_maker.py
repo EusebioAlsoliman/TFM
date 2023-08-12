@@ -111,6 +111,21 @@ record(bi, "nano4gb:finish_all")
     field(ONAM, "True")
     field(VAL, "1")
 }
+
+record(stringin, "rpi4:PTP_slave_code")
+{
+	field(DESC, "ID of the PTP slave")
+}
+
+record(stringin, "nano2gb:PTP_slave_code")
+{
+	field(DESC, "ID of the PTP slave")
+}
+
+record(stringin, "nano4gb:PTP_slave_code")
+{
+	field(DESC, "ID of the PTP slave")
+}
 """
 
 template_dynamic = """
