@@ -33,6 +33,21 @@ def obtain_offset_PTP(): #linuxptp
 
     except:
         return -999999, -999999
+    
+def obtain_portState_PTP():
+    orden = "sudo ./linuxptp/pmc -u -b 0 'GET PORT_DATA_SET'"
+
+    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    output, error = process.communicate()
+
+    pos = output.find("portState")
+    portState = output[pos+9:]
+
+    pos = portState.find("\n")
+    portState = portState[:pos]
+    portState = portState.replace(" ", "")
+
+    return str(portState)
 
 def obtain_slave_code_PTP():
     orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
@@ -77,8 +92,11 @@ class run_PTP(threading.Thread):
     def run(self):
         while self.running:
             self.offset, self.freq = obtain_offset_PTP()
+            self.portState = obtain_portState_PTP()
+
             PTP_slave.put(self.offset)
             PTP_freq.put(self.freq)
+            portState.put(self.portState)
 
     def stop(self):
         self.running = False
@@ -138,6 +156,8 @@ if __name__ == "__main__":
     PTP_slave_code.put(obtain_slave_code_PTP())
 
     PTP_freq = Channel(device + ":PTP_freq")
+
+    portState = Channel(device + ":portState")
 
     thread_PTP = run_PTP()
 

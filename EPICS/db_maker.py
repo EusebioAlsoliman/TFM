@@ -141,6 +141,21 @@ record(ai, "nano4gb:PTP_freq")
 {
 	field(DESC, "Updated frequency of the clock")
 }
+
+record(stringin, "rpi4:portState")
+{
+	field(DESC, "portState of the PTP slave")
+}
+
+record(stringin, "nano2gb:portState")
+{
+	field(DESC, "portState of the PTP slave")
+}
+
+record(stringin, "nano4gb:portState")
+{
+	field(DESC, "portState of the PTP slave")
+}
 """
 
 template_dynamic = """

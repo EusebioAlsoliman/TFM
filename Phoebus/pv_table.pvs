@@ -156,5 +156,12 @@
             <saved_value_timestamp/>
             <completion>true</completion>
         </pv>
+        <pv>
+            <selected>true</selected>
+            <name>pva://nano2gb:portState</name>
+            <tolerance>0.1</tolerance>
+            <saved_value_timestamp/>
+            <completion>true</completion>
+        </pv>
     </pvlist>
 </pvtable>

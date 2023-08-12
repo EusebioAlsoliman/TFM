@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-12 19:29:45 by root-->
+<!--Saved on 2023-08-12 20:23:54 by root-->
 <display version="2.0.0">
   <name>Main Panel</name>
   <background_color>
@@ -47,9 +47,9 @@
   </widget>
   <widget type="stripchart" version="2.1.0">
     <name>Strip Chart</name>
-    <y>307</y>
+    <y>350</y>
     <width>1571</width>
-    <height>503</height>
+    <height>460</height>
     <background_color>
       <color name="Header_ForeGround" red="255" green="255" blue="255">
       </color>
@@ -95,7 +95,7 @@
   <widget type="group" version="2.0.0">
     <name>Seleccionar dispositivo y numero de nodo</name>
     <x>270</x>
-    <y>18</y>
+    <y>27</y>
     <width>510</width>
     <height>228</height>
     <widget type="combo" version="2.0.0">
@@ -162,7 +162,7 @@
     <name>Nodos PTP</name>
     <x>810</x>
     <width>761</width>
-    <height>300</height>
+    <height>340</height>
     <widget type="meter" version="3.0.0">
       <name>Meter</name>
       <pv_name>pva://rpi4:PTP_slave</pv_name>
@@ -208,7 +208,7 @@
       </actions>
       <text>Raspberry Pi 4</text>
       <x>117</x>
-      <y>232</y>
+      <y>265</y>
       <width>190</width>
       <height>36</height>
       <tooltip>$(actions)</tooltip>
@@ -229,7 +229,7 @@
       </actions>
       <text>Jetson Nano 2 GB</text>
       <x>325</x>
-      <y>232</y>
+      <y>265</y>
       <width>190</width>
       <height>36</height>
       <tooltip>$(actions)</tooltip>
@@ -250,7 +250,7 @@
       </actions>
       <text>Jetson Nano 4 GB</text>
       <x>534</x>
-      <y>232</y>
+      <y>265</y>
       <width>190</width>
       <height>36</height>
       <tooltip>$(actions)</tooltip>
@@ -364,6 +364,67 @@
       <pv_name>pva://nano4gb:PTP_freq</pv_name>
       <x>549</x>
       <y>175</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_8</name>
+      <text>portState:</text>
+      <x>11</x>
+      <y>230</y>
+      <height>41</height>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_9</name>
+      <pv_name>pva://rpi4:portState</pv_name>
+      <x>132</x>
+      <y>219</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_10</name>
+      <pv_name>pva://nano2gb:portState</pv_name>
+      <x>340</x>
+      <y>219</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_11</name>
+      <pv_name>pva://nano4gb:portState</pv_name>
+      <x>549</x>
+      <y>219</y>
       <width>160</width>
       <height>40</height>
       <font>
