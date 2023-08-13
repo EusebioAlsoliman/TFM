@@ -8,39 +8,99 @@ import sys
 import os
 
 def obtain_offset_PTP(): #linuxptp
+    orden = "journalctl --unit=ptp4l.service"
+
+    # from journalctl obtain the offset and freq values
+    if device == "nano2gb":
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    else:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    output, error = process.communicate()
+
+    output = output[-113:]
+
+    try: 
+        pos_offset = output.find("offset")
+        pos_freq = output.find("freq")
+        pos_path = output.find("path")
+
+        # Get offset
+        offsetFromMaster = output[pos_offset+6:pos_freq-3]
+        offsetFromMaster = float(offsetFromMaster)
+
+        # get freq
+        freq = output[pos_freq+4:pos_path]
+        freq = float(freq)
+
+        return offsetFromMaster, freq
+    
+    except:
+        return -999999, -999999
+    
+def obtain_portState_PTP():
+    orden = "sudo ./linuxptp/pmc -u -b 0 'GET PORT_DATA_SET'"
+
+    if device == "nano2gb":
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    else:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    output, error = process.communicate()
+
+    pos = output.find("portState")
+    portState = output[pos+9:]
+
+    pos = portState.find("\n")
+    portState = portState[:pos]
+    portState = portState.replace(" ", "")
+
+    return str(portState)
+
+def obtain_slave_code_PTP():
     orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
 
-    # pmc command in bash and obtain result in 'offsetFromMaster'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
-    salida, error = process.communicate()
+    if device == "nano2gb":
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    else:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    output, error = process.communicate()
 
-    pos_ini = salida.find("offset")
-    pos_fin = salida.find("mean")
+    pos = output.find("CURRENT_DATA_SET")
+    slave_code = output[pos:]
+    
+    pos = slave_code.find("\n")
+    slave_code = slave_code[pos+2:]
 
-    offsetFromMaster = salida[pos_ini+17:pos_fin]
-    pos_chars = offsetFromMaster.find("\n")
-    offsetFromMaster = offsetFromMaster[:pos_chars]
-    offsetFromMaster = float(offsetFromMaster)
+    pos = slave_code.find("seq")
+    slave_code = slave_code[:pos]
 
-    return offsetFromMaster
+    return slave_code
 
-def obtain_offset_NTP(ptp_instance): # chrony 
+def obtain_NTP_data(ptp_instance): # chrony 
     orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
-    salida, error = process.communicate()
+    if device == "nano2gb":
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
+    else:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    output, error = process.communicate()
 
-    pos_ini = salida.find("Last offset     :")
+    pos_offset = output.find("Last offset     :")
     
-    salida = salida[pos_ini+17:]
+    output = output[pos_offset+17:]
 
-    pos_fin = salida.find("seconds")
+    pos_fin = output.find("seconds")
 
-    offsetFromMaster = salida[:pos_fin]
+    offsetFromMaster = output[:pos_fin]
     offsetFromMaster = float(offsetFromMaster) * 1e9
 
-    return offsetFromMaster
+    pos_leap_status = output.find("Leap status     :")
+    leap_status = output[pos_leap_status+17:]
+    leap_status = leap_status.replace(" ", "")
+    leap_status = leap_status.replace("\n", "")
+    leap_status = str(leap_status)
+
+    return offsetFromMaster, leap_status
 
 class run_PTP(threading.Thread):
     def __init__(self):
@@ -49,8 +109,12 @@ class run_PTP(threading.Thread):
 
     def run(self):
         while self.running:
-            self.offset = obtain_offset_PTP()
+            self.offset, self.freq = obtain_offset_PTP()
+            self.portState = obtain_portState_PTP()
+
             PTP_slave.set_value(self.offset, ua.VariantType.Float)
+            PTP_freq.set_value(self.freq, ua.VariantType.Float)
+            portState.set_value(self.portState, ua.VariantType.String)
 
     def stop(self):
         self.running = False
@@ -68,8 +132,9 @@ class run_NTP(threading.Thread):
             if list_NTP_up[self.i].get_value() == True:
 
                 if self.is_killed == False:
-                    self.offset = obtain_offset_NTP(self.i)
+                    self.offset, self.leap_status = obtain_NTP_data(self.i)
                     exec("NTP_client_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
+                    exec("NTP_leap_status_" + self.str_i + '.set_value("' + self.leap_status + '", ua.VariantType.String)')
 
                 else:
                     client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + self.str_i, detach=True)
@@ -89,7 +154,9 @@ if __name__ == "__main__":
 
     list_NTP_up = [False] * 20
 
-    n_ntp = int(sys.argv[1])
+    device = sys.argv[1]
+
+    n_ntp = int(sys.argv[2])
 
     threads_NTP = []
 
@@ -99,10 +166,18 @@ if __name__ == "__main__":
 
     server = Server()
 
-    endpoint = "opc.tcp://169.254.145.195:4897"
+    if device == "rpi4":
+        endpoint = "opc.tcp://169.254.145.195:4897"
+        servername = "Pi-4-OPC-UA-Server"
+    elif device == "nano2gb":
+        endpoint = "opc.tcp://169.254.145.193:4897"
+        servername = "Jetson-2GB-OPC-UA-Server"
+    elif device == "nano4gb":
+        endpoint = "opc.tcp://169.254.145.194:4897"
+        servername = "Jetson-4GB-OPC-UA-Server"
+
     server.set_endpoint(endpoint)
 
-    servername = "Pi-4-OPC-UA-Server"
     server.set_server_name(servername)
 
     # OPC-UA-Modelling
@@ -128,6 +203,20 @@ if __name__ == "__main__":
 
     print('Name Space and ID of PTP Slave: ', PTP_slave)
 
+    PTP_slave_code = myobj.add_variable(idx, "PTP_slave_code", obtain_slave_code_PTP(), ua.VariantType.String)
+
+    print('Name Space and ID of PTP Slave Code: ', PTP_slave_code)
+
+    PTP_freq = myobj.add_variable(idx, "PTP_freq", 0, ua.VariantType.Float)
+    PTP_freq.set_writable()
+
+    print('Name Space and ID of PTP Freq: ', PTP_freq)
+
+    portState = myobj.add_variable(idx, "portState", 0, ua.VariantType.String)
+    portState.set_writable()
+
+    print('Name Space and ID of port State: ', portState)
+
     thread_PTP = run_PTP()
 
     for i in range(20):
@@ -141,6 +230,11 @@ if __name__ == "__main__":
         exec("list_NTP_up[" + str_i + "].set_writable()")
 
         exec("print('Name Space and ID of NTP Conf " + str_i + " : ', list_NTP_up[" + str_i + "])")
+
+        exec("NTP_leap_status_" + str_i + " = myobj.add_variable(idx, 'NTP_leap_status_" + str_i + "', '----', ua.VariantType.String)")
+        exec("NTP_leap_status_" + str_i + ".set_writable()")
+
+        exec("print('Name Space and ID of NTP Leap Status " + str_i + " : ', NTP_leap_status_" + str_i + ")")
 
         if i < n_ntp:
             client.containers.run("chrony", cap_add=["SYS_TIME"], volumes=[os.getcwd() + ":/home"], auto_remove=True, network="host", name="ntp" + str_i, detach=True)
@@ -173,7 +267,7 @@ if __name__ == "__main__":
             if list_NTP_up[i].get_value() == False:
                 count += 1
 
-        if count == (n_ntp) or finish_all.get_value() == False:
+        if (count == n_ntp) or finish_all.get_value() == False:
             break
 
     # Espera a que todos los procesos terminen
@@ -184,8 +278,9 @@ if __name__ == "__main__":
 
     for i in range(n_ntp):
         str_i = str(i)
-        if list_NTP_up[i].get_value() == True:
+        if (i < n_ntp) and (list_NTP_up[i].get_value() == True):
             client.containers.get("ntp" + str_i).kill()
+        exec("list_NTP_up[" + str_i + "].set_value(False, ua.VariantType.Boolean)")
 
     server.stop()
 
