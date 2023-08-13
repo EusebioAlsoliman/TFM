@@ -6,6 +6,7 @@ import threading
 from time import sleep
 import sys
 import os
+from time import sleep
 
 def obtain_offset_PTP(): #linuxptp
     orden = "journalctl --unit=ptp4l.service"
@@ -281,6 +282,8 @@ if __name__ == "__main__":
         if (i < n_ntp) and (list_NTP_up[i].get_value() == True):
             client.containers.get("ntp" + str_i).kill()
         exec("list_NTP_up[" + str_i + "].set_value(False, ua.VariantType.Boolean)")
+
+    sleep(4)
 
     server.stop()
 
