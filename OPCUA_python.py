@@ -76,8 +76,11 @@ def obtain_slave_code_PTP():
 
     return slave_code
 
-def obtain_NTP_data(ptp_instance): # chrony 
-    orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
+def obtain_NTP_data(ptp_instance = 0, docker = False): # chrony 
+    if docker:
+        orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
+    else:
+        orden = "chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
     if device == "nano2gb":
@@ -103,19 +106,23 @@ def obtain_NTP_data(ptp_instance): # chrony
 
     return offsetFromMaster, leap_status
 
-class run_PTP(threading.Thread):
+class run_host(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.running = True
 
     def run(self):
         while self.running:
-            self.offset, self.freq = obtain_offset_PTP()
+            self.offset_PTP, self.freq = obtain_offset_PTP()
+            self.offset_NTP, self.leap_status = obtain_NTP_data()
             self.portState = obtain_portState_PTP()
 
-            PTP_slave.set_value(self.offset, ua.VariantType.Float)
+            PTP_slave.set_value(self.offset_PTP, ua.VariantType.Float)
             PTP_freq.set_value(self.freq, ua.VariantType.Float)
             portState.set_value(self.portState, ua.VariantType.String)
+
+            NTP_host.set_value(self.offset_NTP, ua.VariantType.Float)
+            NTP_host_leap_status.set_value(self.leap_status, ua.VariantType.String)
 
     def stop(self):
         self.running = False
@@ -133,7 +140,7 @@ class run_NTP(threading.Thread):
             if list_NTP_up[self.i].get_value() == True:
 
                 if self.is_killed == False:
-                    self.offset, self.leap_status = obtain_NTP_data(self.i)
+                    self.offset, self.leap_status = obtain_NTP_data(self.i, docker = True)
                     exec("NTP_client_" + self.str_i + ".set_value(" + str(self.offset) + ", ua.VariantType.Float)")
                     exec("NTP_leap_status_" + self.str_i + '.set_value("' + self.leap_status + '", ua.VariantType.String)')
 
@@ -218,7 +225,17 @@ if __name__ == "__main__":
 
     print('Name Space and ID of port State: ', portState)
 
-    thread_PTP = run_PTP()
+    NTP_host = myobj.add_variable(idx, "NTP_host", 0, ua.VariantType.Float)
+    NTP_host.set_writable()
+
+    print('Name Space and ID of NTP_host: ', NTP_host)
+
+    NTP_host_leap_status = myobj.add_variable(idx, "NTP_host_leap_status", '----', ua.VariantType.String)
+    NTP_host_leap_status.set_writable()
+
+    print('Name Space and ID of NTP_host_leap_status', NTP_host_leap_status)
+
+    thread_PTP = run_host()
 
     for i in range(20):
         str_i = str(i)
