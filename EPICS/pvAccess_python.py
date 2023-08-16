@@ -66,8 +66,11 @@ def obtain_slave_code_PTP():
 
     return slave_code
 
-def obtain_NTP_data(ptp_instance): # chrony 
-    orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
+def obtain_NTP_data(ptp_instance = 0, docker = False): # chrony 
+    if docker:
+        orden = "docker exec -it ntp" + str(ptp_instance) + " chronyc tracking"
+    else:
+        orden = "chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
     process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
@@ -85,22 +88,27 @@ def obtain_NTP_data(ptp_instance): # chrony
     pos_leap_status = output.find("Leap status     :")
     leap_status = output[pos_leap_status+17:]
     leap_status = leap_status.replace(" ", "")
+    leap_status = leap_status.replace("\n", "")
 
     return offsetFromMaster, leap_status
 
-class run_PTP(threading.Thread):
+class run_host(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.running = True
 
     def run(self):
         while self.running:
-            self.offset, self.freq = obtain_offset_PTP()
+            self.offset_PTP, self.freq = obtain_offset_PTP()
+            self.offset_NTP, self.leap_status = obtain_NTP_data()
             self.portState = obtain_portState_PTP()
 
-            PTP_slave.put(self.offset)
+            PTP_slave.put(self.offset_PTP)
             PTP_freq.put(self.freq)
             portState.put(self.portState)
+
+            NTP_host.put(self.offset_NTP)
+            NTP_host_leap_status.put(self.leap_status)
 
     def stop(self):
         self.running = False
@@ -165,7 +173,10 @@ if __name__ == "__main__":
 
     portState = Channel(device + ":portState")
 
-    thread_PTP = run_PTP()
+    NTP_host = Channel(device + ":NTP_host")
+    NTP_host_leap_status = Channel(device + ":NTP_host_leap_status")
+
+    thread_PTP = run_host()
 
     for i in range(20):
         str_i = str(i)

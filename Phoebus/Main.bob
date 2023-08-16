@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-12 20:47:16 by root-->
+<!--Saved on 2023-08-16 22:03:30 by root-->
 <display version="2.0.0">
   <name>Main Panel</name>
   <background_color>
@@ -48,7 +48,7 @@
   <widget type="stripchart" version="2.1.0">
     <name>Strip Chart</name>
     <y>350</y>
-    <width>1571</width>
+    <width>1896</width>
     <height>460</height>
     <background_color>
       <color name="Header_ForeGround" red="255" green="255" blue="255">
@@ -94,16 +94,16 @@
   </widget>
   <widget type="group" version="2.0.0">
     <name>Seleccionar dispositivo y numero de nodo</name>
-    <x>270</x>
-    <y>27</y>
-    <width>510</width>
+    <x>10</x>
+    <y>114</y>
+    <width>340</width>
     <height>228</height>
     <widget type="combo" version="2.0.0">
       <name>Combo Box</name>
       <pv_name>pva://device_name</pv_name>
       <x>17</x>
       <y>42</y>
-      <width>185</width>
+      <width>115</width>
       <height>49</height>
       <actions>
       </actions>
@@ -117,23 +117,6 @@
       <name>Label_1</name>
       <text>Dispositivo:</text>
       <x>22</x>
-      <y>12</y>
-      <width>240</width>
-      <height>30</height>
-    </widget>
-    <widget type="spinner" version="2.0.0">
-      <name>Spinner_1</name>
-      <pv_name>pva://node_ID</pv_name>
-      <x>256</x>
-      <y>42</y>
-      <width>210</width>
-      <height>50</height>
-      <vertical_alignment>1</vertical_alignment>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_2</name>
-      <text>Nodo:</text>
-      <x>260</x>
       <y>12</y>
       <width>240</width>
       <height>30</height>
@@ -158,18 +141,35 @@
       <height>30</height>
     </widget>
     <widget type="label" version="2.0.0">
+      <name>Label_2</name>
+      <text>Nodo:</text>
+      <x>206</x>
+      <y>12</y>
+      <width>240</width>
+      <height>30</height>
+    </widget>
+    <widget type="spinner" version="2.0.0">
+      <name>Spinner_1</name>
+      <pv_name>pva://node_ID</pv_name>
+      <x>202</x>
+      <y>42</y>
+      <width>96</width>
+      <height>50</height>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
       <name>Label_9</name>
       <text>Leap status:</text>
-      <x>256</x>
+      <x>202</x>
       <y>111</y>
       <width>185</width>
       <height>30</height>
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_12</name>
-      <x>256</x>
+      <x>202</x>
       <y>141</y>
-      <width>160</width>
+      <width>106</width>
       <height>40</height>
       <font>
         <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -191,7 +191,8 @@
   </widget>
   <widget type="group" version="2.0.0">
     <name>Nodos PTP</name>
-    <x>810</x>
+    <x>1135</x>
+    <y>2</y>
     <width>761</width>
     <height>340</height>
     <widget type="meter" version="3.0.0">
@@ -456,6 +457,166 @@
       <pv_name>pva://nano4gb:portState</pv_name>
       <x>549</x>
       <y>219</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Nodos NTP</name>
+    <x>360</x>
+    <y>50</y>
+    <width>761</width>
+    <height>292</height>
+    <widget type="meter" version="3.0.0">
+      <name>Meter_3</name>
+      <pv_name>pva://rpi4:NTP_host</pv_name>
+      <x>117</x>
+      <width>190</width>
+      <height>124</height>
+      <actions>
+      </actions>
+      <minimum>-700000.0</minimum>
+      <maximum>700000.0</maximum>
+    </widget>
+    <widget type="meter" version="3.0.0">
+      <name>Meter_4</name>
+      <pv_name>pva://nano2gb:NTP_host</pv_name>
+      <x>325</x>
+      <width>190</width>
+      <height>124</height>
+      <minimum>-700000.0</minimum>
+      <maximum>700000.0</maximum>
+    </widget>
+    <widget type="meter" version="3.0.0">
+      <name>Meter_5</name>
+      <pv_name>pva://nano4gb:NTP_host</pv_name>
+      <x>534</x>
+      <width>190</width>
+      <height>124</height>
+      <minimum>-700000.0</minimum>
+      <maximum>700000.0</maximum>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>Action Button_5</name>
+      <actions execute_as_one="true">
+        <action type="write_pv">
+          <pv_name>pva://device_name</pv_name>
+          <value>rpi4</value>
+          <description>Open Display</description>
+        </action>
+        <action type="open_display">
+          <file>PTP_Nodes.bob</file>
+          <target>replace</target>
+          <description>WritePV</description>
+        </action>
+      </actions>
+      <text>Raspberry Pi 4</text>
+      <x>117</x>
+      <y>203</y>
+      <width>190</width>
+      <height>36</height>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>Action Button_6</name>
+      <actions execute_as_one="true">
+        <action type="write_pv">
+          <pv_name>pva://device_name</pv_name>
+          <value>nano2gb</value>
+          <description>Open Display</description>
+        </action>
+        <action type="open_display">
+          <file>PTP_Nodes.bob</file>
+          <target>replace</target>
+          <description>WritePV</description>
+        </action>
+      </actions>
+      <text>Jetson Nano 2 GB</text>
+      <x>325</x>
+      <y>203</y>
+      <width>190</width>
+      <height>36</height>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>Action Button_7</name>
+      <actions execute_as_one="true">
+        <action type="write_pv">
+          <pv_name>pva://device_name</pv_name>
+          <value>nano4gb</value>
+          <description>Open Display</description>
+        </action>
+        <action type="open_display">
+          <file>PTP_Nodes.bob</file>
+          <target>replace</target>
+          <description>WritePV</description>
+        </action>
+      </actions>
+      <text>Jetson Nano 4 GB</text>
+      <x>534</x>
+      <y>203</y>
+      <width>190</width>
+      <height>36</height>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_12</name>
+      <text>portState:</text>
+      <x>11</x>
+      <y>144</y>
+      <height>41</height>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_19</name>
+      <pv_name>pva://rpi4:NTP_host_leap_status</pv_name>
+      <x>132</x>
+      <y>133</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_20</name>
+      <pv_name>pva://nano2gb:NTP_host_leap_status</pv_name>
+      <x>340</x>
+      <y>133</y>
+      <width>160</width>
+      <height>40</height>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color name="Header_ForeGround" red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_21</name>
+      <pv_name>pva://nano4gb:NTP_host_leap_status</pv_name>
+      <x>549</x>
+      <y>133</y>
       <width>160</width>
       <height>40</height>
       <font>

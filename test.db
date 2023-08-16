@@ -1,42 +1,4 @@
 
-record(ai, "temperature:water")
-{
-	field(DESC, "Water temperature in the fish tank")
-    field(VAL, "34")
-	field(LOLO, "10")
-	field(LOW, "20")
-	field(HIGH, "80")
-	field(HIHI, "100")
-	field(LSV, "MINOR")
-	field(HSV, "MINOR")
-	field(LLSV, "MAJOR")
-	field(HHSV, "MAJOR")
-}
-
-record(ao, "alarm_lim_dynamic:Low")
-{
-    field(DESC, "Test")
-    field(PINI, "YES")
-    field(OUT, "temperature:oil.LOW")
-    field(VAL, "12")
-}
-
-record(ao, "alarm_lim_dynamic:High")
-{
-    field(DESC, "Test")
-    field(PINI, "YES")
-    field(OUT, "temperature:oil.HIGH")
-    field(VAL, "72")
-}
-
-record(ai, "temperature:oil")
-{
-    field(DESC, "Oil temperature in the engine")
-    field(HSV, "MINOR")
-    field(LSV, "MINOR")
-    field(VAL, "33")
-}
-
 record(int64in, "node_ID")
 {
     field(DESC, "Node ID selected in CSS Phoebus")
@@ -155,6 +117,60 @@ record(stringin, "nano2gb:portState")
 record(stringin, "nano4gb:portState")
 {
 	field(DESC, "portState of the PTP slave")
+}
+
+record(ai, "rpi4:NTP_host")
+{
+    field(DESC, "NTP host in rpi4")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "nano2gb:NTP_host")
+{
+    field(DESC, "NTP host in nano2gb")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "nano4gb:NTP_host")
+{
+    field(DESC, "NTP host in nano4gb")
+	field(LOLO, "-500000")
+	field(LOW, "-200000")
+	field(HIGH, "200000")
+	field(HIHI, "500000")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(stringin, "rpi4:NTP_host_leap_status")
+{
+	field(DESC, "Leap status NTP client in host, rpi4")
+}
+
+record(stringin, "nano2gb:NTP_host_leap_status")
+{
+	field(DESC, "Leap status NTP client in host, nano2gb")
+}
+
+record(stringin, "nano4gb:NTP_host_leap_status")
+{
+	field(DESC, "Leap status NTP client in host, nano4gb")
 }
 
 record(ai, "rpi4:NTP_client:0")
