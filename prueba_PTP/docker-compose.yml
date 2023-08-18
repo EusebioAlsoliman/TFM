@@ -1,12 +1,12 @@
 version: "3.8"
 services:
   client:
-    image: ptp4l:v4.0
+    image: ptp4l:latest
     # privileged: true
     networks:
       - vlan
     volumes:
-      - ${PWD}/ptp4l.conf:/etc/ptp4l.conf
+      - ./ptp4l.conf:/etc/ptp4l.conf
     command: -S -m -f /etc/ptp4l.conf
     deploy:
       mode: replicated
