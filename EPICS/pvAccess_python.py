@@ -11,7 +11,10 @@ def obtain_offset_PTP(): #linuxptp
     orden = "journalctl --unit=ptp4l.service"
 
     # from journalctl obtain the offset and freq values
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    try:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    except:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
     output, error = process.communicate()
 
     output = output[-113:]
@@ -37,7 +40,10 @@ def obtain_offset_PTP(): #linuxptp
 def obtain_portState_PTP():
     orden = "sudo ./linuxptp/pmc -u -b 0 'GET PORT_DATA_SET'"
 
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    try:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    except:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
     output, error = process.communicate()
 
     pos = output.find("portState")
@@ -52,7 +58,10 @@ def obtain_portState_PTP():
 def obtain_slave_code_PTP():
     orden = "sudo ./linuxptp/pmc -u -b 0 'GET CURRENT_DATA_SET'"
 
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    try:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    except:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
     output, error = process.communicate()
 
     pos = output.find("CURRENT_DATA_SET")
@@ -73,7 +82,10 @@ def obtain_NTP_data(ptp_instance = 0, docker = False): # chrony
         orden = "chronyc tracking"
 
     # chronyc command in bash and obtain 'Last offset'
-    process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    try:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, text=True)
+    except:
+        process = subprocess.Popen(shlex.split(orden), stdout=subprocess.PIPE, universal_newlines=True)
     output, error = process.communicate()
 
     pos_offset = output.find("Last offset     :")
