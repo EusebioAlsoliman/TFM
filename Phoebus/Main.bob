@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-16 22:03:30 by root-->
+<!--Saved on 2023-08-20 14:56:18 by root-->
 <display version="2.0.0">
-  <name>Main Panel</name>
+  <name>Panel Principal</name>
   <background_color>
     <color name="Read_Background" red="240" green="240" blue="240">
     </color>
@@ -350,10 +350,11 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_7</name>
-      <text>Frecuencia del reloj:</text>
+      <text>Ajuste de frec. del reloj:</text>
       <x>11</x>
-      <y>178</y>
-      <height>41</height>
+      <y>181</y>
+      <width>136</width>
+      <height>40</height>
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_6</name>
@@ -411,7 +412,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_8</name>
-      <text>portState:</text>
+      <text>Estado del esclavo:</text>
       <x>11</x>
       <y>230</y>
       <height>41</height>
@@ -469,6 +470,13 @@
       </background_color>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_10</name>
+      <text>Desfase del esclavo (offset):</text>
+      <x>11</x>
+      <y>38</y>
+      <height>41</height>
     </widget>
   </widget>
   <widget type="group" version="2.0.0">
@@ -571,7 +579,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_12</name>
-      <text>portState:</text>
+      <text>Estado del cliente:</text>
       <x>11</x>
       <y>144</y>
       <height>41</height>

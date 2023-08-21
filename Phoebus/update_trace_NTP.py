@@ -6,9 +6,7 @@ with scriptContext('widget', 'pvs', 'PVUtil', 'ColorFontUtil', dict=globals()):
 
 	RED = ColorFontUtil.RED
 	BLUE = ColorFontUtil.BLUE
-	ORANGE = ColorFontUtil.getColorFromRGB(255, 255, 0)
 	GREEN = ColorFontUtil.getColorFromRGB(0, 255, 0)
-	PINK = ColorFontUtil.PINK
 
 	node = PVUtil.getString(pvs[0])
 	device = PVUtil.getString(pvs[1])

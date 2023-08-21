@@ -18,20 +18,6 @@
         </pv>
         <pv>
             <selected>true</selected>
-            <name>pva://temperature:water</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
-            <name>pva://temperature:oil</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
             <name>pva://rpi4:NTP_client:1</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
@@ -124,13 +110,6 @@
         <pv>
             <selected>true</selected>
             <name>pva://nano2gb:NTP_client:3</name>
-            <tolerance>0.1</tolerance>
-            <saved_value_timestamp/>
-            <completion>true</completion>
-        </pv>
-        <pv>
-            <selected>true</selected>
-            <name>pva://nano2gb:NTP_client:4</name>
             <tolerance>0.1</tolerance>
             <saved_value_timestamp/>
             <completion>true</completion>
