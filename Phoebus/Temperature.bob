@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2023-10-04 16:05:03 by eusebio-->
+<display version="2.0.0">
+  <name>Panel Temperatura</name>
+  <background_color>
+    <color name="Read_Background" red="240" green="240" blue="240">
+    </color>
+  </background_color>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <class>TITLE</class>
+    <text>Temperatura</text>
+    <x use_class="true">0</x>
+    <y use_class="true">0</y>
+    <width>550</width>
+    <height>31</height>
+    <font use_class="true">
+      <font name="Header 1" family="Liberation Sans" style="BOLD" size="22.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="Text" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button</name>
+    <actions>
+      <action type="open_display">
+        <file>General.bob</file>
+        <target>replace</target>
+        <description>Vista general</description>
+      </action>
+    </actions>
+    <x>30</x>
+    <y>30</y>
+    <width>240</width>
+    <height>50</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="stripchart" version="2.1.0">
+    <name>Strip Chart</name>
+    <y>297</y>
+    <width>590</width>
+    <height>460</height>
+    <background_color>
+      <color name="Header_ForeGround" red="255" green="255" blue="255">
+      </color>
+    </background_color>
+    <y_axes>
+      <y_axis>
+        <title>ºC</title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+        <color>
+          <color name="Text" red="0" green="0" blue="0">
+          </color>
+        </color>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>Temperature water</name>
+        <y_pv>pva://temperature:water</y_pv>
+        <axis>0</axis>
+        <trace_type>2</trace_type>
+        <color>
+          <color red="0" green="0" blue="255">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="stripchart" version="2.1.0">
+    <name>Strip Chart_1</name>
+    <x>610</x>
+    <y>297</y>
+    <width>590</width>
+    <height>460</height>
+    <background_color>
+      <color name="Header_ForeGround" red="255" green="255" blue="255">
+      </color>
+    </background_color>
+    <y_axes>
+      <y_axis>
+        <title>ºC</title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+        <color>
+          <color name="Text" red="0" green="0" blue="0">
+          </color>
+        </color>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>Temperature oil</name>
+        <y_pv>pva://temperature:oil</y_pv>
+        <axis>0</axis>
+        <trace_type>2</trace_type>
+        <color>
+          <color name="OK" red="0" green="255" blue="0">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>Agua</name>
+    <x>290</x>
+    <y>31</y>
+    <width>460</width>
+    <height>249</height>
+    <widget type="thermometer" version="2.0.0">
+      <name>Thermometer_1</name>
+      <pv_name>pva://temperature:water</pv_name>
+      <x>2</x>
+      <y>2</y>
+      <width>80</width>
+      <height>200</height>
+      <tooltip></tooltip>
+    </widget>
+    <widget type="scaledslider" version="2.0.0">
+      <name>Scaled Slider</name>
+      <pv_name>pva://temperature:water</pv_name>
+      <x>92</x>
+      <y>21</y>
+      <width>310</width>
+      <height>40</height>
+      <show_hihi>false</show_hihi>
+      <show_high>false</show_high>
+      <show_low>false</show_low>
+      <show_lolo>false</show_lolo>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_2</name>
+      <pv_name>pva://temperature:water</pv_name>
+      <x>102</x>
+      <y>81</y>
+      <width>190</width>
+      <height>50</height>
+      <interactive>true</interactive>
+    </widget>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>Aceite</name>
+    <x>760</x>
+    <y>31</y>
+    <width>460</width>
+    <height>249</height>
+    <widget type="thermometer" version="2.0.0">
+      <name>Thermometer_2</name>
+      <pv_name>pva://temperature:oil</pv_name>
+      <x>2</x>
+      <y>2</y>
+      <width>80</width>
+      <height>200</height>
+      <tooltip></tooltip>
+    </widget>
+    <widget type="scaledslider" version="2.0.0">
+      <name>Scaled Slider_1</name>
+      <pv_name>pva://temperature:oil</pv_name>
+      <x>92</x>
+      <y>21</y>
+      <width>310</width>
+      <height>40</height>
+      <show_hihi>false</show_hihi>
+      <show_high>false</show_high>
+      <show_low>false</show_low>
+      <show_lolo>false</show_lolo>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_3</name>
+      <pv_name>pva://temperature:oil</pv_name>
+      <x>102</x>
+      <y>81</y>
+      <width>190</width>
+      <height>50</height>
+      <interactive>true</interactive>
+    </widget>
+  </widget>
+</display>

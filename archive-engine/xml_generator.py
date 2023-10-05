@@ -11,6 +11,19 @@ end_sentence = """
 </engineconfig>
 """
 
+template_static = """
+    <channel>
+      <name>pva://temperature:water</name>
+      <monitor/>
+      <period>1.0</period>
+    </channel>
+    <channel>
+      <name>pva://temperature:oil</name>
+      <monitor/>
+      <period>1.0</period>
+    </channel>
+"""
+
 template_dynamic_device = """
     <channel>
       <name>pva://{device}:PTP_slave</name>
@@ -45,13 +58,15 @@ devices = ["rpi4", "nano2gb", "nano4gb"]
 with open("Test.xml", "w") as f:
   f.write(beginning)
 
-  for device in devices:
-    record_device = template_dynamic_device.replace("{device}", device)
-    record_str = template_dynamic_all.replace("{device}", device)
-    f.write(record_device)
+  f.write(template_static)
 
-    for i in range(0,20):
-      record_str_save = record_str.replace("{index}", str(i))
-      f.write(record_str_save)
+  # for device in devices:
+  #   record_device = template_dynamic_device.replace("{device}", device)
+  #   record_str = template_dynamic_all.replace("{device}", device)
+  #   f.write(record_device)
+
+  #   for i in range(0,20):
+  #     record_str_save = record_str.replace("{index}", str(i))
+  #     f.write(record_str_save)
 
   f.write(end_sentence)

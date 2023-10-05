@@ -1,4 +1,33 @@
 fixed_variables = """
+
+record(ai, "temperature:water")
+{
+	field(DESC, "Water temperature in the fish tank")
+    field(VAL, "34")
+	field(LOLO, "10")
+	field(LOW, "20")
+	field(HIGH, "80")
+	field(HIHI, "100")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
+record(ai, "temperature:oil")
+{
+	field(DESC, "Oil temperature in the engine")
+    field(VAL, "44")
+	field(LOLO, "10")
+	field(LOW, "20")
+	field(HIGH, "80")
+	field(HIHI, "100")
+	field(LSV, "MINOR")
+	field(HSV, "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+}
+
 record(int64in, "node_ID")
 {
     field(DESC, "Node ID selected in CSS Phoebus")

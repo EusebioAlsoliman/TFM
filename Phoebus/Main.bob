@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-20 14:56:18 by root-->
+<!--Saved on 2023-10-04 15:47:47 by eusebio-->
 <display version="2.0.0">
   <name>Panel Principal</name>
   <background_color>
@@ -41,7 +41,6 @@
     </actions>
     <x>30</x>
     <y>30</y>
-    <width>220</width>
     <height>50</height>
     <tooltip>$(actions)</tooltip>
   </widget>
@@ -92,7 +91,7 @@
       </trace>
     </traces>
   </widget>
-  <widget type="group" version="2.0.0">
+  <widget type="group" version="3.0.0">
     <name>Seleccionar dispositivo y numero de nodo</name>
     <x>10</x>
     <y>114</y>
@@ -189,7 +188,7 @@
       </scripts>
     </widget>
   </widget>
-  <widget type="group" version="2.0.0">
+  <widget type="group" version="3.0.0">
     <name>Nodos PTP</name>
     <x>1135</x>
     <y>2</y>
@@ -479,7 +478,7 @@
       <height>41</height>
     </widget>
   </widget>
-  <widget type="group" version="2.0.0">
+  <widget type="group" version="3.0.0">
     <name>Nodos NTP</name>
     <x>360</x>
     <y>50</y>
@@ -638,5 +637,20 @@
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
     </widget>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_1</name>
+    <actions>
+      <action type="open_display">
+        <file>Temperature.bob</file>
+        <target>replace</target>
+        <description>Temperaturas</description>
+      </action>
+    </actions>
+    <text>Temperaturas</text>
+    <x>180</x>
+    <y>30</y>
+    <height>50</height>
+    <tooltip>$(actions)</tooltip>
   </widget>
 </display>
